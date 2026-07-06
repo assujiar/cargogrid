@@ -68,3 +68,12 @@ If a command cannot run because the application scaffold or dependency manifest 
 - No service-role or secret keys in browser/client code.
 - Tenant-scoped tables must include `tenant_id`, indexes, and RLS policies.
 - Sensitive mutations must write audit logs.
+
+
+## Clean-Room and Feature Parity Boundary
+
+- CargoGrid is a clean-room greenfield SaaS product built from scratch.
+- BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation.
+- Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP.
+- Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
+- Do not copy, port, import, or reuse any BCP code, SQL, schema, migration, component, utility, UI/layout, asset, config, dummy data, tenant-specific logic, UGC branding, or internal UGC/BCP data.

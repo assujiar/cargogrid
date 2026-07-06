@@ -10,6 +10,14 @@ Use this checklist for every implementation PR.
 - [ ] Any BCP reference was limited to human business-process context, pain points, requirements, and operating lessons.
 - [ ] CargoGrid implementation remains independently designed, tenant-isolated, configurable, and auditable.
 
+
+## BCP Feature Parity Security Checks
+
+- [ ] Feature parity work uses `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as business requirements only.
+- [ ] No BCP code, SQL, schema, migration, component, utility, UI/layout, asset, config, dummy data, tenant-specific logic, UGC branding, or internal UGC/BCP data was copied.
+- [ ] Comparable BCP-inspired capabilities are rebuilt with CargoGrid tenant isolation, RLS, module/feature gates, auditability, and Supreme Admin configuration.
+- [ ] WhatsApp/email/outreach, DSO/AR, import/export, and analytics features do not leak tenant, customer, financial, location, or internal operational data.
+
 ## Secrets and Privileged Access
 
 - [ ] No service-role key is imported into browser/client code.

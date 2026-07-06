@@ -57,6 +57,15 @@ CRM, RFQ, quotation, pricing, procurement, finance, TMS, WMS, customer portal, a
 
 All future prompts must enforce clean-room greenfield rebuild rules and must treat every module as a new CargoGrid module, not as an extension, completion, reuse, or port of BCP.
 
+
+## BCP Feature Parity Catalog Status
+
+`docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` is the business capability checklist for BCP-inspired feature parity. It is requirements-only and contains no BCP implementation artifacts.
+
+BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Comparable capabilities such as CRM, RFQ, quotation, pricing, procurement, DSO/AR, marketing/outreach, WhatsApp/email, notification, target achievement, attendance/location, import/export, and analytics must be rebuilt as CargoGrid-owned modules where planned.
+
+CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS, public tracking, customer portal, accounting, loyalty, integration hub, and Supreme Admin configuration UI.
+
 ## Module Dependency Map Summary
 
 - Control plane owns tenants, plans, module entitlements, RBAC, domains, tenant settings, and audit policy.
@@ -69,6 +78,7 @@ All future prompts must enforce clean-room greenfield rebuild rules and must tre
 
 ## Current Build Phase
 
+Phase 03.8 — BCP Feature Parity Catalog.
 Phase 03.6 — Clean-Room Greenfield Alignment.
 Phase 03 — Server-Side Configuration Resolver.
 Phase 02 — SaaS Control-Plane Database Foundation.
@@ -82,6 +92,7 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 02: SaaS control-plane database foundation migration added with tenant, branch, entitlement, configuration, domain, and audit primitives.
 - Phase 03: Server-side configuration resolver added for tenant settings, scoped config hierarchy, module entitlement checks, and feature flags.
 - Phase 03.6: Clean-room greenfield alignment added across project documentation, blueprint references, prompt pack references, checklists, and persistent context.
+- Phase 03.8: BCP-inspired feature parity business capability catalog added as clean-room requirements only.
 
 ## Script Status
 
@@ -129,6 +140,11 @@ Phase 00 — Project Governance and Persistent Build Memory.
 
 - Node built-in tests validate governance documentation.
 - React/Next.js component tests are not present because application code has not been scaffolded yet.
+
+
+## Corrected Phase Sequence Addendum
+
+Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
 
 ## Next Recommended Phase
 
@@ -206,6 +222,7 @@ Phase 03 — Developer tooling repair and migration validation: repair `package.
 - `test/governance.test.mjs` — governance smoke tests.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
+- `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
 CargoGrid is a web-based, multi-tenant, white-label logistics ERP.

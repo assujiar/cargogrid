@@ -18,6 +18,11 @@ Commercial Core is a new CargoGrid module group to be built from scratch. It inc
 
 CargoGrid must preserve this clean data flow: lead converts to account/customer; RFQ converts to quotation; approved quotation converts to job order; job order creates shipment/tracking; shipment events feed tracking, customer portal, SLA, notification, billing readiness, and reports; POD feeds billing readiness, customer portal, document center, and invoice evidence; invoice/payment feeds AR, accounting, profitability, and loyalty.
 
+
+## BCP Feature Parity Rule
+
+BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
+
 ## No Copy Checklist
 
 Before any implementation PR is considered complete, confirm:
@@ -66,6 +71,7 @@ Use these files as the main reference:
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md`
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md`
 - `CARGOGRID_CONTEXT.md`
+- `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 
 ## Quality Gate
 
