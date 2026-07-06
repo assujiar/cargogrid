@@ -2,6 +2,23 @@
 
 Use this checklist before every PR is considered complete.
 
+
+## Clean-Room Regression Gate
+
+- [ ] CargoGrid remains a clean-room, greenfield SaaS product built from scratch.
+- [ ] No BCP code, schema, migration, component, utility, asset, data, environment/config, branding, or tenant-specific logic was copied or ported.
+- [ ] BCP was used only as human business-process reference, not implementation source.
+- [ ] CRM, RFQ, quotation, pricing, procurement, finance, TMS, WMS, customer portal, and accounting are treated as new CargoGrid modules to be built from scratch.
+- [ ] Connected data flow remains input-once and anti-duplicate-work.
+
+
+## BCP Feature Parity Checks
+
+- [ ] If the task touches CRM, RFQ, quotation, pricing, procurement, DSO/AR, marketing/outreach, WhatsApp/email, notification, target achievement, attendance/location, import/export, or analytics, it references `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as business requirements only.
+- [ ] BCP feature parity is treated as rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation.
+- [ ] The task does not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP.
+- [ ] New CargoGrid modules such as TMS, WMS, public tracking, customer portal, accounting, and loyalty remain CargoGrid-owned greenfield implementations.
+
 ## Scope Control
 
 - [ ] The task is small, scoped, and PR-sized.

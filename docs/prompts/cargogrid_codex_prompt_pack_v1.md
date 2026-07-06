@@ -7,6 +7,31 @@
 
 ---
 
+## Clean-Room Greenfield Rule
+
+CargoGrid is built from scratch as a clean-room, greenfield public SaaS product. No UGC Business Command Portal / BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
+
+## BCP Reference Boundary
+
+BCP may only be used as a human business reference for logistics process understanding, pain points, module requirements, and operating lessons. BCP must not be used as implementation source. CargoGrid owns its own schema, code, UI, configuration, security, workflows, tests, and documentation.
+
+## Commercial Core Greenfield Scope
+
+Commercial Core is a new CargoGrid module group to be built from scratch. It includes customer/account master, customer contacts, lead management, sales pipeline, opportunity, activity/task/follow-up, RFQ/inquiry, rate request, quotation, quotation approval, rate management, customer contract rate, surcharge/charge rules, margin rule, and quote-to-job conversion. No legacy module is presumed available in CargoGrid; every Commercial Core capability must be designed and implemented cleanly inside CargoGrid.
+
+## Anti-Duplicate-Work Data Flow
+
+CargoGrid must preserve this clean data flow: lead converts to account/customer; RFQ converts to quotation; approved quotation converts to job order; job order creates shipment/tracking; shipment events feed tracking, customer portal, SLA, notification, billing readiness, and reports; POD feeds billing readiness, customer portal, document center, and invoice evidence; invoice/payment feeds AR, accounting, profitability, and loyalty.
+
+
+## BCP Feature Parity Rule
+
+BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
+
+## Corrected Phase Sequence Addendum
+
+Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
+
 ## How to use this prompt pack
 
 Use one prompt at a time. One prompt equals one small Codex task / one branch / one PR.
@@ -446,7 +471,7 @@ Output:
 You are Codex working on CargoGrid Logistics ERP.
 
 Product context:
-CargoGrid is a multi-tenant logistics ERP. Access control has three separate layers: module entitlement, feature flags, and RBAC permissions. SAIKI/CargoGrid Supreme Admin controls module/feature entitlement globally. Tenant admins can manage users and roles only inside the modules/features granted to their tenant.
+CargoGrid is a multi-tenant logistics ERP. Access control has three separate layers: module entitlement, feature flags, and RBAC permissions. CargoGrid Supreme Admin controls module/feature entitlement globally. Tenant admins can manage users and roles only inside the modules/features granted to their tenant.
 
 Task:
 Implement RBAC schema and permission catalog.
