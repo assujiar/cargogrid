@@ -43,11 +43,32 @@ CargoGrid must operate as one connected logistics operating grid: commercial int
 
 ## Current Build Phase
 
+Phase 01A — Developer Script Stabilization.
 Phase 00 — Project Governance and Persistent Build Memory.
 
 ## Completed Phases
 
 - Phase 00: Governance files, persistent context, regression/security checklists, ADRs, and build log.
+- Phase 01A: Developer scripts stabilized for lint, typecheck, test, and governance build verification.
+
+## Script Status
+
+- `npm run lint`: configured with ESLint.
+- `npm run typecheck`: configured with TypeScript strict no-emit checking.
+- `npm test`: configured with Node's built-in test runner.
+- `npm run build`: configured as lightweight governance verification until a real Next.js build exists.
+- Formatting: no format script is configured because no formatting tooling existed before Phase 01A.
+
+## Failing Commands
+
+- None for Phase 01A.
+
+## Known Risks
+
+- No runnable Next.js application scaffold exists yet.
+- The current `npm run build` command validates governance files only; it must be replaced with the real Next.js/Vercel build when the application scaffold is introduced.
+- Tenant/RBAC/database schemas are not yet implemented; future schema phases must enforce RLS, indexes, and tenant isolation from the first migration.
+- Service-role usage rules are documented but not yet enforceable against application code because no application code exists.
 
 ## Known Risks
 
@@ -63,6 +84,16 @@ Phase 00 — Project Governance and Persistent Build Memory.
 
 ## Test Status
 
+- Node built-in tests validate governance documentation.
+- React/Next.js component tests are not present because application code has not been scaffolded yet.
+
+## Next Recommended Phase
+
+Phase 01B — Application scaffold using Next.js, React, TypeScript, Supabase publishable client utilities, and a real Vercel-ready build target.
+
+## Next Recommended Fix Task
+
+Replace the temporary governance-only `npm run build` command with `next build` during the application scaffold phase, and add framework-specific smoke tests once React/Next.js code exists.
 - No automated tests exist yet because this phase is documentation-only and does not introduce application code.
 - TODO: Add lint, typecheck, unit test, and build execution in the first application scaffold phase when `package.json` exists. Linked from `docs/build-log/phase-00.md`.
 
@@ -82,6 +113,15 @@ Phase 01 — Application scaffold and quality gate setup using Next.js, React, T
 - `docs/adr/0003-config-driven-erp.md` — Supreme Admin configuration decision record.
 - `docs/adr/0004-connected-module-data-flow.md` — connected module data-flow decision record.
 - `docs/build-log/phase-00.md` — Phase 00 implementation log.
+- `docs/build-log/phase-01.md` — Phase 01A developer script stabilization log.
+- `package.json` — developer script entry points.
+- `tsconfig.json` — TypeScript strict checking configuration.
+- `types/cargogrid.d.ts` — no-runtime TypeScript placeholder so typecheck runs before application code exists.
+- `eslint.config.mjs` — ESLint flat configuration.
+- `scripts/verify-governance.mjs` — temporary governance build verification.
+- `test/governance.test.mjs` — governance smoke tests.
+- `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
+- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
 CargoGrid is a web-based, multi-tenant, white-label logistics ERP.

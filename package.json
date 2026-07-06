@@ -2,6 +2,19 @@
   "name": "cargogrid",
   "version": "0.0.0",
   "private": true,
+  "description": "CargoGrid logistics ERP governance and build foundation.",
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test",
+    "build": "node scripts/verify-governance.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.4.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4"
   "scripts": {
     "dev": "next dev",
     "build": "next build",

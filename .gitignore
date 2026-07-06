@@ -1,4 +1,11 @@
 node_modules/
+npm-debug.log*
+coverage/
+dist/
+.next/
+.vercel/
+.env
+.env*.local
 .next/
 out/
 .vercel/
