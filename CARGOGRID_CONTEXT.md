@@ -102,6 +102,17 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - `npm run build`: configured as lightweight governance verification until a real Next.js build exists.
 - Formatting: no format script is configured because no formatting tooling existed before Phase 01A.
 
+## Current Quality Gate Status
+
+- `npm run lint`: pass on the latest Phase 01A failure-fix pass.
+- `npm run typecheck`: pass on the latest Phase 01A failure-fix pass.
+- `npm test`: pass on the latest Phase 01A failure-fix pass.
+- `npm run build`: pass on the latest Phase 01A failure-fix pass.
+
+## Failing Commands
+
+- None for the latest Phase 01A quality gate failure-fix pass.
+- Prior environment note: `git fetch origin main` could not run because no `origin` remote is configured in this local checkout.
 ## Failing Commands
 
 - None for Phase 03.
@@ -188,6 +199,7 @@ Tooling was repaired in Phase 03 so `npm run lint`, `npm run typecheck`, `npm te
 ## Next Recommended Phase
 
 Phase 04 — RBAC and membership foundation: add tenant users/memberships, roles, permissions, role bindings, branch access, server-side authorization helpers, audited Supreme Admin mutation paths, and Supabase RLS policies connected to the Phase 02 control plane and Phase 03 resolver.
+Phase 03 — Developer tooling repair and migration validation: repair `package.json`, restore runnable lint/typecheck/test/build commands, install or configure Supabase migration validation, and apply the Phase 02 migration locally before adding RBAC or operational logistics tables.
 
 ## Important File Paths
 
