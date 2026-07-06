@@ -69,3 +69,8 @@ Phase 00 is complete only if the documentation files above exist and no applicat
 - `npm run typecheck`
 - `npm test`
 - `npm run build`
+
+
+## Phase 03.6 Clean-Room Alignment Note
+
+CargoGrid is confirmed as a clean-room, greenfield public SaaS product built from scratch. BCP may be used only as a human business-process reference and must not be used as implementation source. No BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.

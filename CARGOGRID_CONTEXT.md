@@ -4,6 +4,23 @@
 
 CargoGrid is a white-label, multi-tenant, fully configurable web-based logistics ERP for 3PLs, freight forwarders, trucking operators, warehouse operators, and in-house logistics teams.
 
+## Clean-Room Greenfield Rule
+
+CargoGrid is built from scratch as a clean-room, greenfield public SaaS product. No UGC Business Command Portal / BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
+
+## BCP Reference Boundary
+
+BCP may only be used as a human business reference for logistics process understanding, pain points, module requirements, and operating lessons. BCP must not be used as implementation source. CargoGrid owns its own schema, code, UI, configuration, security, workflows, tests, and documentation.
+
+## Commercial Core Greenfield Scope
+
+Commercial Core is a new CargoGrid module group to be built from scratch. It includes customer/account master, customer contacts, lead management, sales pipeline, opportunity, activity/task/follow-up, RFQ/inquiry, rate request, quotation, quotation approval, rate management, customer contract rate, surcharge/charge rules, margin rule, and quote-to-job conversion. No legacy module is presumed available in CargoGrid; every Commercial Core capability must be designed and implemented cleanly inside CargoGrid.
+
+## Anti-Duplicate-Work Data Flow
+
+CargoGrid must preserve this clean data flow: lead converts to account/customer; RFQ converts to quotation; approved quotation converts to job order; job order creates shipment/tracking; shipment events feed tracking, customer portal, SLA, notification, billing readiness, and reports; POD feeds billing readiness, customer portal, document center, and invoice evidence; invoice/payment feeds AR, accounting, profitability, and loyalty.
+
+
 CargoGrid must operate as one connected logistics operating grid: commercial intent, shipment execution, warehouse movement, document/POD evidence, billing readiness, accounting, customer portal, public tracking, loyalty, reporting, and integrations must share source-of-truth records instead of becoming disconnected modules.
 
 ## Stack
@@ -31,6 +48,15 @@ CargoGrid must operate as one connected logistics operating grid: commercial int
 14. Every phase must run lint, typecheck, tests, build, and applicable migration checks before being considered complete.
 15. If a test cannot be written yet, create an explicit TODO with reason and link it in the build log.
 
+
+## Clean-Room Product Status
+
+CargoGrid is a new public SaaS product built from zero. BCP is legacy reference only and may be used solely for human business-process understanding, pain points, module requirements, and operating lessons. BCP must not be used as implementation source.
+
+CRM, RFQ, quotation, pricing, procurement, finance, TMS, WMS, customer portal, and accounting must all be coded new inside CargoGrid. CargoGrid owns its own schema, code, UI, configuration, security, workflows, tests, and documentation.
+
+All future prompts must enforce clean-room greenfield rebuild rules and must treat every module as a new CargoGrid module, not as an extension, completion, reuse, or port of BCP.
+
 ## Module Dependency Map Summary
 
 - Control plane owns tenants, plans, module entitlements, RBAC, domains, tenant settings, and audit policy.
@@ -43,6 +69,7 @@ CargoGrid must operate as one connected logistics operating grid: commercial int
 
 ## Current Build Phase
 
+Phase 03.6 — Clean-Room Greenfield Alignment.
 Phase 03 — Server-Side Configuration Resolver.
 Phase 02 — SaaS Control-Plane Database Foundation.
 Phase 01A — Developer Script Stabilization.
@@ -54,6 +81,7 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 01A: Developer scripts stabilized for lint, typecheck, test, and governance build verification.
 - Phase 02: SaaS control-plane database foundation migration added with tenant, branch, entitlement, configuration, domain, and audit primitives.
 - Phase 03: Server-side configuration resolver added for tenant settings, scoped config hierarchy, module entitlement checks, and feature flags.
+- Phase 03.6: Clean-room greenfield alignment added across project documentation, blueprint references, prompt pack references, checklists, and persistent context.
 
 ## Script Status
 
@@ -63,6 +91,17 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - `npm run build`: configured as lightweight governance verification until a real Next.js build exists.
 - Formatting: no format script is configured because no formatting tooling existed before Phase 01A.
 
+## Current Quality Gate Status
+
+- `npm run lint`: pass on the latest Phase 01A failure-fix pass.
+- `npm run typecheck`: pass on the latest Phase 01A failure-fix pass.
+- `npm test`: pass on the latest Phase 01A failure-fix pass.
+- `npm run build`: pass on the latest Phase 01A failure-fix pass.
+
+## Failing Commands
+
+- None for the latest Phase 01A quality gate failure-fix pass.
+- Prior environment note: `git fetch origin main` could not run because no `origin` remote is configured in this local checkout.
 ## Failing Commands
 
 - None for Phase 03.

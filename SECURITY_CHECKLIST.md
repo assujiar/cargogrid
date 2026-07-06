@@ -2,6 +2,14 @@
 
 Use this checklist for every implementation PR.
 
+
+## BCP Contamination Audit
+
+- [ ] No BCP code, schema, migration, SQL, component, utility, asset, tenant data, internal config, environment value, or branding was copied into CargoGrid.
+- [ ] No BCP module was treated as already existing in CargoGrid.
+- [ ] Any BCP reference was limited to human business-process context, pain points, requirements, and operating lessons.
+- [ ] CargoGrid implementation remains independently designed, tenant-isolated, configurable, and auditable.
+
 ## Secrets and Privileged Access
 
 - [ ] No service-role key is imported into browser/client code.

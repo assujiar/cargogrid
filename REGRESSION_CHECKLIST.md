@@ -2,6 +2,15 @@
 
 Use this checklist before every PR is considered complete.
 
+
+## Clean-Room Regression Gate
+
+- [ ] CargoGrid remains a clean-room, greenfield SaaS product built from scratch.
+- [ ] No BCP code, schema, migration, component, utility, asset, data, environment/config, branding, or tenant-specific logic was copied or ported.
+- [ ] BCP was used only as human business-process reference, not implementation source.
+- [ ] CRM, RFQ, quotation, pricing, procurement, finance, TMS, WMS, customer portal, and accounting are treated as new CargoGrid modules to be built from scratch.
+- [ ] Connected data flow remains input-once and anti-duplicate-work.
+
 ## Scope Control
 
 - [ ] The task is small, scoped, and PR-sized.

@@ -64,3 +64,8 @@ Implemented the server-only CargoGrid configuration resolver used by future conn
 - `resolveTenantSettings` supports branch overrides through the `tenant_settings` configuration key. Future Supreme Admin UI work must create the matching schema before branch-specific settings are editable.
 - The resolver currently supports request-local caching by resolver instance only. If React/Next request cache conventions are introduced later, this resolver can be adapted without adding process-global cache state.
 - No service-role client is used by this resolver. Future Supreme Admin mutation paths must remain server-side and write `audit_logs`.
+
+
+## Phase 03.6 Clean-Room Alignment Note
+
+CargoGrid is confirmed as a clean-room, greenfield public SaaS product built from scratch. BCP may be used only as a human business-process reference and must not be used as implementation source. No BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
