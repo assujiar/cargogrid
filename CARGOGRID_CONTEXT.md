@@ -15,4 +15,5 @@ Core principles:
 Current status:
 - Repository initialized.
 - Blueprint and prompt pack uploaded.
-- No application scaffold yet.
+- Phase 00 scaffold added: Next.js App Router, React, TypeScript, Tailwind CSS, Supabase utilities, Vitest smoke test, and Vercel-ready project files.
+- No ERP business modules, logistics tables, tenant tables, RBAC tables, or migrations have been created yet.
