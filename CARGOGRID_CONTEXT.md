@@ -144,6 +144,7 @@ Tooling was repaired in Phase 03 so `npm run lint`, `npm run typecheck`, `npm te
 ## Next Recommended Phase
 
 Phase 04 — RBAC and membership foundation: add tenant users/memberships, roles, permissions, role bindings, branch access, server-side authorization helpers, audited Supreme Admin mutation paths, and Supabase RLS policies connected to the Phase 02 control plane and Phase 03 resolver.
+Phase 03 — Developer tooling repair and migration validation: repair `package.json`, restore runnable lint/typecheck/test/build commands, install or configure Supabase migration validation, and apply the Phase 02 migration locally before adding RBAC or operational logistics tables.
 
 ## Important File Paths
 
