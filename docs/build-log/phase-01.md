@@ -59,6 +59,9 @@ No formatting script was added because the repository did not already use format
 Pass. Developer scripts now exist and pass for the current governance-only repository state.
 
 
+## Phase 03.6 Clean-Room Alignment Note
+
+CargoGrid is confirmed as a clean-room, greenfield public SaaS product built from scratch. BCP may be used only as a human business-process reference and must not be used as implementation source. No BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
 ## Phase 01A Quality Gate Recheck
 
 ### Branch Sync

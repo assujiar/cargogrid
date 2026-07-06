@@ -9,6 +9,22 @@
 
 ---
 
+## Clean-Room Greenfield Rule
+
+CargoGrid is built from scratch as a clean-room, greenfield public SaaS product. No UGC Business Command Portal / BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
+
+## BCP Reference Boundary
+
+BCP may only be used as a human business reference for logistics process understanding, pain points, module requirements, and operating lessons. BCP must not be used as implementation source. CargoGrid owns its own schema, code, UI, configuration, security, workflows, tests, and documentation.
+
+## Commercial Core Greenfield Scope
+
+Commercial Core is a new CargoGrid module group to be built from scratch. It includes customer/account master, customer contacts, lead management, sales pipeline, opportunity, activity/task/follow-up, RFQ/inquiry, rate request, quotation, quotation approval, rate management, customer contract rate, surcharge/charge rules, margin rule, and quote-to-job conversion. No legacy module is presumed available in CargoGrid; every Commercial Core capability must be designed and implemented cleanly inside CargoGrid.
+
+## Anti-Duplicate-Work Data Flow
+
+CargoGrid must preserve this clean data flow: lead converts to account/customer; RFQ converts to quotation; approved quotation converts to job order; job order creates shipment/tracking; shipment events feed tracking, customer portal, SLA, notification, billing readiness, and reports; POD feeds billing readiness, customer portal, document center, and invoice evidence; invoice/payment feeds AR, accounting, profitability, and loyalty.
+
 ## How to use this file
 
 This is the complete master reference for building CargoGrid. It combines:
@@ -69,7 +85,7 @@ No module may be designed as a standalone island. CargoGrid is a connected opera
 
 ## 0. Executive summary
 
-The existing architecture already defines the right control foundation: tenant isolation, plan/module entitlement, RBAC, tenant settings, CargoGrid supreme admin, audit logs, and domain routing. That foundation must remain. The missing part is the complete logistics ERP domain blueprint.
+CargoGrid is a clean-room greenfield product. Its control foundation, tenant isolation, plan/module entitlement, RBAC, tenant settings, CargoGrid Supreme Admin, audit logs, and domain routing must be designed and implemented inside CargoGrid from scratch. BCP or any other legacy system may inform business-process understanding only; it is not an implementation source.
 
 This expanded blueprint defines three planes:
 
@@ -105,6 +121,40 @@ The product covers:
 - Billing readiness, invoicing, AR/AP, accounting ledger, tax, payment allocation, bank/cash, cost accrual, and profitability analytics.
 - Notification engine, API, webhook, integration hub.
 - Dashboard, reporting, and audit.
+
+### 1.1.1 Commercial Core clean-room module group
+
+Commercial Core is a new CargoGrid module group to be designed and coded from scratch. It includes:
+
+- Customer/account master.
+- Customer contacts.
+- Lead management.
+- Sales pipeline.
+- Opportunity.
+- Activity/task/follow-up.
+- RFQ/inquiry.
+- Rate request.
+- Quotation.
+- Quotation approval.
+- Rate management.
+- Customer contract rate.
+- Surcharge/charge rules.
+- Margin rule.
+- Quote-to-job conversion.
+
+BCP may help humans understand commercial logistics pain points, but CargoGrid must implement all Commercial Core schema, UI, logic, workflows, configuration, security, and tests independently.
+
+### 1.1.2 Anti-duplicate-work data flow
+
+CargoGrid must preserve this data flow without retyping:
+
+1. Lead converts to account/customer.
+2. RFQ converts to quotation.
+3. Approved quotation converts to job order.
+4. Job order creates shipment/tracking.
+5. Shipment events feed tracking, customer portal, SLA, notification, billing readiness, and reports.
+6. POD feeds billing readiness, customer portal, document center, and invoice evidence.
+7. Invoice/payment feeds AR, accounting, profitability, and loyalty.
 
 ### 1.2 Non-goals for early build
 
@@ -230,7 +280,7 @@ flowchart TB
     VendorPortal[Vendor Portal]
     DriverPWA[Driver Mobile Web / PWA]
     TenantApp[Tenant Internal Web App]
-    SaikiConsole[CargoGrid Platform Owner Admin Console]
+    CargoGridConsole[CargoGrid Platform Owner Admin Console]
   end
 
   subgraph App[Application Plane]
@@ -312,7 +362,7 @@ Rules:
 
 ## 4. Control Plane: tenancy, subscription, entitlement, RBAC
 
-This section keeps the existing architecture direction and expands it.
+This section defines CargoGrid architecture direction from scratch and expands it without relying on BCP implementation artifacts.
 
 ### 4.1 Actor hierarchy
 
@@ -3460,7 +3510,7 @@ Do not put full WMS and route optimization in MVP. Put WMS in phase 4 after the 
 ## 34. Open questions before build
 
 1. Product brand: CargoGrid Logistics OS, CargoGrid TrackPortal, CargoGrid Platform Owner Logistics Cloud, or another name?
-2. Will the first production pilot be UGC internal or external tenant?
+2. Will the first production pilot be an internal validation tenant or an external tenant?
 3. Is the first target buyer forwarder, trucking, warehouse operator, or distributor?
 4. Which features are included in Starter/Growth/Business/Enterprise?
 5. Which finance mode is enabled for first pilot: Finance Lite, Finance Pro, or Accounting Enterprise?
@@ -6127,7 +6177,7 @@ No module can be used unless enabled. No action can run unless user has permissi
 Task:
 Implement CargoGrid RBAC, module gate, feature gate, and tenant access helpers.
 
-Create/extend:
+Create CargoGrid-owned files:
 - users/profile table if needed
 - tenant_users
 - customer_users placeholder if needed
@@ -6181,7 +6231,7 @@ Enable full customization from Supreme Admin UI without coding or backend edits.
 Task:
 Implement server-side configuration resolver and configuration tables.
 
-Create/extend tables:
+Create CargoGrid-owned tables:
 - configuration_schemas
 - configuration_values
 - workflow_definitions
@@ -6563,7 +6613,7 @@ Customer can book, track, view docs, later stock/invoices.
 Task:
 Implement Customer Portal identity and booking flow.
 
-Create/extend:
+Create CargoGrid-owned files:
 - customer_users
 - customer_user_roles if needed
 - customer_portal_settings

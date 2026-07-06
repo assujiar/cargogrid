@@ -60,3 +60,8 @@ Implemented the first Supabase migration for the CargoGrid SaaS control plane. T
 - Future operational modules must reference `branches` rather than creating duplicate branch/profit-center structures.
 - Future permission checks must evaluate module and feature entitlements before module-specific authorization.
 - Supreme Admin write paths must be implemented server-side and must write `audit_logs`; no browser/client code may import service-role credentials.
+
+
+## Phase 03.6 Clean-Room Alignment Note
+
+CargoGrid is confirmed as a clean-room, greenfield public SaaS product built from scratch. BCP may be used only as a human business-process reference and must not be used as implementation source. No BCP code, schema, migration, component, utility, asset, internal data, tenant-specific logic, environment/config, or branding may be copied into CargoGrid.
