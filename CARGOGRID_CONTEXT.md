@@ -61,6 +61,17 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - `npm run build`: configured as lightweight governance verification until a real Next.js build exists.
 - Formatting: no format script is configured because no formatting tooling existed before Phase 01A.
 
+## Current Quality Gate Status
+
+- `npm run lint`: pass on the latest Phase 01A failure-fix pass.
+- `npm run typecheck`: pass on the latest Phase 01A failure-fix pass.
+- `npm test`: pass on the latest Phase 01A failure-fix pass.
+- `npm run build`: pass on the latest Phase 01A failure-fix pass.
+
+## Failing Commands
+
+- None for the latest Phase 01A quality gate failure-fix pass.
+- Prior environment note: `git fetch origin main` could not run because no `origin` remote is configured in this local checkout.
 ## Failing Commands
 
 - None for Phase 01A.
