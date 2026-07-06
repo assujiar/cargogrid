@@ -77,3 +77,16 @@ If a command cannot run because the application scaffold or dependency manifest 
 - Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP.
 - Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
 - Do not copy, port, import, or reuse any BCP code, SQL, schema, migration, component, utility, UI/layout, asset, config, dummy data, tenant-specific logic, UGC branding, or internal UGC/BCP data.
+
+
+## Phase 03.10 Prompt Reconciliation Requirements
+
+Every future Codex task must explicitly confirm:
+
+- CargoGrid is a clean-room greenfield rebuild; build from scratch.
+- BCP is business reference only; do not copy, import, port, or reuse BCP code/schema/component/assets/data/config.
+- Connected-module architecture is preserved: avoid duplicate work, use shared master records, define upstream/downstream relationships, and feed status/event/history records into related modules where relevant.
+- Supreme Admin configuration controls module behavior where applicable.
+- Supabase RLS, tenant isolation, permission gates, module gates, feature gates, audit logs, and no service-role-in-browser rules are enforced.
+- Testing includes lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression, and no-BCP-contamination checks.
+- Documentation updates include changed files, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream relationships.

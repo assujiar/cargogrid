@@ -224,67 +224,47 @@ CargoGrid must also build modules that go beyond comparable BCP business capabil
 - Supreme Admin configuration UI.
 - Regression, security, performance, deployment, and release readiness.
 
-## Corrected Phase Sequence
+## Correct Phase Sequence After Phase 03.10
 
-1. Phase 00 — Governance, context, and clean-room rules.
-2. Phase 01 — Application scaffold and quality gate.
-3. Phase 02 — SaaS control plane.
-4. Phase 03 — Server-side configuration resolver.
-5. Phase 03.6 — Clean-room greenfield alignment.
-6. Phase 03.8 — BCP feature parity business capability catalog.
-7. Phase 04 — RBAC, tenant membership, module gate, feature gate, and branch access.
-8. Phase 05 — Master data foundation.
-9. Phase 06 — Commercial Core: customer/account master, contacts, leads, pipeline, opportunity, activity/task/follow-up.
-10. Phase 07 — RFQ and Quotation.
-11. Phase 08 — Pricing, rates, and procurement.
-12. Phase 09 — Job order core and quote-to-job conversion.
-13. Phase 10 — Shipment/tracking backbone.
-14. Phase 11 — Public tracking.
-15. Phase 12 — Customer portal.
-16. Phase 13 — Document center and POD.
-17. Phase 14 — TMS first mile.
-18. Phase 15 — TMS middle mile.
-19. Phase 16 — TMS last mile.
-20. Phase 17 — WMS location foundation.
-21. Phase 18 — WMS LPN and labeling.
-22. Phase 19 — Inventory ledger.
-23. Phase 20 — WMS inbound/outbound.
-24. Phase 21 — Billing readiness.
-25. Phase 22 — Invoicing and AR.
-26. Phase 23 — Finance Lite, DSO, and collection follow-up.
-27. Phase 24 — AP/vendor bill matching.
-28. Phase 25 — Accounting GL.
-29. Phase 26 — Accounting posting engine.
-30. Phase 27 — Financial reports.
-31. Phase 28 — Notification, WhatsApp/email, and outreach.
-32. Phase 29 — Sales performance and target achievement.
-33. Phase 30 — Marketing/campaigns optional.
-34. Phase 31 — Attendance/location optional.
-35. Phase 32 — Recruitment optional.
-36. Phase 33 — Loyalty.
-37. Phase 34 — Integration hub.
-38. Phase 35 — Import/export.
-39. Phase 36 — Reporting and analytics.
-40. Phase 37 — Supreme Admin configuration UI.
-41. Phase 38 — Regression suite.
-42. Phase 39 — Security hardening.
-43. Phase 40 — Performance.
-44. Phase 41 — Deployment.
-45. Phase 42 — Smoke test.
-46. Phase 43 — Release candidate.
+Pre-03.10 foundation phases remain Phase 00 through Phase 03.10. Future execution phases must use this sequence:
 
-## Review Checklist for Future Phases
+1. Phase 04 — Supreme Admin Configuration Studio.
+2. Phase 05 — Core Master Data.
+3. Phase 06 — Commercial Core Rebuild.
+4. Phase 07 — RFQ / Inquiry / Ticketing Rebuild.
+5. Phase 08 — Rate Request & Procurement Rebuild.
+6. Phase 09 — Pricing / Rate Management Rebuild.
+7. Phase 10 — Quotation Rebuild.
+8. Phase 11 — Target, KPI & Sales Performance Rebuild.
+9. Phase 12 — Finance Lite / DSO / AR Rebuild.
+10. Phase 13 — Communication & Notification Rebuild.
+11. Phase 14 — Attendance / Workforce / Location Rebuild.
+12. Phase 15 — Issue Report / Internal Ticket Rebuild.
+13. Phase 16 — Job Order Core.
+14. Phase 17 — Numbering / Resi / Tracking Number Engine.
+15. Phase 18 — Public Tracking.
+16. Phase 19 — Customer Portal.
+17. Phase 20 — Document Center & POD.
+18. Phase 21 — TMS First/Middle/Last Mile.
+19. Phase 22 — WMS Multi Warehouse/Racking/Labeling.
+20. Phase 23 — Inventory Ledger.
+21. Phase 24 — WMS Inbound/Outbound.
+22. Phase 25 — Billing Readiness.
+23. Phase 26 — Invoicing & AR.
+24. Phase 27 — Vendor Payable / AP.
+25. Phase 28 — Accounting / GL.
+26. Phase 29 — Financial Reports.
+27. Phase 30 — Loyalty.
+28. Phase 31 — Integration Hub/API/Webhook.
+29. Phase 32 — Import/Export.
+30. Phase 33 — Reporting/KPI.
+31. Phase 34 — Regression Suite.
+32. Phase 35 — Security Hardening.
+33. Phase 36 — Performance.
+34. Phase 37 — Deployment.
+35. Phase 38 — Smoke Test.
+36. Phase 39 — Release Candidate.
 
-- [ ] The phase references this catalog as business requirements only.
-- [ ] The phase rebuilds comparable capabilities from scratch inside CargoGrid.
-- [ ] No BCP code, SQL, schema, migration, component, utility, UI/layout, asset, config, dummy data, tenant-specific logic, UGC branding, or internal UGC/BCP data is copied.
-- [ ] The phase does not assume a capability already exists in CargoGrid because it existed in BCP.
-- [ ] The phase preserves tenant isolation, RLS, Supreme Admin configurability, auditability, module/feature gates, and connected data flow.
-# CargoGrid — BCP Feature Inventory & Clean-Room Requirement Catalog v1
-
-**Purpose:** This document gives Codex and developers an explicit feature inventory inspired by the legacy UGC Business Command Portal (BCP) so CargoGrid can rebuild comparable and expanded capabilities from scratch.
-
-**Critical boundary:** This is a business-requirement inventory only. It is not a code reference. CargoGrid must not copy, port, reuse, import, or derive implementation code, SQL schema, migrations, UI components, assets, data, config, tenant-specific logic, or UGC branding from BCP.
 
 ---
 
@@ -922,62 +902,41 @@ CargoGrid must also include modules beyond BCP:
 
 ## 5. Updated build sequence with BCP feature parity included
 
-Recommended sequence after Phase 03.6/03.8:
+## Correct Phase Sequence After Phase 03.10
 
-1. Phase 04 — Supreme Admin Configuration Studio.
-2. Phase 05 — Core Master Data.
-3. Phase 06 — Commercial Core Rebuild: CRM/account/lead/opportunity/activity.
-4. Phase 07 — RFQ, Inquiry, Ticket-like Flow & Quotation Rebuild.
-5. Phase 08 — Rate, Tariff, Pricing Intelligence & Procurement Rebuild.
-6. Phase 09 — Sales Performance, Target Achievement & Commercial Analytics.
-7. Phase 10 — Job Order Core.
-8. Phase 11 — Numbering, Resi, Document Number, and Public Verification Engine.
-9. Phase 12 — Public Tracking and Tracking Widget.
-10. Phase 13 — Customer Portal.
-11. Phase 14 — Document Center and POD.
-12. Phase 15 — TMS First/Middle/Last Mile.
-13. Phase 16 — WMS Multi Warehouse/Racking/Labeling.
-14. Phase 17 — Inventory Ledger.
-15. Phase 18 — Inbound/Outbound Warehouse.
-16. Phase 19 — Billing Readiness.
-17. Phase 20 — Invoicing and AR.
-18. Phase 21 — Vendor Payable/AP.
-19. Phase 22 — Accounting/GL.
-20. Phase 23 — Financial Reports.
-21. Phase 24 — Loyalty/Membership.
-22. Phase 25 — Notification Engine, Email, WhatsApp, and Outreach Automation.
-23. Phase 26 — Import/Export and Data Reconciliation.
-24. Phase 27 — Marketing Growth optional module.
-25. Phase 28 — Recruitment/HR optional module.
-26. Phase 29 — Integration Hub/API/Webhook.
-27. Phase 30 — Reporting/KPI/BI.
-28. Phase 31 — Regression Suite.
-29. Phase 32 — Security Audit/Hardening.
-30. Phase 33 — Performance/Scalability.
-31. Phase 34 — Deployment Readiness.
-32. Phase 35 — Smoke Test.
-33. Phase 36 — Release Candidate.
-
----
-
-## 6. Prompt rule for future Codex tasks
-
-Every future Codex prompt must include:
-
-> Build this feature from scratch for CargoGrid. Do not copy, import, port, or reuse any code, SQL, schema, migration, component, utility, UI/layout, asset, config, dummy data, tenant-specific logic, UGC branding, or internal UGC/BCP data from BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` only as a business capability checklist, not as implementation source.
-
----
-
-## 7. Feature parity acceptance criteria
-
-A CargoGrid phase passes feature parity only when:
-
-- it rebuilds the relevant BCP-inspired capability as CargoGrid-native;
-- it uses tenant-scoped schema and RLS;
-- it connects to shared master data;
-- it avoids duplicate data entry;
-- it is configurable by Supreme Admin when tenant-specific behavior varies;
-- it is covered by tests;
-- it updates build log and context;
-- it confirms no BCP code/schema/assets/data/config were copied.
-
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
