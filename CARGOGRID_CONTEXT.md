@@ -43,6 +43,7 @@ CargoGrid must operate as one connected logistics operating grid: commercial int
 
 ## Current Build Phase
 
+Phase 02 — SaaS Control-Plane Database Foundation.
 Phase 01A — Developer Script Stabilization.
 Phase 00 — Project Governance and Persistent Build Memory.
 
@@ -50,6 +51,7 @@ Phase 00 — Project Governance and Persistent Build Memory.
 
 - Phase 00: Governance files, persistent context, regression/security checklists, ADRs, and build log.
 - Phase 01A: Developer scripts stabilized for lint, typecheck, test, and governance build verification.
+- Phase 02: SaaS control-plane database foundation migration added with tenant, branch, entitlement, configuration, domain, and audit primitives.
 
 ## Script Status
 
@@ -79,7 +81,7 @@ Phase 00 — Project Governance and Persistent Build Memory.
 
 ## Migration Status
 
-- No database migrations exist.
+- Phase 02 control-plane migration exists at `supabase/migrations/20260706000000_saas_control_plane_foundation.sql`.
 - No logistics, tenant, RBAC, finance, WMS, or TMS tables have been created.
 
 ## Test Status
@@ -100,6 +102,33 @@ Replace the temporary governance-only `npm run build` command with `next build` 
 ## Next Recommended Phase
 
 Phase 01 — Application scaffold and quality gate setup using Next.js, React, TypeScript, Supabase publishable client utilities, lint, typecheck, tests, and build scripts.
+
+
+## Phase 02 Completion Status
+
+Phase 02 — SaaS Control-Plane Database Foundation is implemented as a Supabase migration. It creates the control-plane primitives for tenants, tenant settings, branches, plans, modules, module features, plan module entitlements, tenant module entitlements, tenant feature overrides, configuration schemas, configuration values, domains, and audit logs.
+
+Validation is partially blocked: the Supabase CLI/local database service is not installed/configured in this repository, and npm commands currently fail before execution because `package.json` is invalid JSON from a pre-existing duplicate/truncated manifest block.
+
+## Control-Plane Table List
+
+- `tenants`
+- `tenant_settings`
+- `branches`
+- `plans`
+- `modules`
+- `module_features`
+- `plan_modules`
+- `tenant_modules`
+- `tenant_feature_overrides`
+- `configuration_schemas`
+- `configuration_values`
+- `domains`
+- `audit_logs`
+
+## Next Recommended Phase
+
+Phase 03 — Developer tooling repair and migration validation: repair `package.json`, restore runnable lint/typecheck/test/build commands, install or configure Supabase migration validation, and apply the Phase 02 migration locally before adding RBAC or operational logistics tables.
 
 ## Important File Paths
 
