@@ -10,6 +10,12 @@
 ## Required Context
 
 Read these before editing:
+## Scope
+- Keep the task PR-sized and narrow.
+- Do not build unrelated modules or broad refactors.
+- Confirm whether database migrations are required before creating them.
+
+## Required References
 - `AGENTS.md`
 - `CARGOGRID_CONTEXT.md`
 - Relevant section only from `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md`
@@ -48,6 +54,7 @@ Read these before editing:
 
 ## Quality Gate
 
+## Quality Gate
 Run and report:
 - `npm run lint`
 - `npm run typecheck`
@@ -56,3 +63,8 @@ Run and report:
 - Applicable migration checks, if migrations exist.
 
 If a command cannot run because the application scaffold or dependency manifest does not exist yet, document that reason in the build log and final report.
+
+## Security Gate
+- No service-role or secret keys in browser/client code.
+- Tenant-scoped tables must include `tenant_id`, indexes, and RLS policies.
+- Sensitive mutations must write audit logs.

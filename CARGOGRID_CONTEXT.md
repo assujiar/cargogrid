@@ -84,3 +84,20 @@ Phase 01 — Application scaffold and quality gate setup using Next.js, React, T
 - `docs/build-log/phase-00.md` — Phase 00 implementation log.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
+CargoGrid is a web-based, multi-tenant, white-label logistics ERP.
+
+Core principles:
+- One connected operating grid, not disconnected modules.
+- Single input, multi-use data flow.
+- No duplicate work for users.
+- Full Supreme Admin configuration without backend edits.
+- Supabase RLS-first security.
+- React/Next.js frontend.
+- Vercel deployment.
+- Every phase must update this file and docs/build-log/phase-XX.md.
+
+Current status:
+- Repository initialized.
+- Blueprint and prompt pack uploaded.
+- Phase 00 scaffold added: Next.js App Router, React, TypeScript, Tailwind CSS, Supabase utilities, Vitest smoke test, and Vercel-ready project files.
+- No ERP business modules, logistics tables, tenant tables, RBAC tables, or migrations have been created yet.
