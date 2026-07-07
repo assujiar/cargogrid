@@ -486,3 +486,9 @@ Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A — Jo
 The recovery execution queue is documented in `docs/roadmap/recovery-execution-queue.md`. Recovery must proceed through Phase 16A.1 through Phase 16A.6, or those items must be explicitly deferred by the user. Operators must not jump backward to active Phase 12/13/14/15/16 labels.
 
 Phase 16B — Job Order Server Actions and Repository Runtime remains not started. Phase 16B must not begin until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+
+## Canonical Prompt Pack Shell Status
+
+The canonical prompt pack shell is established at `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` as the only authoritative future executable prompt source. Historical prompt files remain historical/redirect-only references and must not be used as active executable prompt sources.
+
+The shell defines global rules, phase type Definitions of Done, roadmap/recovery references, prompt length and context safety limits, and future prompt index placeholders only. No future prompt was executed, no full future prompt was written, no product feature was built, no business migration was created, and Phase 16B was not continued during this documentation task.
