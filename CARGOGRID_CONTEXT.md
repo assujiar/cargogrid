@@ -66,6 +66,61 @@ BCP feature parity means rebuilding comparable capabilities from scratch inside 
 
 CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS, public tracking, customer portal, accounting, loyalty, integration hub, and Supreme Admin configuration UI.
 
+
+## Phase 03.9 BCP-Parity Build Prompt Status
+
+Phase 03.9 — BCP-Parity Clean-Room Build Prompts is complete as a documentation-only phase. `docs/prompts/bcp-parity-feature-build-prompts.md` now provides standalone future build prompts for BCP-equivalent features rebuilt as CargoGrid-native modules from scratch. The prompts cover Commercial Core, RFQ/inquiry/ticketing, rate request/procurement, pricing/rate management, quotation, target/KPI/sales performance, Finance Lite/DSO/AR, communication/notification, attendance/workforce/location, issue/internal ticket/exception management, menu/module/UI configuration, analytics/audit/reporting, import/export, and marketing/campaign support.
+
+The prompt library requires every future BCP-parity feature to enforce clean-room implementation, connected module flow, single source of truth, Supreme Admin configuration, tenant isolation, Supabase RLS, server-only mutations, permission/module/feature gates, audit logging, tests, build checks, and documentation updates. No application code was changed and no migrations were created in Phase 03.9.
+
+## Correct Phase Sequence After Phase 03.9
+
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
+
+
+## Phase 03.10 Full Prompt Pack Reconciliation Status
+
+Phase 03.10 — Full Prompt Pack Reconciliation is complete as a documentation-only phase. The main prompt pack, BCP-parity prompt library, blueprint, BCP feature parity reference, Codex task template, security checklist, and regression checklist now align older prompts with the updated CargoGrid rebuild architecture.
+
+All future prompts must explicitly enforce clean-room greenfield implementation, zero BCP code/schema/assets/data/config reuse, BCP as business reference only, connected-module architecture, no duplicate user input, shared master records, upstream/downstream relationships, Supreme Admin configuration, Supabase RLS-first security, React/Next.js + Supabase + Vercel stack, module gates, feature gates, permission gates, audit logging, and no-BCP-contamination checks.
+
+Phase 03.10 reconciled Control Plane full module catalog coverage, Config Resolver hierarchy through Module/Feature override, RBAC BCP-parity permission namespaces with reserved global-only `supreme.*`, Core Master Data as the shared source of truth, Supreme Admin full no-code behavior customization, Job Order downstream dependencies, and TMS/WMS/Finance consumption of upstream records rather than duplicate input. Phase 03.10 follow-up tightened prompt coverage with an authoritative phase map for Phases 04–39 and made the Commercial Core flow explicit before Job Order: Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. No application code was changed and no migrations were created.
+
 ## Module Dependency Map Summary
 
 - Control plane owns tenants, plans, module entitlements, RBAC, domains, tenant settings, and audit policy.
@@ -78,6 +133,8 @@ CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS
 
 ## Current Build Phase
 
+Phase 03.10 — Full Prompt Pack Reconciliation.
+Phase 03.9 — BCP-Parity Clean-Room Build Prompts.
 Phase 03.8 — BCP Feature Parity Catalog.
 Phase 03.6 — Clean-Room Greenfield Alignment.
 Phase 03 — Server-Side Configuration Resolver.
@@ -93,6 +150,8 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 03: Server-side configuration resolver added for tenant settings, scoped config hierarchy, module entitlement checks, and feature flags.
 - Phase 03.6: Clean-room greenfield alignment added across project documentation, blueprint references, prompt pack references, checklists, and persistent context.
 - Phase 03.8: BCP-inspired feature parity business capability catalog added as clean-room requirements only.
+- Phase 03.9: BCP-parity feature build prompt library added for clean-room CargoGrid-native future modules.
+- Phase 03.10: Full prompt pack reconciliation aligned older prompts, checklists, blueprint references, RBAC, Master Data, Control Plane, Supreme Admin, Security, Regression, Deployment, and Release Candidate guidance with the updated clean-room CargoGrid rebuild architecture.
 
 ## Script Status
 
@@ -142,9 +201,44 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - React/Next.js component tests are not present because application code has not been scaffolded yet.
 
 
-## Corrected Phase Sequence Addendum
+## Correct Phase Sequence After Phase 03.10
 
-Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
 
 ## Next Recommended Phase
 
@@ -185,7 +279,7 @@ Validation is partially blocked: the Supabase CLI/local database service is not 
 
 ## Next Recommended Phase
 
-Phase 04 — RBAC and membership foundation: add tenant users/memberships, roles, permissions, role bindings, branch access, server-side authorization helpers, audited Supreme Admin mutation paths, and Supabase RLS policies connected to the Phase 02 control plane and Phase 03 resolver.
+Phase 04 — Supreme Admin Configuration Studio, followed by Core Master Data and the clean-room BCP-parity CargoGrid module rebuild sequence.
 
 
 ## Phase 03 Configuration Resolver Status
@@ -222,6 +316,9 @@ Phase 03 — Developer tooling repair and migration validation: repair `package.
 - `test/governance.test.mjs` — governance smoke tests.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
+- `docs/prompts/bcp-parity-feature-build-prompts.md` — standalone future build prompts for clean-room BCP-equivalent CargoGrid-native modules.
+- `docs/build-log/phase-03-9.md` — Phase 03.9 documentation-only build log.
+- `docs/build-log/phase-03-10.md` — Phase 03.10 full prompt-pack reconciliation build log.
 - `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.

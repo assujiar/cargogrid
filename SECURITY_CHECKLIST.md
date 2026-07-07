@@ -54,3 +54,12 @@ Use this checklist for every implementation PR.
 - [ ] Tenant-scoped database changes include `tenant_id`, RLS policies, and indexes.
 - [ ] Sensitive mutations write audit logs.
 - [ ] No tenant-specific behavior is hardcoded.
+
+
+## Phase 03.10 Reconciliation Security Checks
+
+- [ ] Control Plane, Config Resolver, RBAC, Supreme Admin, Core Master Data, Security, Regression, Deployment, and Release Candidate prompts reflect the updated Phase 04–39 sequence.
+- [ ] RBAC coverage includes BCP-parity namespaces and logistics/finance/platform namespaces, with reserved `supreme.*` permissions never assignable to tenant roles.
+- [ ] Core Master Data remains the single source of truth for customers/accounts, contacts, addresses, branches, warehouses, users, roles, vendors, vendor contacts, service types, cargo types, vehicle types, rate zones, coverage areas, payment terms, tax codes, currencies, document types, notification templates, issue categories, and attendance policies.
+- [ ] TMS, WMS, billing, accounting, and loyalty consume upstream job/shipment/POD/rate/invoice/payment data instead of asking users to retype it.
+- [ ] No BCP code/schema/assets/data/config or UGC-specific logic has entered CargoGrid.

@@ -28,9 +28,69 @@ CargoGrid must preserve this clean data flow: lead converts to account/customer;
 
 BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
 
-## Corrected Phase Sequence Addendum
+## Phase 03.9 — BCP-Parity Clean-Room Build Prompt Library
 
-Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
+Phase 03.9 adds `docs/prompts/bcp-parity-feature-build-prompts.md`, a standalone prompt library for future BCP-equivalent capabilities rebuilt as CargoGrid-native modules from scratch. BCP remains a business capability checklist only, not an implementation source. Use these prompts one at a time before or around the logistics operation phases so Commercial Core, RFQ/inquiry, procurement, pricing, quotation, KPI, Finance Lite/DSO/AR, communication, attendance, issue reporting, menu configuration, analytics, import/export, and marketing support become connected CargoGrid modules with Supreme Admin configuration, tenant isolation, RLS, audit logs, and no duplicate user input.
+
+## Correct Phase Sequence After Phase 03.9
+
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
+
+
+## Authoritative Phase Coverage Map
+
+The sections below include legacy prompt bodies reconciled to the corrected sequence. Phases 06–15 are implemented as standalone BCP-parity prompts in `docs/prompts/bcp-parity-feature-build-prompts.md`; copy those prompts one at a time before starting Phase 16 Job Order. If a later section heading contains a continuation note, it belongs to the phase shown in this map and must write that phase build log.
+
+| Phase | Prompt location | Build log | Required upstream/downstream rule |
+| --- | --- | --- | --- |
+| 04 — Supreme Admin Configuration Studio | Main prompt pack Prompt 04A/04B and 04C continuation | `docs/build-log/phase-04.md` | Configures modules, RBAC boundaries, workflows, statuses, templates, approvals, SLA, notifications, pricing, billing, accounting, loyalty, menus, labels, portal/tracking, and import/export behavior before tenant modules depend on them. |
+| 05 — Core Master Data | Main prompt pack Phase 05 | `docs/build-log/phase-05.md` | Owns shared customers/accounts, contacts, addresses, branches, warehouses, users, roles, vendors, service/cargo/vehicle/rate/payment/tax/document/notification/issue/attendance records. |
+| 06 — Commercial Core Rebuild | BCP-parity prompt library | `docs/build-log/phase-06.md` | Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. |
+| 07 — RFQ / Inquiry / Ticketing Rebuild | BCP-parity prompt library | `docs/build-log/phase-07.md` | RFQ/inquiry/ticket records feed rate request, quotation, documents, assignment, SLA, exceptions, and activity timeline. |
+| 08 — Rate Request & Procurement Rebuild | BCP-parity prompt library | `docs/build-log/phase-08.md` | Vendor responses and selected costs feed quotation and future job costing. |
+| 09 — Pricing / Rate Management Rebuild | BCP-parity prompt library | `docs/build-log/phase-09.md` | Selling/buying/customer contract rates feed quotation, billing readiness, job profitability, and reports. |
+| 10 — Quotation Rebuild | BCP-parity prompt library | `docs/build-log/phase-10.md` | Approved quotations convert to Job Order without duplicate customer/address/cargo/rate input. |
+| 11 — Target, KPI & Sales Performance Rebuild | BCP-parity prompt library | `docs/build-log/phase-11.md` | KPI snapshots read lead/RFQ/quote/job/revenue/margin facts rather than duplicating them. |
+| 12 — Finance Lite / DSO / AR Rebuild | BCP-parity prompt library | `docs/build-log/phase-12.md` | AR and DSO read billing readiness, invoice evidence, payment terms, invoices, collections, and profitability. |
+| 13 — Communication & Notification Rebuild | BCP-parity prompt library | `docs/build-log/phase-13.md` | Event-triggered messages consume job/shipment/invoice/RFQ/customer facts and audit outbound messages. |
+| 14 — Attendance / Workforce / Location Rebuild | BCP-parity prompt library | `docs/build-log/phase-14.md` | Attendance and location policy records connect to branch/team/user visibility without hardcoded tenant behavior. |
+| 15 — Issue Report / Internal Ticket Rebuild | BCP-parity prompt library | `docs/build-log/phase-15.md` | Internal issues link to shipment/job/customer/vendor where relevant and feed escalation/reporting. |
+| 16–39 | Main prompt pack sections below | Matching `docs/build-log/phase-XX.md` | Operational, finance, reporting, hardening, deployment, smoke, and release prompts consume upstream phase records and must not create disconnected silos. |
 
 ## How to use this prompt pack
 
@@ -39,40 +99,43 @@ Use one prompt at a time. One prompt equals one small Codex task / one branch / 
 Recommended branch pattern:
 
 ```txt
-feat/phase-00-governance
-feat/phase-01-quality-gate
-feat/phase-02-control-plane-schema
-feat/phase-03-config-resolver
-feat/phase-04-rbac
-feat/phase-05-master-data
-feat/phase-06-job-order-core
-feat/phase-07-tracking
-feat/phase-08-customer-portal
-feat/phase-09-document-pod
-feat/phase-10-tms-firstmile
-feat/phase-11-tms-middlemile
-feat/phase-12-tms-lastmile
-feat/phase-13-wms-location
-feat/phase-14-wms-lpn-labeling
-feat/phase-15-inventory-ledger
-feat/phase-16-wms-inbound-outbound
-feat/phase-17-billing-readiness
-feat/phase-18-invoicing
-feat/phase-19-ap
-feat/phase-20-accounting-gl
-feat/phase-21-accounting-posting
-feat/phase-22-financial-reports
-feat/phase-23-loyalty
-feat/phase-24-integration-hub
-feat/phase-25-import-export
-feat/phase-26-reporting-kpi
-feat/phase-27-supreme-admin-config-ui
-feat/phase-28-regression-suite
-feat/phase-29-security-hardening
-feat/phase-30-performance
-feat/phase-31-deployment
-feat/phase-32-smoke-test
-feat/phase-33-release-candidate
+docs/phase-03-9-bcp-parity-build-prompts
+feat/phase-04-supreme-admin-configuration-studio
+feat/phase-05-core-master-data
+feat/phase-06-commercial-core-rebuild
+feat/phase-07-rfq-inquiry-ticketing-rebuild
+feat/phase-08-rate-request-procurement-rebuild
+feat/phase-09-pricing-rate-management-rebuild
+feat/phase-10-quotation-rebuild
+feat/phase-11-target-kpi-sales-performance
+feat/phase-12-finance-lite-dso-ar
+feat/phase-13-communication-notification
+feat/phase-14-attendance-workforce-location
+feat/phase-15-issue-report-internal-ticket
+feat/phase-16-job-order-core
+feat/phase-17-numbering-resi-tracking-engine
+feat/phase-18-public-tracking
+feat/phase-19-customer-portal
+feat/phase-20-document-center-pod
+feat/phase-21-tms-first-middle-last-mile
+feat/phase-22-wms-multi-warehouse-racking-labeling
+feat/phase-23-inventory-ledger
+feat/phase-24-wms-inbound-outbound
+feat/phase-25-billing-readiness
+feat/phase-26-invoicing-ar
+feat/phase-27-vendor-payable-ap
+feat/phase-28-accounting-gl
+feat/phase-29-financial-reports
+feat/phase-30-loyalty
+feat/phase-31-integration-hub-api-webhook
+feat/phase-32-import-export
+feat/phase-33-reporting-kpi
+feat/phase-34-regression-suite
+feat/phase-35-security-hardening
+feat/phase-36-performance
+feat/phase-37-deployment
+feat/phase-38-smoke-test
+feat/phase-39-release-candidate
 ```
 
 Every prompt includes:
@@ -108,6 +171,14 @@ If a prompt says to inspect the blueprint, Codex should inspect only the relevan
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a white-label, multi-tenant, fully configurable web-based logistics ERP for 3PLs, freight forwarders, trucking operators, warehouse operators, and in-house logistics teams. The stack is Supabase + React/Next.js + Vercel. The system must connect commercial, TMS, WMS, customer portal, public tracking, document/POD, billing, accounting, loyalty, reporting, and integration modules in one connected operating grid.
@@ -181,6 +252,14 @@ After changes:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is built on Supabase + React/Next.js + Vercel. The system must be secure, tenant-isolated, fully configurable from Supreme Admin, and designed as connected logistics ERP modules with no repeated user input across workflows.
 
@@ -244,6 +323,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is a multi-tenant logistics ERP on Supabase + React/Next.js + Vercel. Clean code, security, tenant isolation, full Supreme Admin customization, and no duplicate workflow input are mandatory.
 
@@ -303,6 +390,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is a white-label, multi-tenant logistics ERP using Supabase + React/Next.js + Vercel. CargoGrid must support Supreme Admin full customization, module entitlement, feature flags, tenant isolation, RLS, white-label domains, and connected modules with no repeated user work.
 
@@ -339,6 +434,11 @@ Data model rules:
 - configuration_schemas define editable settings forms.
 - configuration_values store resolved overrides by tenant/branch/warehouse/customer/service scope.
 - domains map hostnames/subdomains/custom domains to tenants.
+
+
+Control Plane full module catalog requirement:
+- Seed or support module entitlement records for Commercial Core, CRM, RFQ / Inquiry / Ticketing, Rate Request, Procurement, Pricing / Rate Management, Quotation, Target & KPI, Finance Lite / DSO / AR, Communication / Notification, Attendance / Workforce, Issue Report, Job Order, Tracking, Customer Portal, TMS, WMS, Inventory, Billing, Invoicing, AP, Accounting, Loyalty, Integration, Reporting, and Supreme Admin.
+- Module and feature entitlement must be independent from RBAC permission assignment; disabled modules must block UI navigation and server actions.
 
 Security rules:
 1. Every tenant-scoped table must have tenant_id.
@@ -399,6 +499,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is a configurable logistics ERP on Supabase + React/Next.js + Vercel. Supreme Admin must be able to customize tenant behavior from UI/config tables without coding, backend edits, SQL patches, or redeploys. All modules must be connected, data-driven, and avoid repeated user input.
 
@@ -432,7 +540,11 @@ Rules:
 7. All config reads must remain tenant-isolated.
 
 Connected-module rules:
-- Future modules must call this resolver for numbering, workflow, documents, labels, billing rules, WMS rules, customer portal visibility, notification triggers, tax rules, approval rules, and loyalty rules.
+- Future modules must call this resolver for numbering, workflow, documents, labels, billing rules, WMS rules, customer portal visibility, notification triggers, tax rules, approval rules, loyalty rules, and module/feature overrides.
+Updated configuration hierarchy requirement:
+- Resolve configuration in this exact order unless a later ADR supersedes it: Global default → Plan default → Tenant override → Branch override → Warehouse override → Customer override → Service override → Module/Feature override.
+- Configuration types must cover module behavior, feature flags, workflows, statuses, required fields, numbering, templates, approvals, SLA, notifications, pricing, margin, billing, accounting posting, loyalty, menu/navigation visibility, tenant-specific labels, portal visibility, tracking masking, and import/export templates.
+
 - Do not let individual modules invent separate config mechanisms.
 
 Tests required:
@@ -463,18 +575,30 @@ Output:
 
 ---
 
-# Phase 04 — RBAC, Module Gate, Permission Gate
+# Phase 04 — Supreme Admin Configuration Studio
 
-## Prompt 04A — Implement RBAC schema and permission catalog
+## Prompt 04A — Implement Supreme Admin configuration studio, RBAC schema, and full permission catalog
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a multi-tenant logistics ERP. Access control has three separate layers: module entitlement, feature flags, and RBAC permissions. CargoGrid Supreme Admin controls module/feature entitlement globally. Tenant admins can manage users and roles only inside the modules/features granted to their tenant.
 
 Task:
 Implement RBAC schema and permission catalog.
+Updated permission catalog requirement:
+- Include action namespaces for crm.*, customers.*, leads.*, pipeline.*, rfq.*, tickets.*, rate_requests.*, procurement.*, pricing.*, quotations.*, sales_targets.*, finance_lite.*, ar.*, notifications.*, campaigns.*, attendance.*, issues.*, jobs.*, shipments.*, tracking.*, portal.*, tms.*, wms.*, inventory.*, billing.*, invoicing.*, ap.*, accounting.*, loyalty.*, integrations.*, reports.*, and supreme.*.
+- Reserved supreme.* permissions are global-only and must never be assignable to tenant roles. Tenant admins can receive only tenant-safe delegated administration permissions inside their tenant entitlements.
+
 
 Scope:
 - Supabase migrations.
@@ -570,6 +694,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is a Supabase + React/Next.js + Vercel logistics ERP. Security must be enforced server-side. Module entitlement, feature flags, and RBAC permissions are separate gates. Tenant isolation and RLS are mandatory.
 
@@ -638,18 +770,30 @@ Output:
 
 ---
 
-# Phase 05 — Master Data Foundation
+# Phase 05 — Core Master Data
 
 ## Prompt 05A — Build connected logistics master data
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid is a connected logistics ERP on Supabase + React/Next.js + Vercel. Master data must be shared across modules so users do not re-enter the same information in CRM, RFQ, quotation, booking, shipment, warehouse, billing, accounting, portal, and loyalty.
 
 Task:
-Implement logistics master data foundation.
+Implement Core Master Data Foundation.
+Updated master data single-source-of-truth catalog:
+- Core Master Data must provide authoritative records for customers/accounts, customer contacts, customer addresses, branches, warehouses, users, roles, vendors, vendor contacts, service types, cargo types, vehicle types, rate zones, coverage areas, payment terms, tax codes, currencies, document types, notification templates, issue categories, and attendance policies.
+- Commercial, RFQ, quotation, procurement, pricing, job order, shipment, TMS, WMS, billing, invoicing, AP, accounting, loyalty, reporting, import/export, notifications, attendance, and issue workflows must reuse these records instead of creating local duplicates.
+
 
 Scope:
 - Database migrations.
@@ -729,24 +873,36 @@ Output:
 
 ---
 
-# Phase 06 — Job Order Core & Connected Shipment Backbone
+# Phase 16 — Job Order Core & Connected Shipment Backbone
 
 ## Prompt 06A — Build Job Order Core schema
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid connects CRM/RFQ/quotation, shipment execution, tracking, WMS, POD, billing, accounting, portal, and reporting through one operational backbone: logistics job and shipment records. This must prevent duplicate work and ensure one source of truth.
 
 Task:
 Implement Job Order Core schema.
+Updated upstream/downstream rule:
+- Job Order is downstream from booking, RFQ, approved quotation, and manual internal job creation only when Supreme Admin configuration permits it.
+- Job Order must consume upstream customer/account/contact/address/cargo/rate/quotation data and feed shipment/tracking, TMS, WMS, document/POD, billing readiness, invoicing, AP/job costing, accounting, portal, reporting, notifications, and loyalty without duplicate input.
+
 
 Scope:
 - Supabase migrations.
 - Types update if applicable.
 - Tests if migration/integration test infra exists.
-- docs/build-log/phase-06.md
+- docs/build-log/phase-24.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -820,7 +976,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-06.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-24.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - migration files;
@@ -835,6 +991,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid must generate job numbers, shipment numbers, tracking/resi numbers, invoice numbers, LPN numbers, manifest numbers, warehouse location codes, and document numbers from configurable Supreme Admin rules. No tenant-specific numbering may be hardcoded.
 
@@ -845,7 +1009,7 @@ Scope:
 - Server-side numbering library.
 - Database migration for numbering_rules and numbering_sequences if not already complete.
 - Tests.
-- docs/build-log/phase-06.md
+- docs/build-log/phase-24.md
 - CARGOGRID_CONTEXT.md
 
 Required generated number types:
@@ -898,7 +1062,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-06.md with numbering types and test results.
+Update docs/build-log/phase-24.md with numbering types and test results.
 Update CARGOGRID_CONTEXT.md with numbering engine status.
 
 Output:
@@ -914,17 +1078,29 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid uses job order and shipment as the connected operational backbone. A shipment must flow into tracking, documents/POD, WMS dispatch, billing readiness, invoice, accounting, reports, and customer portal without duplicate input.
 
 Task:
 Build Job Order Core UI and server actions.
+Updated upstream/downstream rule:
+- Job Order is downstream from booking, RFQ, approved quotation, and manual internal job creation only when Supreme Admin configuration permits it.
+- Job Order must consume upstream customer/account/contact/address/cargo/rate/quotation data and feed shipment/tracking, TMS, WMS, document/POD, billing readiness, invoicing, AP/job costing, accounting, portal, reporting, notifications, and loyalty without duplicate input.
+
 
 Scope:
 - Internal app routes/components.
 - Server actions/API handlers.
 - Tests.
-- docs/build-log/phase-06.md
+- docs/build-log/phase-24.md
 - CARGOGRID_CONTEXT.md
 
 Routes/pages:
@@ -972,7 +1148,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-06.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-24.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -983,12 +1159,20 @@ Output:
 
 ---
 
-# Phase 07 — Public Tracking & Website Widget
+# Phase 18 — Public Tracking & Website Widget
 
 ## Prompt 07A — Implement safe public tracking API and page
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid provides white-label shipment tracking that tenants can publish on their own websites. Public tracking must read from shipment_events and shipment data without exposing internal costs, vendor data, private notes, tenant secrets, or other sensitive fields.
@@ -1001,7 +1185,7 @@ Scope:
 - Public tracking page.
 - Server-side data masking layer.
 - Tests.
-- docs/build-log/phase-07.md
+- docs/build-log/phase-26.md
 - CARGOGRID_CONTEXT.md
 
 Routes:
@@ -1036,7 +1220,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-07.md with public fields, security decisions, tests, and risks.
+Update docs/build-log/phase-26.md with public fields, security decisions, tests, and risks.
 Update CARGOGRID_CONTEXT.md.
 
 Output:
@@ -1051,6 +1235,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid tenants need a white-label tracking widget they can embed on their company websites. The widget must use only public tracking API data and must not require privileged access.
 
@@ -1061,7 +1253,7 @@ Scope:
 - Widget route/component.
 - Embed snippet generator minimal UI if Supreme Admin tenant settings page exists; otherwise create helper/snippet document.
 - Tests.
-- docs/build-log/phase-07.md
+- docs/build-log/phase-26.md
 - CARGOGRID_CONTEXT.md
 
 Routes/features:
@@ -1096,7 +1288,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-07.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-26.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1108,12 +1300,20 @@ Output:
 
 ---
 
-# Phase 08 — Customer Portal & Booking
+# Phase 19 — Customer Portal & Booking
 
 ## Prompt 08A — Build customer portal identity boundary
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid includes a customer portal where tenant customers can book shipments, track shipments, view POD/documents, view warehouse stock, see invoices/AR, raise claims, and view loyalty. Customer users are not the same as tenant internal users. Customer data access must be strictly scoped to their customer account.
@@ -1126,7 +1326,7 @@ Scope:
 - Portal auth/access helpers.
 - Basic portal routes.
 - Tests.
-- docs/build-log/phase-08.md
+- docs/build-log/phase-27.md
 - CARGOGRID_CONTEXT.md
 
 Create/update:
@@ -1171,7 +1371,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-08.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-27.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - migrations/files changed;
@@ -1185,6 +1385,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid must prevent duplicate work. Customer portal booking must become the source transaction that internal users can convert into logistics job and shipment without retyping customer, address, package, and service data.
 
@@ -1197,7 +1405,7 @@ Scope:
 - Internal booking review page.
 - Conversion server action.
 - Tests.
-- docs/build-log/phase-08.md
+- docs/build-log/phase-27.md
 - CARGOGRID_CONTEXT.md
 
 Routes:
@@ -1246,7 +1454,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-08.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-27.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1257,12 +1465,20 @@ Output:
 
 ---
 
-# Phase 09 — Document Center & POD
+# Phase 20 — Document Center & POD
 
 ## Prompt 09A — Build secure document center and POD foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid logistics processes are document-heavy. Documents and POD drive tracking, customer portal, billing readiness, invoicing, claims, finance, and audit. Document storage must be secure, tenant-isolated, and visibility-controlled.
@@ -1276,7 +1492,7 @@ Scope:
 - Server actions/API handlers.
 - Basic UI components if project pattern exists.
 - Tests.
-- docs/build-log/phase-09.md
+- docs/build-log/phase-28.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1348,7 +1564,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-09.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-28.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - migrations/files changed;
@@ -1359,12 +1575,20 @@ Output:
 
 ---
 
-# Phase 10 — TMS First-Mile
+# Phase 21 — TMS First/Middle/Last Mile — First-Mile
 
 ## Prompt 10A — Build first-mile execution module
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid TMS is built around shipment_legs. First-mile, middle-mile, last-mile, warehousing, and crossdock are connected legs of the same shipment, not separate disconnected apps. Status updates must create shipment_events and feed public tracking, customer portal, SLA, billing readiness, and reports.
@@ -1377,7 +1601,7 @@ Scope:
 - Server actions/API handlers.
 - Internal UI.
 - Tests.
-- docs/build-log/phase-10.md
+- docs/build-log/phase-28.md
 - CARGOGRID_CONTEXT.md
 
 Routes:
@@ -1422,7 +1646,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-10.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-28.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1433,12 +1657,20 @@ Output:
 
 ---
 
-# Phase 11 — TMS Middle-Mile & Manifest
+# Phase 21 — TMS First/Middle/Last Mile — Middle-Mile & Manifest
 
 ## Prompt 11A — Build middle-mile and manifest module
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid middle-mile connects shipment legs, hubs/branches/warehouses, vendor/fleet assignment, manifests, public tracking, and billing evidence. It must not duplicate shipment records.
@@ -1451,7 +1683,7 @@ Scope:
 - Server actions/API handlers.
 - Internal UI.
 - Tests.
-- docs/build-log/phase-11.md
+- docs/build-log/phase-28.md
 - CARGOGRID_CONTEXT.md
 
 Create tables if needed:
@@ -1496,7 +1728,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-11.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-28.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1507,12 +1739,20 @@ Output:
 
 ---
 
-# Phase 12 — TMS Last-Mile & ePOD
+# Phase 21 — TMS First/Middle/Last Mile — Last-Mile & ePOD
 
 ## Prompt 12A — Build last-mile delivery and ePOD
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid last-mile completes shipment execution and feeds customer portal, public tracking, POD, billing readiness, claims, reporting, and loyalty. Completion must be rule-driven and auditable.
@@ -1526,7 +1766,7 @@ Scope:
 - Internal UI.
 - Driver/mobile web minimal route if simple; otherwise add TODO.
 - Tests.
-- docs/build-log/phase-12.md
+- docs/build-log/phase-28.md
 - CARGOGRID_CONTEXT.md
 
 Routes:
@@ -1566,7 +1806,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-12.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-28.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1577,12 +1817,20 @@ Output:
 
 ---
 
-# Phase 13 — WMS Multi-Warehouse & Racking
+# Phase 22 — WMS Multi Warehouse/Racking/Labeling
 
 ## Prompt 13A — Build WMS warehouse and location hierarchy
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid WMS supports multi-branch, multi-warehouse, area, zone, aisle, rack, level, bin/location, labels, inventory ledger, stock visibility, inbound, outbound, and customer portal stock. Warehouse locations must be reusable across WMS, TMS crossdock, stock visibility, billing, and reporting.
@@ -1595,7 +1843,7 @@ Scope:
 - Server actions/API handlers.
 - Internal WMS UI.
 - Tests.
-- docs/build-log/phase-13.md
+- docs/build-log/phase-29.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1652,7 +1900,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-13.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-29.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - migrations/files changed;
@@ -1663,12 +1911,20 @@ Output:
 
 ---
 
-# Phase 14 — WMS Item, SKU, LPN & Labeling
+# Phase 22 — WMS Multi Warehouse/Racking/Labeling — Item, SKU, LPN & Labeling
 
 ## Prompt 14A — Build item/SKU, LPN, and label foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid WMS must support labeling for shipments, LPNs, cartons, pallets, and warehouse locations. Labels must be configurable from Supreme Admin and must not require code changes per tenant.
@@ -1681,7 +1937,7 @@ Scope:
 - Server-side label data preparation.
 - Basic UI.
 - Tests.
-- docs/build-log/phase-14.md
+- docs/build-log/phase-29.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1730,7 +1986,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-14.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-29.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1741,12 +1997,20 @@ Output:
 
 ---
 
-# Phase 15 — Inventory Ledger Engine
+# Phase 23 — Inventory Ledger
 
 ## Prompt 15A — Build inventory ledger engine
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid inventory must be ledger-based. Current stock is a projection of movements, not manually overwritten values. Inventory must feed WMS, customer portal stock visibility, outbound, dispatch, billing, storage aging, reports, and accounting if enabled.
@@ -1758,7 +2022,7 @@ Scope:
 - Database migrations.
 - Server-side inventory transaction functions.
 - Tests.
-- docs/build-log/phase-15.md
+- docs/build-log/phase-30.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1821,7 +2085,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-15.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-30.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - migrations/files changed;
@@ -1832,18 +2096,29 @@ Output:
 
 ---
 
-# Phase 16 — WMS Inbound & Outbound
+# Phase 24 — WMS Inbound/Outbound
 
 ## Prompt 16A — Build WMS inbound and outbound flows
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid WMS inbound and outbound must reuse customer, warehouse, SKU, LPN, inventory ledger, shipment/job, document, and portal data. Users must not retype stock or shipment data when moving from warehouse to delivery.
 
 Task:
 Implement WMS inbound and outbound flows.
+Data-consumption rule:
+- TMS/WMS/Finance modules must consume existing upstream data instead of asking for duplicate input: shipment uses customer/account/address/cargo from upstream; WMS inbound can originate from booking/job/order; billing uses shipment/job/POD/rate/cost data; accounting uses issued invoices/vendor bills/payments; loyalty uses paid invoices only.
+
 
 Scope:
 - Database migrations.
@@ -1851,7 +2126,7 @@ Scope:
 - Internal WMS UI.
 - Customer portal hooks if already built.
 - Tests.
-- docs/build-log/phase-16.md
+- docs/build-log/phase-31.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1912,7 +2187,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-16.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-31.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -1923,25 +2198,36 @@ Output:
 
 ---
 
-# Phase 17 — Billing Readiness
+# Phase 25 — Billing Readiness
 
 ## Prompt 17A — Build billing readiness engine
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid billing readiness connects operations to finance. A shipment/job should not become invoice-ready just because someone manually says so. Readiness must be rule-based, configuration-driven, and based on actual job/shipment events, POD, documents, costs, charges, claims, and customer billing profile.
 
 Task:
 Implement billing readiness engine.
+Data-consumption rule:
+- TMS/WMS/Finance modules must consume existing upstream data instead of asking for duplicate input: shipment uses customer/account/address/cargo from upstream; WMS inbound can originate from booking/job/order; billing uses shipment/job/POD/rate/cost data; accounting uses issued invoices/vendor bills/payments; loyalty uses paid invoices only.
+
 
 Scope:
 - Database migrations.
 - Server-side readiness evaluator.
 - UI for readiness status if app pattern exists.
 - Tests.
-- docs/build-log/phase-17.md
+- docs/build-log/phase-32.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -1999,7 +2285,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-17.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-32.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2010,12 +2296,20 @@ Output:
 
 ---
 
-# Phase 18 — Invoicing
+# Phase 26 — Invoicing & AR
 
 ## Prompt 18A — Build invoice draft and issue flow
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid invoicing must be connected to job/shipment charges, billing readiness, customer/payment terms, tax codes, document templates, AR, customer portal, accounting posting, and loyalty. Users must not re-enter invoice data that already exists in jobs, shipments, charges, or customers.
@@ -2029,7 +2323,7 @@ Scope:
 - Internal finance UI.
 - Customer portal invoice visibility if portal exists.
 - Tests.
-- docs/build-log/phase-18.md
+- docs/build-log/phase-33.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2077,7 +2371,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-18.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-33.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2088,12 +2382,20 @@ Output:
 
 ---
 
-# Phase 19 — Vendor Payable / AP
+# Phase 27 — Vendor Payable / AP
 
 ## Prompt 19A — Build vendor payable foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid must track vendor/subcontractor costs from shipment execution through AP/vendor bill matching and job profitability. Vendor payable must not expose data to customers.
@@ -2106,7 +2408,7 @@ Scope:
 - Server actions/API handlers.
 - Internal AP UI.
 - Tests.
-- docs/build-log/phase-19.md
+- docs/build-log/phase-04.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2151,7 +2453,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-19.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-04.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2162,25 +2464,36 @@ Output:
 
 ---
 
-# Phase 20 — Accounting COA & General Ledger
+# Phase 28 — Accounting / GL
 
 ## Prompt 20A — Build accounting foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid may operate as Finance Lite, Finance Pro, or Accounting Enterprise depending on tenant entitlement. Accounting must be double-entry, tenant-scoped, auditable, and connected to invoices, vendor bills, payments, tax, bank, branch, and reporting.
 
 Task:
 Implement Accounting Enterprise foundation: chart of accounts, fiscal periods, journal entries, and posting rules.
+Data-consumption rule:
+- TMS/WMS/Finance modules must consume existing upstream data instead of asking for duplicate input: shipment uses customer/account/address/cargo from upstream; WMS inbound can originate from booking/job/order; billing uses shipment/job/POD/rate/cost data; accounting uses issued invoices/vendor bills/payments; loyalty uses paid invoices only.
+
 
 Scope:
 - Database migrations.
 - Server-side accounting validation library.
 - Basic internal UI if project pattern allows.
 - Tests.
-- docs/build-log/phase-20.md
+- docs/build-log/phase-34.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2221,7 +2534,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-20.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-34.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2232,12 +2545,20 @@ Output:
 
 ---
 
-# Phase 21 — Accounting Posting Engine
+# Phase 28 — Accounting / GL — Posting Engine
 
 ## Prompt 21A — Build accounting posting engine
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid accounting posting must convert operational finance documents into balanced journal entries using configurable posting rules. It must prevent duplicate posting and support reversals.
@@ -2249,7 +2570,7 @@ Scope:
 - Server-side posting engine.
 - Database adjustments if required.
 - Tests.
-- docs/build-log/phase-21.md
+- docs/build-log/phase-34.md
 - CARGOGRID_CONTEXT.md
 
 Supported source documents:
@@ -2289,7 +2610,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-21.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-34.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2300,12 +2621,20 @@ Output:
 
 ---
 
-# Phase 22 — Financial Reports
+# Phase 29 — Financial Reports
 
 ## Prompt 22A — Build financial reports
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid financial reports must use posted accounting data for accounting statements and operational finance data for AR/AP views. Reports must be tenant-isolated, branch-filterable, and exportable.
@@ -2317,7 +2646,7 @@ Scope:
 - Server-side report queries.
 - Internal report UI.
 - Tests.
-- docs/build-log/phase-22.md
+- docs/build-log/phase-35.md
 - CARGOGRID_CONTEXT.md
 
 Reports:
@@ -2354,7 +2683,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-22.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-35.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2365,12 +2694,20 @@ Output:
 
 ---
 
-# Phase 23 — Loyalty & Membership
+# Phase 30 — Loyalty
 
 ## Prompt 23A — Build B2B loyalty and membership module
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid loyalty is B2B, not consumer-style gimmick. Loyalty must be margin-safe and based on paid invoices, not bookings. Loyalty must connect customer, invoice, payment, margin, tier, benefits, portal, and reporting.
@@ -2383,7 +2720,7 @@ Scope:
 - Server-side loyalty evaluator.
 - Internal UI and customer portal view if available.
 - Tests.
-- docs/build-log/phase-23.md
+- docs/build-log/phase-36.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2425,7 +2762,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-23.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-36.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2436,12 +2773,20 @@ Output:
 
 ---
 
-# Phase 24 — Integration Hub API & Webhook
+# Phase 31 — Integration Hub/API/Webhook
 
 ## Prompt 24A — Build API keys and webhook foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid must support enterprise integration through API keys, scoped permissions, webhooks, and secure event delivery. Integrations must not bypass tenant isolation or module/feature gates.
@@ -2454,7 +2799,7 @@ Scope:
 - Server-side API key and webhook libraries.
 - Initial API routes if safe.
 - Tests.
-- docs/build-log/phase-24.md
+- docs/build-log/phase-37.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2515,7 +2860,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-24.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-37.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2526,12 +2871,20 @@ Output:
 
 ---
 
-# Phase 25 — Import / Export Mapping
+# Phase 32 — Import/Export
 
 ## Prompt 25A — Build configurable import/export foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid customers will migrate from Excel/Google Sheets/legacy systems. Import/export must be configurable and safe, but must not create duplicate sources of truth. Imported data must land in canonical tables.
@@ -2544,7 +2897,7 @@ Scope:
 - Server-side import/export framework.
 - UI if project pattern exists.
 - Tests.
-- docs/build-log/phase-25.md
+- docs/build-log/phase-38.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2591,7 +2944,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-25.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-38.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2602,12 +2955,20 @@ Output:
 
 ---
 
-# Phase 26 — Reporting & KPI
+# Phase 33 — Reporting/KPI
 
 ## Prompt 26A — Build operational reporting and KPI foundation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid reporting must read from connected source-of-truth tables and ledgers. Reports must not require users to maintain separate Excel-style report tables. KPI definitions should be configurable where practical.
@@ -2620,7 +2981,7 @@ Scope:
 - Server-side report definitions and report runners.
 - Basic report UI.
 - Tests.
-- docs/build-log/phase-26.md
+- docs/build-log/phase-39.md
 - CARGOGRID_CONTEXT.md
 
 Create tables:
@@ -2666,7 +3027,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-26.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-39.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2677,25 +3038,36 @@ Output:
 
 ---
 
-# Phase 27 — Supreme Admin Configuration Studio
+# Phase 04 — Supreme Admin Configuration Studio — Prompt 04C Full No-Code Behavior UI Continuation
 
 ## Prompt 27A — Build Supreme Admin Configuration Studio
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid must be fully customizable from Supreme Admin UI. No tenant-specific workflow, numbering, label, document, billing, WMS, tracking, portal, loyalty, approval, notification, or integration behavior should require backend edits, SQL patches, env edits, or redeploys.
 
 Task:
 Build Supreme Admin Configuration Studio.
+Full no-code customization catalog:
+- Supreme Admin UI must configure modules and feature flags, roles and permission boundaries, workflows, statuses, form fields, required fields, numbering rules, templates, document templates, label templates, approval rules, SLA rules, notification rules, pricing rules, margin rules, billing rules, accounting posting rules, loyalty rules, menu/navigation visibility, tenant-specific labels, customer portal visibility, public tracking masking, and import/export templates.
+
 
 Scope:
 - Supreme Admin routes/pages/components.
 - Server actions for config CRUD.
 - Audit logs.
 - Tests.
-- docs/build-log/phase-27.md
+- docs/build-log/phase-04.md
 - CARGOGRID_CONTEXT.md
 
 Routes:
@@ -2758,7 +3130,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-27.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-04.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - files changed;
@@ -2769,12 +3141,20 @@ Output:
 
 ---
 
-# Phase 28 — Regression Suite
+# Phase 34 — Regression Suite
 
 ## Prompt 28A — Build critical regression test suite
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a multi-tenant, connected logistics ERP. Regression testing is mandatory because one module feeds another. A fix in tracking must not break billing readiness. A WMS change must not break stock portal. A permission change must not leak tenant data.
@@ -2784,7 +3164,7 @@ Create critical regression test suite for CargoGrid.
 
 Scope:
 - Tests only unless tiny test helpers are needed.
-- docs/build-log/phase-28.md
+- docs/build-log/phase-34.md
 - CARGOGRID_CONTEXT.md
 
 Required regression scenarios:
@@ -2814,7 +3194,7 @@ Required regression scenarios:
 Rules:
 - Use existing test framework.
 - Prefer integration tests for security boundaries.
-- If test infra cannot support a scenario, create a pending test/TODO with reason and add it to docs/build-log/phase-28.md.
+- If test infra cannot support a scenario, create a pending test/TODO with reason and add it to docs/build-log/phase-34.md.
 - Do not add product features.
 
 Run:
@@ -2824,7 +3204,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-28.md with test list, pass/fail status, gaps, and next fixes.
+Update docs/build-log/phase-34.md with test list, pass/fail status, gaps, and next fixes.
 Update CARGOGRID_CONTEXT.md with regression suite status.
 
 Output:
@@ -2836,12 +3216,20 @@ Output:
 
 ---
 
-# Phase 29 — Security Hardening
+# Phase 35 — Security Hardening
 
 ## Prompt 29A — Perform security audit
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid handles sensitive logistics, warehouse, customer, document, invoice, accounting, and API data. Security is non-negotiable. Tenant isolation, RLS, public tracking masking, customer portal isolation, and no service-role leak are mandatory.
@@ -2856,7 +3244,7 @@ Scope:
 - Storage access inspection.
 - API/webhook inspection.
 - docs/security/SECURITY_AUDIT_REPORT.md
-- docs/build-log/phase-29.md
+- docs/build-log/phase-35.md
 - CARGOGRID_CONTEXT.md
 
 Audit focus:
@@ -2896,7 +3284,7 @@ Rules:
 Run tests/build if needed, but audit report is primary output.
 
 Documentation update:
-Update docs/build-log/phase-29.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-35.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - security report path;
@@ -2910,6 +3298,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Product context:
 CargoGrid must meet maximum security standards for multi-tenant logistics ERP. Fix only critical/high security findings from SECURITY_AUDIT_REPORT.md. Do not create feature drift.
 
@@ -2919,7 +3315,7 @@ Fix CRITICAL and HIGH findings from docs/security/SECURITY_AUDIT_REPORT.md.
 Scope:
 - Only files required to fix critical/high issues.
 - Add regression tests for each fixed issue.
-- docs/build-log/phase-29.md
+- docs/build-log/phase-35.md
 - CARGOGRID_CONTEXT.md
 
 Rules:
@@ -2938,7 +3334,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-29.md with fixed findings, tests, command results, and residual risks.
+Update docs/build-log/phase-35.md with fixed findings, tests, command results, and residual risks.
 Update CARGOGRID_CONTEXT.md.
 
 Output:
@@ -2951,12 +3347,20 @@ Output:
 
 ---
 
-# Phase 30 — Performance & Scalability
+# Phase 36 — Performance
 
 ## Prompt 30A — Performance and indexing pass
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid must support multi-tenant logistics data at scale: shipments, events, documents, inventory ledger, invoices, journal entries, reports, and webhooks. Performance must be improved without changing product behavior.
@@ -2969,7 +3373,7 @@ Scope:
 - Index migrations.
 - Pagination safeguards.
 - Tests where practical.
-- docs/build-log/phase-30.md
+- docs/build-log/phase-36.md
 - CARGOGRID_CONTEXT.md
 
 Focus areas:
@@ -3008,7 +3412,7 @@ Run:
 - npm run build
 
 Documentation update:
-Update docs/build-log/phase-30.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-36.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - indexes added;
@@ -3020,12 +3424,20 @@ Output:
 
 ---
 
-# Phase 31 — Deployment Readiness
+# Phase 37 — Deployment
 
 ## Prompt 31A — Create deployment docs and environment validation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid deploys on Vercel with Supabase backend/storage/auth/database. Deployment must be repeatable, secure, and documented so future sessions do not restart from zero.
@@ -3037,7 +3449,7 @@ Scope:
 - Documentation.
 - Env validation script if project pattern allows.
 - No product feature changes.
-- docs/build-log/phase-31.md
+- docs/build-log/phase-37.md
 - CARGOGRID_CONTEXT.md
 
 Create/update:
@@ -3075,7 +3487,7 @@ Run:
 - env validation if added
 
 Documentation update:
-Update docs/build-log/phase-31.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-37.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - docs created;
@@ -3086,12 +3498,20 @@ Output:
 
 ---
 
-# Phase 32 — Smoke Test
+# Phase 38 — Smoke Test
 
 ## Prompt 32A — Build smoke test checklist and automation
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid release must prove the connected flow works from Supreme Admin tenant setup to customer booking, shipment tracking, POD, billing readiness, invoice, portal visibility, and tenant isolation.
@@ -3102,7 +3522,7 @@ Create production smoke test checklist and automated smoke tests where possible.
 Scope:
 - Smoke test docs.
 - Automated smoke tests only if test framework supports it.
-- docs/build-log/phase-32.md
+- docs/build-log/phase-38.md
 - CARGOGRID_CONTEXT.md
 
 Create/update:
@@ -3145,7 +3565,7 @@ Run:
 - npm run test:e2e if exists
 
 Documentation update:
-Update docs/build-log/phase-32.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-38.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - smoke docs/tests created;
@@ -3156,12 +3576,20 @@ Output:
 
 ---
 
-# Phase 33 — Release Candidate
+# Phase 39 — Release Candidate
 
 ## Prompt 33A — Prepare Release Candidate 1
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a multi-tenant, fully configurable logistics ERP built on Supabase + React/Next.js + Vercel. Release Candidate must not add new features. It must prove quality, security, regression safety, migration safety, deployment readiness, and connected module integrity.
@@ -3173,7 +3601,7 @@ Scope:
 - Fix only release-blocking bugs.
 - Run quality gates.
 - Create release report.
-- docs/build-log/phase-33.md
+- docs/build-log/phase-39.md
 - CARGOGRID_CONTEXT.md
 
 Do not:
@@ -3219,7 +3647,7 @@ Report sections:
 - go/no-go recommendation.
 
 Documentation update:
-Update docs/build-log/phase-33.md and CARGOGRID_CONTEXT.md.
+Update docs/build-log/phase-39.md and CARGOGRID_CONTEXT.md.
 
 Output:
 - release report path;
@@ -3236,6 +3664,14 @@ Output:
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a multi-tenant, configurable logistics ERP on Supabase + React/Next.js + Vercel. Do not guess. Diagnose from logs, current code, docs/build-log, and CARGOGRID_CONTEXT.md.
@@ -3273,6 +3709,14 @@ Output required:
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Product context:
 CargoGrid is a connected logistics ERP. A regression in one module may break downstream flows such as tracking, billing readiness, WMS stock, invoicing, accounting, or portal visibility. Fix must be minimal and tested.
@@ -3319,6 +3763,14 @@ Output:
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
 
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
+
 Task:
 Update build memory after manual code changes so future Codex sessions can continue without relearning.
 
@@ -3351,6 +3803,14 @@ Use this after any phase if Codex did code but did not update docs properly.
 
 ```txt
 You are Codex working on CargoGrid Logistics ERP.
+
+Universal CargoGrid architecture rules for this prompt:
+- CargoGrid is a clean-room greenfield rebuild. Build from scratch. Do not copy, import, port, or reuse BCP code/schema/component/assets/data/config. BCP is business reference only.
+- Preserve connected-module architecture: avoid duplicate work, use a single source of truth, use shared master records, do not create disconnected module silos, define upstream/downstream relationships, and make every status/event/history feed related modules where relevant.
+- Use the React/Next.js + Supabase + Vercel stack, Supabase RLS-first tenant isolation, server-only sensitive mutations, audit logs, module gates, feature gates, and permission gates.
+- Make tenant behavior configurable through Supreme Admin where applicable; do not hardcode tenant-specific workflows, statuses, labels, templates, numbering, visibility, approvals, notifications, pricing, billing, accounting, loyalty, menu, import/export, or portal/tracking behavior.
+- Testing must include lint, typecheck, test, build, tenant isolation, permission denial, module gate, feature gate where relevant, regression coverage, and a no-BCP-contamination check.
+- Documentation must update CARGOGRID_CONTEXT.md and docs/build-log/phase-XX.md with files changed, commands run, test results, remaining risks, no BCP code copied, and upstream/downstream module relationships.
 
 Task:
 Complete phase documentation and handoff memory for the current phase.
