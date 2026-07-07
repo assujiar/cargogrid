@@ -466,3 +466,11 @@ Single source of truth rules for this phase: Job Order is downstream from bookin
 Every new table is tenant-scoped, has RLS enabled, includes internal jobs/shipments permission policies, and writes sensitive mutations to `audit_logs`. Tracking reads `shipment_events`; billing readiness reads shipment status, documents, costs, and charges; WMS dispatch/outbound should link to `shipment_legs` or `shipments` rather than duplicate delivery records.
 
 No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Recovery Reconciliation Spec Status
+
+Feature development is paused until roadmap, phase, prompt, and tooling recovery rules are reconciled. `docs/roadmap/recovery-reconciliation-spec.md` is the permanent recovery spec for this reconciliation.
+
+The recovery spec confirms CargoGrid remains clean-room greenfield, BCP is business reference only, and no BCP code, schema, migration, component, asset, data, configuration, UGC-specific logic, or tenant-specific logic may be copied or reused. Future executable prompts must live only in `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`; `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md` are historical/redirect-only.
+
+Historical Phases 12 through 16 are contract-preview only as documented in the recovery spec. Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A — Job Order Core Schema, with `supabase/migrations/20260707240000_job_order_core.sql` retained as the historical migration filename. Canonical Phase 24 is WMS Inbound/Outbound. Phase 16B must not start until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
