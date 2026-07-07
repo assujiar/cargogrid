@@ -120,6 +120,7 @@ Phase 03.10 — Full Prompt Pack Reconciliation is complete as a documentation-o
 All future prompts must explicitly enforce clean-room greenfield implementation, zero BCP code/schema/assets/data/config reuse, BCP as business reference only, connected-module architecture, no duplicate user input, shared master records, upstream/downstream relationships, Supreme Admin configuration, Supabase RLS-first security, React/Next.js + Supabase + Vercel stack, module gates, feature gates, permission gates, audit logging, and no-BCP-contamination checks.
 
 Phase 03.10 reconciled Control Plane full module catalog coverage, Config Resolver hierarchy through Module/Feature override, RBAC BCP-parity permission namespaces with reserved global-only `supreme.*`, Core Master Data as the shared source of truth, Supreme Admin full no-code behavior customization, Job Order downstream dependencies, and TMS/WMS/Finance consumption of upstream records rather than duplicate input. Phase 03.10 follow-up tightened prompt coverage with an authoritative phase map for Phases 04–39 and made the Commercial Core flow explicit before Job Order: Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. No application code was changed and no migrations were created.
+Phase 03.10 reconciled Control Plane full module catalog coverage, Config Resolver hierarchy through Module/Feature override, RBAC BCP-parity permission namespaces with reserved global-only `supreme.*`, Core Master Data as the shared source of truth, Supreme Admin full no-code behavior customization, Job Order downstream dependencies, and TMS/WMS/Finance consumption of upstream records rather than duplicate input. No application code was changed and no migrations were created.
 
 ## Module Dependency Map Summary
 
@@ -230,6 +231,8 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 09 Pricing / Rate Management tests verify pricing downstream flow, rate lane/rate creation, rate versioning, customer contract rates, surcharge rules, competitiveness snapshots, rate proposal approvals, tenant isolation, permission denial, migration tables, RLS, audit triggers, master/procurement reuse, and pricing approval handoff.
 - Phase 10 Quotation tests verify quote-to-job downstream flow, quotation creation/versioning, line items, multi-shipment quotation details, procurement cost contributions, margin floor checks, approvals, public verification token hashes, expiry events, quote-to-job conversion placeholders, tenant isolation, permission denial, migration tables, RLS, audit triggers, upstream master/RFQ/commercial/pricing/procurement reuse, and downstream job conversion placeholders.
 - Phase 11 Target, KPI & Sales Performance tests verify connected source modules, target period/target creation, user/team target assignment, achievement events, commercial KPI snapshots, win-rate snapshots, revenue/margin snapshots, dashboard snapshots, tenant isolation, permission denial, migration tables, RLS, audit triggers, quotation reuse, and append-only performance audit events.
+- Node built-in tests validate governance documentation.
+- React/Next.js component tests are not present because application code has not been scaffolded yet.
 
 
 ## Correct Phase Sequence After Phase 03.10
