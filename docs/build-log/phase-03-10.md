@@ -47,9 +47,11 @@ RBAC, Master Data, Control Plane, Supreme Admin, Security, Regression, Deploymen
 - `npm run typecheck`: pass.
 - `npm test`: pass.
 - `npm run build`: pass after local dependency installation; package manifests and lockfiles were not changed or committed in this documentation-only phase.
+- `npm run build`: pass with a pre-existing Next.js warning that `package-lock.json` contains invalid JSON while Next attempts lockfile patching; this documentation-only phase did not modify package manifests or application code.
 
 ## Remaining Risks
 
 - The reconciled prompts are implementation guidance only; future phases must still design schemas, RLS policies, UI, server actions, tests, migrations, and release artifacts in small PR-sized tasks.
 - Local dependencies may need to be installed before running quality gates in fresh checkouts; package manifests and lockfiles are intentionally unchanged by this documentation-only phase.
+- The repository lockfile appears to contain pre-existing invalid JSON that Next.js reports during build lockfile patching even though the build exits successfully; this phase leaves package files unchanged to remain documentation-only.
 - Future implementation PRs must continue to document no-copy compliance and upstream/downstream module relationships in their phase build logs.
