@@ -159,14 +159,308 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 
 | Phase | Title | Phase Type | Status | Prompt Placeholder |
 | --- | --- | --- | --- | --- |
-| Phase 16A.1 | Contract Recovery: Finance Lite / DSO / AR Migration and Runtime Alignment | Migration + Runtime/Backend | Placeholder only | To be written later |
-| Phase 16A.2 | Contract Recovery: Communication & Notification Migration and Runtime Alignment | Migration + Runtime/Backend | Placeholder only | To be written later |
-| Phase 16A.3 | Contract Recovery: Attendance / Workforce / Location Migration and Runtime Alignment | Migration + Runtime/Backend | Placeholder only | To be written later |
-| Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Placeholder only | To be written later |
-| Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend + UI | Placeholder only | To be written later |
-| Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation/Validation | Placeholder only | To be written later |
+| Phase 16A.1 | Contract Recovery: Finance Lite / DSO / AR Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.2 | Contract Recovery: Communication & Notification Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.3 | Contract Recovery: Attendance / Workforce / Location Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 20 |
 | Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend | Blocked by recovery gate | To be written later |
 | Phase 16C | Job Order Internal UI | UI | Blocked by recovery gate | To be written later |
 | Phase 16D | Job Order Workflow Integration | Integration | Blocked by recovery gate | To be written later |
 | Phase 16E | Job Order Regression and Hardening | Hardening | Blocked by recovery gate | To be written later |
 | Phase 17+ | Future canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
+
+## 20. Ready-to-Copy Recovery Prompts
+
+### Phase 16A.1 — Finance Lite / DSO / AR Migration and Runtime Alignment
+
+```text
+Work on Phase 16A.1 — Finance Lite / DSO / AR Migration and Runtime Alignment. Do not execute Phase 16A.2 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend Alignment.
+Completion Mode: Convert historical Phase 12 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-12.md
+- lib/finance-lite/repository.ts
+Scope:
+- Add or verify normalized Finance Lite / DSO / AR tables for customer_billing_profiles, ar_records, ar_import_batches, outstanding_invoice_snapshots, aging_buckets, collection_status_events, billing_readiness_links, invoice_evidence_links, job_profitability_snapshots, or equivalent normalized tables.
+- Avoid duplicate payment_terms if payment terms already exist in Core Master Data; reference/reuse the existing source of truth instead.
+- Add tenant_id, RLS, supporting indexes, constraints, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
+- Preserve clean lead -> customer -> quotation -> job -> shipment/POD -> billing readiness -> invoice/payment -> AR/accounting/profitability flow.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
+- Server-only runtime actions/repository methods aligned to the schema.
+- Tests for tenant isolation, denial paths, audit writes, DSO/AR flows, payment-term reuse, and billing/POD/invoice links.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md.
+Not Complete If:
+- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
+- payment_terms are duplicated instead of reusing an existing Core Master Data source.
+- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
+Definition of Done:
+- Historical Phase 12 is no longer contract-only for the implemented/verified Finance Lite scope.
+- Runtime writes are server-only, audited, tenant-isolated, and connected to billing readiness, invoice evidence, AR, and profitability records.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm concrete tables/equivalents added or verified.
+- Confirm payment_terms were not duplicated.
+- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
+- Confirm no future prompt was executed and no Phase 16B work was started.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.2 — Communication & Notification Migration and Runtime Alignment
+
+```text
+Work on Phase 16A.2 — Communication & Notification Migration and Runtime Alignment. Do not execute Phase 16A.3 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend Alignment.
+Completion Mode: Convert historical Phase 13 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-13.md
+- lib/communications/repository.ts
+Scope:
+- Add or verify normalized Communication & Notification tables for message_templates, email_campaigns, email_campaign_logs, whatsapp_templates, whatsapp_message_logs, notification_rules, escalation_rules, recipient_rules, outbound_message_audit_logs, event_notification_links, or equivalent normalized tables.
+- Connect RFQ, job, shipment, invoice, POD, billing readiness, and AR events to notification rules without duplicate data entry.
+- Store no provider secrets in browser/client code; provider secrets must remain server-only.
+- Add tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
+- Server-only notification runtime for rule resolution, message/template handling, logging, escalation/recipient rules, and event links.
+- Tests for tenant isolation, provider-secret safety, denial paths, audit writes, rule resolution, event links, and append-only outbound logs.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-2-communications-notifications-recovery.md.
+Not Complete If:
+- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
+- Provider secrets can reach browser/client code.
+- RFQ/job/shipment/invoice/POD/billing readiness/AR event linkage is omitted without explicit user-approved deferral.
+Definition of Done:
+- Historical Phase 13 is no longer contract-only for the implemented/verified Communication & Notification scope.
+- Runtime notification behavior is server-only, audited, tenant-isolated, and connected to operational/billing/AR events.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm concrete tables/equivalents added or verified.
+- Confirm provider secrets are not exposed to client/browser code.
+- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, and event-rule links.
+- Confirm no future prompt was executed and no Phase 16B work was started.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.3 — Attendance / Workforce / Location Migration and Runtime Alignment
+
+```text
+Work on Phase 16A.3 — Attendance / Workforce / Location Migration and Runtime Alignment. Do not execute Phase 16A.4 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend Alignment.
+Completion Mode: Convert historical Phase 14 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-14.md
+- lib/attendance/repository.ts
+Scope:
+- Add or verify normalized Attendance / Workforce / Location tables for attendance_records, workforce_locations, branch_location_policies, check_in_out_events, attendance_visibility_rules, attendance_audit_events, geolocation_policy_rules, attendance_policy_configs, or equivalent normalized tables.
+- Validate geolocation server-side; never trust client-only location validation.
+- Add tenant_id, RLS, indexes, constraints, audit triggers/events, append-only check-in/out events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
+- Server-only attendance runtime for policy lookup, geolocation validation, check-in/check-out event creation, summary updates, visibility, and audit writes.
+- Tests for tenant isolation, geolocation boundaries, denial paths, audit writes, append-only events, duplicate daily records, and visibility rules.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-3-attendance-workforce-location-recovery.md.
+Not Complete If:
+- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
+- Geolocation validation is only client-side.
+- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
+Definition of Done:
+- Historical Phase 14 is no longer contract-only for the implemented/verified Attendance / Workforce / Location scope.
+- Runtime attendance behavior is server-only, audited, tenant-isolated, and policy-driven through configuration.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm concrete tables/equivalents added or verified.
+- Confirm server-side geolocation validation.
+- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
+- Confirm no future prompt was executed and no Phase 16B work was started.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.4 — Issue Report / Internal Ticket / Exception Migration and Runtime Alignment
+
+```text
+Work on Phase 16A.4 — Issue Report / Internal Ticket / Exception Migration and Runtime Alignment. Do not execute Phase 16A.5 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend Alignment.
+Completion Mode: Convert historical Phase 15 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-15.md
+- lib/issues/repository.ts
+Scope:
+- Add or verify normalized Issue Report / Internal Ticket / Exception tables for internal_issues, issue_categories, issue_assignments, issue_status_events, issue_severity_rules, issue_timeline_events, issue_documents, issue_escalations, issue_entity_links, or equivalent normalized tables.
+- Connect issue records to shipment, job, customer, vendor, RFQ, invoice, document, notification, and reporting records by reference/link tables without duplicating source data.
+- Add tenant_id, RLS, indexes, constraints, audit triggers/events, append-only status/timeline/assignment/escalation history, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
+- Server-only issue runtime for creation, assignment, status transitions, timeline, documents, escalation, entity links, and audit writes.
+- Tests for tenant isolation, denial paths, audit writes, append-only events, severity/escalation rules, entity links, and duplicate-data avoidance.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-4-issues-exceptions-recovery.md.
+Not Complete If:
+- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
+- Entity connections duplicate shipment/job/customer/vendor/RFQ/invoice/document facts instead of linking to sources of truth.
+- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
+Definition of Done:
+- Historical Phase 15 is no longer contract-only for the implemented/verified Issue / Ticket / Exception scope.
+- Runtime issue behavior is server-only, audited, tenant-isolated, and connected to operational, notification, and reporting records.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm concrete tables/equivalents added or verified.
+- Confirm source-of-truth entity links without duplicate data.
+- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
+- Confirm no future prompt was executed and no Phase 16B work was started.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.5 — Menu / Module / UI Configuration Migration and Runtime Alignment
+
+```text
+Work on Phase 16A.5 — Menu / Module / UI Configuration Migration and Runtime Alignment. Do not execute Phase 16A.6 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend Alignment.
+Completion Mode: Convert historical Phase 16 Menu/UI contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16.md
+- lib/navigation/repository.ts
+Scope:
+- Add or verify normalized Menu / Module / UI Configuration tables for menu_configs, module_navigation_items, feature_visibility_rules, role_menu_bindings, tenant_menu_overrides, ui_label_configs, navigation_audit_events, or equivalent normalized tables.
+- Connect to modules, module_features, roles, permissions, tenant settings, Supreme Admin configuration, and UI rendering.
+- Ensure tenant behavior is data/config-driven and never hardcoded per tenant.
+- Add tenant_id, RLS, indexes, constraints, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
+- Server-only navigation runtime for menu resolution, feature visibility, role bindings, tenant overrides, label configs, and audit writes.
+- UI rendering integration only as needed to consume runtime config; avoid broad UI rewrites.
+- Tests for tenant isolation, no hardcoded tenant behavior, denial paths, audit writes, module/feature/role/permission links, and resolved navigation output.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-5-menu-module-ui-config-recovery.md.
+Not Complete If:
+- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
+- Tenant-specific behavior is hardcoded in code instead of stored in configuration tables.
+- Connections to modules, module_features, roles, permissions, tenant settings, Supreme Admin configuration, or UI rendering are omitted without explicit user-approved deferral.
+Definition of Done:
+- Historical Phase 16 is no longer contract-only for the implemented/verified Menu / Module / UI Configuration scope.
+- Runtime navigation/config behavior is server-only, audited, tenant-isolated, permission-aware, and Supreme Admin configurable.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm concrete tables/equivalents added or verified.
+- Confirm no hardcoded tenant behavior.
+- Confirm tenant_id, RLS, indexes, constraints, audit triggers/events, server-only runtime actions, tests, and UI runtime alignment.
+- Confirm no future prompt was executed and no Phase 16B work was started.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.6 — Contract Recovery Regression and Documentation Lock
+
+```text
+Work on Phase 16A.6 — Contract Recovery Regression and Documentation Lock. Do not start Phase 16B.
+
+Phase Type: Hardening + Documentation Lock.
+Completion Mode: Verify and lock the Phase 16A.1 through Phase 16A.5 recovery state. Do not build new product features, create new business migrations, or continue Phase 16B.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md
+- docs/build-log/phase-16a-2-communications-notifications-recovery.md
+- docs/build-log/phase-16a-3-attendance-workforce-location-recovery.md
+- docs/build-log/phase-16a-4-issues-exceptions-recovery.md
+- docs/build-log/phase-16a-5-menu-module-ui-config-recovery.md
+Scope:
+- Verify Phase 16A.1 through Phase 16A.5 are no longer contract-only, or each has an explicit user-approved deferral.
+- Verify recovered modules have migrations or documented explicit deferrals.
+- Verify tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, docs, and build logs for each recovered module.
+- Verify old prompt files are deprecated/redirect-only and the canonical prompt pack is the only executable future prompt source.
+- Run the full quality gate and document results.
+Required Concrete Artifacts:
+- Updated CARGOGRID_CONTEXT.md.
+- New docs/build-log/phase-16a-6-contract-recovery-regression.md with regression findings, file references, quality-gate output, deferrals if any, and Phase 16B gate status.
+- Documentation-only corrections if needed to lock prompt authority/deprecation status; no product features or business migrations.
+Not Complete If:
+- Any Phase 16A.1 through Phase 16A.5 item remains contract-only without explicit user-approved deferral.
+- Missing tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, docs, or build logs are ignored instead of fixed or explicitly deferred.
+- Old prompt files remain presented as executable future prompt sources.
+- Phase 16B is started.
+Definition of Done:
+- Contract recovery status is verified and documented.
+- Canonical prompt pack is confirmed as the only executable future prompt source.
+- Phase 16B remains blocked unless all recovery items are complete or explicitly deferred.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm Phase 16A.1 through Phase 16A.5 recovery/deferral status.
+- Confirm old prompt files are deprecated and canonical prompt pack is the only executable future prompt source.
+- Confirm no future prompt was executed.
+- Confirm no features or migrations were created.
+- Confirm full quality-gate results.
+- Confirm no BCP implementation artifact was copied or reused.
+```
