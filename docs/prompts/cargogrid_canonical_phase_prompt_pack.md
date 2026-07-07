@@ -165,10 +165,10 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 | Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 20 |
-| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend | Blocked by recovery gate | To be written later |
-| Phase 16C | Job Order Internal UI | UI | Blocked by recovery gate | To be written later |
-| Phase 16D | Job Order Workflow Integration | Integration | Blocked by recovery gate | To be written later |
-| Phase 16E | Job Order Regression and Hardening | Hardening | Blocked by recovery gate | To be written later |
+| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery gate | See Section 21 |
+| Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 21 |
+| Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
+| Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 21 |
 | Phase 17+ | Future canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
 
 ## 20. Ready-to-Copy Recovery Prompts
@@ -462,5 +462,175 @@ Completion Report:
 - Confirm no future prompt was executed.
 - Confirm no features or migrations were created.
 - Confirm full quality-gate results.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+
+## 21. Ready-to-Copy Job Order Future Prompts
+
+### Phase 16B — Job Order Server Actions and Repository Runtime
+
+```text
+Work on Phase 16B — Job Order Server Actions and Repository Runtime. Do not execute Phase 16C, 16D, or 16E.
+
+Phase Type: Runtime/Backend Implementation.
+Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not run until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+Required Verification:
+- Verify supabase/migrations/20260707240000_job_order_core.sql exists.
+- Verify Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred.
+Scope:
+- Consume the existing Phase 16A Job Order schema. Do not create duplicate job order, shipment, package, leg, event, document-link, cost, charge, or status-history tables.
+- Implement server-only repository/runtime/server actions for job creation and updates, shipment creation, event append, cost/charge add, and document link handling.
+- Validate job creation from booking, RFQ, approved quotation, and manual internal creation only when Supreme Admin configuration permits.
+- Reuse customer/account/contact/address/service/cargo/rate/quotation data by reference or controlled snapshot; do not ask users to re-enter upstream data.
+- Enforce tenant isolation, module gates, feature gates, permission gates, validation, and audit logging.
+Required Concrete Artifacts:
+- Executable server-only repositories/actions/runtime wired to the existing schema.
+- Tests for tenant isolation, permission denial, module denial, feature denial, job creation, shipment creation, event append, cost/charge add, document link, and no duplicate schema.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16b-job-order-runtime.md.
+Not Complete If:
+- Only repository interfaces, proposed methods, TODOs, docs, or string-presence tests are added.
+- Duplicate job order schema or business migrations are created.
+Definition of Done:
+- Job Order backend behavior is executable, audited, tenant-isolated, permission-aware, and uses existing Phase 16A tables.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm Phase 16A.1 through Phase 16A.6 were complete or explicitly deferred before starting.
+- Confirm prompts 16C through 16E were not executed.
+- Confirm existing Phase 16A schema was consumed and no duplicate job order tables were created.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16C — Job Order Internal UI
+
+```text
+Work on Phase 16C — Job Order Internal UI. Do not execute Phase 16D or 16E.
+
+Phase Type: UI Implementation.
+Completion Mode: Build real internal Job Order UI backed by Phase 16B runtime. Do not complete as AppShell preview or preview cards.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+- docs/build-log/phase-16b-job-order-runtime.md
+Scope:
+- Add routed internal Job Order UI with page/route, list, detail, create/edit form, status/event views, packages, legs, costs, charges, and document links.
+- Include loading, empty, and error states; filter/search; role/module/feature visibility; form validation; and real server-action/repository integration.
+- Preserve no-duplicate-input flow by pre-filling/reusing upstream booking/RFQ/approved quotation/customer/contact/address/service/cargo/rate data when available.
+Required Concrete Artifacts:
+- Route/page, list, detail, create/edit form, status/events, package/leg/cost/charge/document-link UI surfaces.
+- Tests for rendering, loading/empty/error states, filter/search, validation, role/module visibility, permission denial, and successful server-action integration.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
+Not Complete If:
+- Only AppShell preview cards, static mock screens, docs, or TODO-only tests are added.
+Definition of Done:
+- Internal users can access real Job Order UI paths and perform permitted operations through Phase 16B runtime without duplicate upstream data entry.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm real Job Order route/page, list, detail, create/edit, status/events, packages, legs, costs, charges, document links, states, filters/search, role/module visibility, and tests.
+- Confirm Phase 16D/16E were not executed.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16D — Job Order Workflow Integration
+
+```text
+Work on Phase 16D — Job Order Workflow Integration. Do not execute Phase 16E.
+
+Phase Type: Integration Implementation.
+Completion Mode: Connect Job Order to approved upstream and downstream workflows through real identifiers, events, links, and tests. Documentation alone is not sufficient.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+- docs/build-log/phase-16b-job-order-runtime.md
+- docs/build-log/phase-16c-job-order-internal-ui.md
+Scope:
+- Connect approved quotation, RFQ, and manual allowed source to Job Order using existing runtime and Supreme Admin configuration gates.
+- Connect Job Order to shipment events, costs, charges, documents, billing readiness placeholders, notifications, and reporting surfaces/placeholders where downstream modules are not fully built.
+- Prove no duplicate input: upstream customer/account/contact/address/service/cargo/rate/quotation facts must be referenced, transformed, or snapshotted only where justified.
+- Add event/history/audit records for workflow transitions and integration actions.
+Required Concrete Artifacts:
+- Working integration paths between upstream source records, Job Order, shipment events, costs, charges, document links, billing readiness placeholders, notifications, and reporting.
+- Regression/integration tests for source conversion, duplicate-input avoidance, event/history/audit writes, denial paths, and downstream link creation.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16d-job-order-workflow-integration.md.
+Not Complete If:
+- Integration is only documented, mocked, or represented by TODO placeholders.
+Definition of Done:
+- Approved upstream records can become Job Orders and produce downstream operational links/events without re-entering source data.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm approved quotation/RFQ/manual allowed sources are connected to Job Order.
+- Confirm downstream shipment events, costs, charges, documents, billing readiness placeholders, notifications, and reporting links.
+- Confirm no duplicate input, event/history/audit records, regression tests, and no Phase 16E execution.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16E — Job Order Regression and Hardening
+
+```text
+Work on Phase 16E — Job Order Regression and Hardening.
+
+Phase Type: Hardening.
+Completion Mode: Harden existing Phase 16A through 16D Job Order implementation. Do not complete as documentation-only work.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+- docs/build-log/phase-16b-job-order-runtime.md
+- docs/build-log/phase-16c-job-order-internal-ui.md
+- docs/build-log/phase-16d-job-order-workflow-integration.md
+Scope:
+- Expand regression tests across schema, runtime, UI, and integration flows.
+- Perform security checks, RLS review, tenant isolation review, no service-role leak checks, migration validation or blocker documentation, performance/index review, and docs/build-log/context lock.
+- Fix narrow defects found during hardening without broad refactors or unrelated module work.
+Required Concrete Artifacts:
+- Added/updated tests and focused fixes for Job Order regression/security/RLS/service-role/performance findings.
+- Migration validation output or documented blocker/root cause if the environment cannot run it.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
+Not Complete If:
+- Only documentation/checklists are changed and no regression/security/hardening tests or concrete fixes are added.
+Definition of Done:
+- Job Order implementation has strengthened test coverage, security posture, RLS confidence, service-role leak protection, migration validation status, index/performance review, and locked documentation context.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm regression tests, security checks, RLS review, no service-role leak checks, migration validation/blocker documentation, performance/index review, and docs/build-log/context lock.
+- Confirm no later prompt was executed and no unrelated features or migrations were created.
 - Confirm no BCP implementation artifact was copied or reused.
 ```
