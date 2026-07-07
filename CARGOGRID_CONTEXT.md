@@ -406,3 +406,63 @@ Current status:
 - Blueprint and prompt pack uploaded.
 - Phase 00 scaffold added: Next.js App Router, React, TypeScript, Tailwind CSS, Supabase utilities, Vitest smoke test, and Vercel-ready project files.
 - No ERP business modules, logistics tables, tenant tables, RBAC tables, or migrations have been created yet.
+
+## Phase 12 Finance Lite / DSO / AR Rebuild Status
+
+Phase 12 adds the CargoGrid-native Finance Lite / DSO / AR design and server-only repository foundation without creating database migrations. The module proposes tenant-scoped CargoGrid-owned tables for `customer_billing_profiles`, `payment_terms`, `ar_records`, `ar_import_batches`, `outstanding_invoice_snapshots`, `aging_buckets`, `collection_status_events`, `billing_readiness_links`, `invoice_evidence_links`, and `job_profitability_snapshots`.
+
+Single source of truth rules for this phase: customer/account identity remains in shared customer master records; POD and invoice evidence remain in document records; billing readiness remains the upstream billing readiness source; AR records represent invoice collection state; collection status is append-only through `collection_status_events`; job profitability is a point-in-time snapshot connected to job/order and AR references. The preserved downstream flow is POD/document evidence → billing readiness → invoice/AR record → collection status events → DSO dashboard → accounting/profitability.
+
+The server-only Finance Lite repository uses tenant, module, feature, and permission gates before mutations and writes finance audit events for sensitive payment term, billing profile, AR, collection, billing readiness, and invoice evidence changes. Supreme Admin configurability is represented through module features for payment terms, billing profiles, AR records, collections, invoice evidence, billing readiness, DSO dashboard, and job profitability; future migrations and UI should back these features with config tables rather than tenant-specific code paths.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Phase 13 Communication & Notification Rebuild Status
+
+Phase 13 adds the CargoGrid-native Communication & Notification design and server-only repository foundation without creating database migrations. The module proposes tenant-scoped CargoGrid-owned tables for `message_templates`, `email_campaigns`, `email_campaign_logs`, `whatsapp_templates`, `whatsapp_message_logs`, `notification_rules`, `escalation_rules`, `recipient_rules`, `outbound_message_audit_logs`, and `event_notification_links`.
+
+Single source of truth rules for this phase: customer/account/contact identity remains in shared master data; RFQ, quotation, job, shipment, invoice, POD, billing readiness, and AR events remain in their owning modules; communication stores reusable templates, notification configuration, append-only outbound audit/message logs, and event notification links only. The preserved downstream flow is RFQ/job/shipment/invoice event → notification rule → recipient rule → channel template → outbound message audit → campaign/message log → escalation rule.
+
+The server-only Communication repository uses tenant, module, feature, and permission gates before mutations and writes communication audit events for template, campaign, rule, escalation, recipient, and outbound-message changes. Supreme Admin configurability is represented through notification module features for templates, email campaigns, WhatsApp, notification rules, recipient rules, escalation rules, event notifications, and outbound audit; future migrations and UI should back these features with configuration tables rather than tenant-specific code paths.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Phase 14 Attendance / Workforce / Location Rebuild Status
+
+Phase 14 adds the CargoGrid-native Attendance / Workforce / Location design and server-only repository foundation without creating database migrations. The module proposes tenant-scoped CargoGrid-owned tables for `attendance_records`, `workforce_locations`, `branch_location_policies`, `check_in_out_events`, `attendance_visibility_rules`, `attendance_audit_events`, `geolocation_policy_rules`, and `attendance_policy_configs`.
+
+Single source of truth rules for this phase: workforce identity remains in tenant user and role assignments; branch/location meaning remains in shared master/config records when those modules exist; attendance stores daily attendance summaries, append-only check-in/check-out events, location policies, visibility rules, geolocation constraints, and audit facts only. The preserved downstream flow is Supreme Admin attendance policy → branch/location policy → workforce location → check-in/out event → attendance record → visibility rule → audit trail → workforce reports.
+
+The server-only Attendance repository uses tenant, module, feature, and permission gates before mutations and writes attendance audit events for policy, location, visibility, attendance record, and check-in/check-out changes. Supreme Admin configurability is represented through attendance module features for policy configs, branch policies, geolocation rules, visibility rules, workforce locations, attendance records, and check events; future migrations and UI should back these features with configuration tables rather than tenant-specific code paths.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Phase 15 Issue Report / Internal Ticket / Exception Rebuild Status
+
+Phase 15 adds the CargoGrid-native Issue Report / Internal Ticket / Exception design and server-only repository foundation without creating database migrations. The module proposes tenant-scoped CargoGrid-owned tables for `internal_issues`, `issue_categories`, `issue_assignments`, `issue_status_events`, `issue_severity_rules`, `issue_timeline_events`, `issue_documents`, `issue_escalations`, and `issue_entity_links`.
+
+Single source of truth rules for this phase: shipment, job, customer, vendor, RFQ, invoice, and document records remain in their owning modules; issue management stores issue reports, category/severity configuration, assignments, append-only status/timeline events, document links, escalation facts, and entity links only. The preserved downstream flow is shipment/job/customer/vendor event → internal issue report → category and severity rule → assignment → status and timeline events → document evidence → escalation → resolution reporting.
+
+The server-only Issues repository uses tenant, module, feature, and permission gates before mutations and writes issue audit events for category, report, assignment, status, severity, timeline, document, escalation, and entity-link changes. Supreme Admin configurability is represented through issue module features for categories, reports, assignments, status, severity rules, timeline, documents, escalations, and entity links; future migrations and UI should back these features with configuration tables rather than tenant-specific code paths.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Phase 16 Menu / Module / UI Configuration Rebuild Status
+
+Phase 16 adds the CargoGrid-native Menu / Module / UI Configuration design and server-only repository foundation without creating database migrations. The module proposes tenant-scoped CargoGrid-owned tables for `menu_configs`, `module_navigation_items`, `feature_visibility_rules`, `role_menu_bindings`, `tenant_menu_overrides`, `ui_label_configs`, and `navigation_audit_events`.
+
+Single source of truth rules for this phase: module identity and feature availability remain in the platform module/feature catalog and tenant subscriptions; RBAC role identity remains in role records; navigation stores configurable menus, module navigation items, role bindings, feature visibility rules, tenant overrides, UI labels, and audit facts only. The preserved downstream flow is Supreme Admin menu config → module navigation item → feature visibility rule → role menu binding → tenant menu override → UI label config → navigation audit event.
+
+The server-only Navigation repository uses tenant, module, feature, and permission gates before mutations and writes navigation audit events for menu, navigation item, visibility, role binding, tenant override, and UI label changes. Supreme Admin configurability is represented through settings module features and future migrations/UI should back these features with configuration tables rather than tenant-specific code paths.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
+
+## Phase 24 Job Order Core Schema Status
+
+Phase 24 adds CargoGrid-native Job Order Core schema through `supabase/migrations/20260707240000_job_order_core.sql`. The migration creates `logistics_jobs`, `shipments`, `shipment_packages`, `shipment_legs`, `shipment_events`, `shipment_documents_link`, `shipment_costs`, `shipment_charges`, and `shipment_status_history` as the parent commercial-operational job and shipment execution backbone.
+
+Single source of truth rules for this phase: Job Order is downstream from booking, RFQ, approved quotation, and manual internal job creation only when Supreme Admin configuration permits it. It consumes upstream customer/account/contact/address/cargo/rate/quotation data through references and snapshots, then feeds shipment/tracking, TMS, WMS, document/POD, billing readiness, invoicing, AP/job costing, accounting, portal, reporting, notifications, and loyalty without duplicate shipment/tracking/billing records.
+
+Every new table is tenant-scoped, has RLS enabled, includes internal jobs/shipments permission policies, and writes sensitive mutations to `audit_logs`. Tracking reads `shipment_events`; billing readiness reads shipment status, documents, costs, and charges; WMS dispatch/outbound should link to `shipment_legs` or `shipments` rather than duplicate delivery records.
+
+No BCP code, schema, migrations, components, utilities, assets, data, environment/config, branding, or tenant-specific logic were copied, ported, imported, adapted, mechanically translated, or reused. BCP remained a business capability reference boundary only.
