@@ -66,6 +66,61 @@ BCP feature parity means rebuilding comparable capabilities from scratch inside 
 
 CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS, public tracking, customer portal, accounting, loyalty, integration hub, and Supreme Admin configuration UI.
 
+
+## Phase 03.9 BCP-Parity Build Prompt Status
+
+Phase 03.9 — BCP-Parity Clean-Room Build Prompts is complete as a documentation-only phase. `docs/prompts/bcp-parity-feature-build-prompts.md` now provides standalone future build prompts for BCP-equivalent features rebuilt as CargoGrid-native modules from scratch. The prompts cover Commercial Core, RFQ/inquiry/ticketing, rate request/procurement, pricing/rate management, quotation, target/KPI/sales performance, Finance Lite/DSO/AR, communication/notification, attendance/workforce/location, issue/internal ticket/exception management, menu/module/UI configuration, analytics/audit/reporting, import/export, and marketing/campaign support.
+
+The prompt library requires every future BCP-parity feature to enforce clean-room implementation, connected module flow, single source of truth, Supreme Admin configuration, tenant isolation, Supabase RLS, server-only mutations, permission/module/feature gates, audit logging, tests, build checks, and documentation updates. No application code was changed and no migrations were created in Phase 03.9.
+
+## Correct Phase Sequence After Phase 03.9
+
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
+
+
+## Phase 03.10 Full Prompt Pack Reconciliation Status
+
+Phase 03.10 — Full Prompt Pack Reconciliation is complete as a documentation-only phase. The main prompt pack, BCP-parity prompt library, blueprint, BCP feature parity reference, Codex task template, security checklist, and regression checklist now align older prompts with the updated CargoGrid rebuild architecture.
+
+All future prompts must explicitly enforce clean-room greenfield implementation, zero BCP code/schema/assets/data/config reuse, BCP as business reference only, connected-module architecture, no duplicate user input, shared master records, upstream/downstream relationships, Supreme Admin configuration, Supabase RLS-first security, React/Next.js + Supabase + Vercel stack, module gates, feature gates, permission gates, audit logging, and no-BCP-contamination checks.
+
+Phase 03.10 reconciled Control Plane full module catalog coverage, Config Resolver hierarchy through Module/Feature override, RBAC BCP-parity permission namespaces with reserved global-only `supreme.*`, Core Master Data as the shared source of truth, Supreme Admin full no-code behavior customization, Job Order downstream dependencies, and TMS/WMS/Finance consumption of upstream records rather than duplicate input. Phase 03.10 follow-up tightened prompt coverage with an authoritative phase map for Phases 04–39 and made the Commercial Core flow explicit before Job Order: Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. No application code was changed and no migrations were created.
+
 ## Module Dependency Map Summary
 
 - Control plane owns tenants, plans, module entitlements, RBAC, domains, tenant settings, and audit policy.
@@ -78,6 +133,16 @@ CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS
 
 ## Current Build Phase
 
+Phase 11 — Target, KPI & Sales Performance Rebuild.
+Phase 10 — Quotation Rebuild.
+Phase 09 — Pricing / Rate Management Rebuild.
+Phase 08 — Rate Request & Procurement Rebuild.
+Phase 07 — RFQ / Inquiry / Ticketing Rebuild.
+Phase 06 — Commercial Core Rebuild.
+Phase 05 — Core Master Data Foundation.
+Phase 04 — RBAC Schema and Permission Catalog.
+Phase 03.10 — Full Prompt Pack Reconciliation.
+Phase 03.9 — BCP-Parity Clean-Room Build Prompts.
 Phase 03.8 — BCP Feature Parity Catalog.
 Phase 03.6 — Clean-Room Greenfield Alignment.
 Phase 03 — Server-Side Configuration Resolver.
@@ -93,6 +158,16 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 03: Server-side configuration resolver added for tenant settings, scoped config hierarchy, module entitlement checks, and feature flags.
 - Phase 03.6: Clean-room greenfield alignment added across project documentation, blueprint references, prompt pack references, checklists, and persistent context.
 - Phase 03.8: BCP-inspired feature parity business capability catalog added as clean-room requirements only.
+- Phase 03.9: BCP-parity feature build prompt library added for clean-room CargoGrid-native future modules.
+- Phase 03.10: Full prompt pack reconciliation aligned older prompts, checklists, blueprint references, RBAC, Master Data, Control Plane, Supreme Admin, Security, Regression, Deployment, and Release Candidate guidance with the updated clean-room CargoGrid rebuild architecture.
+- Phase 04: RBAC schema and permission catalog added with tenant memberships, roles, permissions, role assignments, Supreme Admin users, impersonation sessions, role templates, RLS policies, audit triggers, reserved Supreme Admin permission safeguards, permission catalog tests, and server-only authorization helpers for tenant/module/feature/permission/action gates.
+- Phase 05: Core Master Data Foundation added source-of-truth customers/accounts, contacts, reusable addresses, geographic references, warehouses, rate zones, coverage areas, vendors, vendor contacts, service/cargo/vehicle/package/unit types, payment terms, tax codes, currencies, document types, notification templates, issue categories, attendance policies, RLS policies, audit triggers, and server-only repository helpers with authorization gates.
+- Phase 06: Commercial Core Rebuild added CargoGrid-native lead, qualification, opportunity, activity, sales plan, account ownership, duplicate account, merge workflow, account mapping, shared/virtual ownership schema, server-only repository helpers, RLS policies, audit triggers, and tests while preserving Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order as the required pre-Job Order sequence.
+- Phase 07: RFQ / Inquiry / Ticketing Rebuild added CargoGrid-native inquiry intake, ticket number generation, status lifecycle, assignment, SLA policy, document, comment timeline, exception, rate-request link, quotation link schema, server-only repository helpers, RLS policies, audit triggers, and tests while preserving RFQ → rate request and RFQ → quotation downstream flows without duplicate customer/contact/address/service/cargo input.
+- Phase 08: Rate Request & Procurement Rebuild added CargoGrid-native vendor registration token, vendor rate request, request lane, vendor response, vendor comparison, rate proposal, vendor buying rate, vendor service coverage, vendor performance schema, server-only repository helpers, RLS policies, audit triggers, and tests while preserving selected vendor cost flow into future quotation and job costing.
+- Phase 09: Pricing / Rate Management Rebuild added CargoGrid-native rate lane, selling rate, customer contract rate, domestic/EXIM/import DTD/LTL rule, surcharge, minimum charge, rate version, competitiveness snapshot, rate proposal approval schema, server-only repository helpers, RLS policies, audit triggers, and tests while reusing vendor buying rates from procurement.
+- Phase 10: Quotation Rebuild added CargoGrid-native quotation generation, versions, line items, multi-shipment quotation details, cost contributions, margin floor checks, approvals, expiry events, document/public verification records, quote-to-job conversion placeholders, server-only repository helpers, RLS policies, audit triggers, and tests while preserving RFQ → Quotation → Approved Quote → Customer/Account → Job Order without duplicate customer/contact/address/service/cargo/rate input.
+- Phase 11: Target, KPI & Sales Performance Rebuild added CargoGrid-native target periods, sales targets, user/team targets, target achievement events, commercial KPI snapshots, win-rate snapshots, revenue/margin snapshots, dashboard snapshots, performance audit events, server-only repository helpers, RLS policies, audit triggers, and tests while consuming lead/RFQ/quotation/deal/revenue facts instead of duplicating commercial records.
 
 ## Script Status
 
@@ -119,32 +194,82 @@ Phase 00 — Project Governance and Persistent Build Memory.
 
 ## Known Risks
 
-- No runnable Next.js application scaffold exists yet.
-- The current `npm run build` command validates governance files only; it must be replaced with the real Next.js/Vercel build when the application scaffold is introduced.
-- Tenant/RBAC/database schemas are not yet implemented; future schema phases must enforce RLS, indexes, and tenant isolation from the first migration.
-- Service-role usage rules are documented but not yet enforceable against application code because no application code exists.
+- A runnable Next.js scaffold exists, but ERP business UI modules are not yet implemented.
+- Phase 04 RBAC schema exists as a migration, but Supabase CLI/local database migration application is not available in this environment.
+- Operational logistics, finance, WMS, and TMS schemas are not yet implemented.
+- Service-role usage rules are documented and must continue to be enforced as server-side code expands.
 
 ## Known Risks
 
-- No runnable application scaffold exists yet after this governance-only phase.
-- Automated lint, typecheck, test, and build commands cannot run until the application package is introduced in a later phase.
-- Tenant/RBAC/database schemas are not yet implemented; future schema phases must enforce RLS, indexes, and tenant isolation from the first migration.
-- Service-role usage rules are documented but not yet enforceable by automated tests because no application code exists.
+- Application scaffold and automated lint/typecheck/test/build commands are available.
+- RBAC tables have been designed in migration form with RLS and audit triggers; migration apply validation is pending Supabase CLI/local database availability.
+- Future schema phases must continue enforcing tenant isolation, RLS, supporting indexes, and audit logs from the first migration.
+- Service-role usage rules must be covered by future server/client boundary tests as privileged code expands.
 
 ## Migration Status
 
 - Phase 02 control-plane migration exists at `supabase/migrations/20260706000000_saas_control_plane_foundation.sql`.
-- No logistics, tenant, RBAC, finance, WMS, or TMS tables have been created.
+- Phase 04 RBAC migration exists at `supabase/migrations/20260707000000_rbac_permission_catalog.sql`.
+- Phase 05 Core Master Data migration exists at `supabase/migrations/20260707010000_core_master_data_foundation.sql`.
+- Phase 06 Commercial Core migration exists at `supabase/migrations/20260707020000_commercial_core_rebuild.sql`.
+- Phase 07 RFQ / Inquiry / Ticketing migration exists at `supabase/migrations/20260707030000_rfq_inquiry_ticketing_rebuild.sql`.
+- Phase 08 Rate Request & Procurement migration exists at `supabase/migrations/20260707040000_rate_request_procurement_rebuild.sql`.
+- Phase 09 Pricing / Rate Management migration exists at `supabase/migrations/20260707050000_pricing_rate_management_rebuild.sql`.
+- Phase 10 Quotation migration exists at `supabase/migrations/20260707060000_quotation_rebuild.sql`.
+- Phase 11 Target, KPI & Sales Performance migration exists at `supabase/migrations/20260707070000_target_kpi_sales_performance_rebuild.sql`.
+- No logistics, finance, WMS, or TMS operational tables have been created. Phase 04 RBAC, Phase 05 Core Master Data, Phase 06 Commercial Core, Phase 07 RFQ / Inquiry / Ticketing, Phase 08 Rate Request & Procurement, Phase 09 Pricing / Rate Management, Phase 10 Quotation, and Phase 11 Target/KPI/Sales Performance tables are defined in migration form but not locally applied in this environment.
 
 ## Test Status
 
-- Node built-in tests validate governance documentation.
-- React/Next.js component tests are not present because application code has not been scaffolded yet.
+- Vitest tests validate governance documentation, the server-side configuration resolver, app shell behavior, and the RBAC permission catalog.
+- Phase 04 RBAC tests verify required permission namespaces, reserved Supreme Admin permissions, gate order, seeded role templates, RLS, audit trigger coverage, server-only authorization helper behavior, tenant isolation, module denial, feature denial, permission denial, Supreme Admin access, Supreme Admin tenant-impacting audit logging, malformed permission-key denial, and valid action access.
+- Phase 05 Core Master Data tests verify customer creation, address reuse, archive visibility, tenant isolation, permission denial, vendor CRUD isolation, and migration catalog coverage for all required tenant-scoped master data tables, RLS enables, audit triggers, and key policies.
+- Phase 06 Commercial Core tests verify flow ordering, lead creation, lead qualification events, opportunity qualification gating, stage history, activity link validation, tenant isolation, duplicate account detection, Commercial Core migration tables, RLS, audit triggers, master-data reuse, and append-only history tables.
+- Phase 07 RFQ / Inquiry / Ticketing tests verify inquiry number generation, downstream flow, inquiry intake, status timeline, assignment history, comments, exceptions, rate-request/quotation links, tenant isolation, permission denial, migration tables, RLS, audit triggers, master/commercial-data reuse, and append-only inquiry lifecycle events.
+- Phase 08 Rate Request & Procurement tests verify selected-cost downstream flow, rate request/lane creation, registration tokens, vendor responses, selected comparisons, rate proposals, performance events, tenant isolation, permission denial, migration tables, RLS, audit triggers, master/RFQ reuse, buying-rate validity, service coverage, and quotation/job-cost placeholders.
+- Phase 09 Pricing / Rate Management tests verify pricing downstream flow, rate lane/rate creation, rate versioning, customer contract rates, surcharge rules, competitiveness snapshots, rate proposal approvals, tenant isolation, permission denial, migration tables, RLS, audit triggers, master/procurement reuse, and pricing approval handoff.
+- Phase 10 Quotation tests verify quote-to-job downstream flow, quotation creation/versioning, line items, multi-shipment quotation details, procurement cost contributions, margin floor checks, approvals, public verification token hashes, expiry events, quote-to-job conversion placeholders, tenant isolation, permission denial, migration tables, RLS, audit triggers, upstream master/RFQ/commercial/pricing/procurement reuse, and downstream job conversion placeholders.
+- Phase 11 Target, KPI & Sales Performance tests verify connected source modules, target period/target creation, user/team target assignment, achievement events, commercial KPI snapshots, win-rate snapshots, revenue/margin snapshots, dashboard snapshots, tenant isolation, permission denial, migration tables, RLS, audit triggers, quotation reuse, and append-only performance audit events.
 
 
-## Corrected Phase Sequence Addendum
+## Correct Phase Sequence After Phase 03.10
 
-Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
 
 ## Next Recommended Phase
 
@@ -185,7 +310,7 @@ Validation is partially blocked: the Supabase CLI/local database service is not 
 
 ## Next Recommended Phase
 
-Phase 04 — RBAC and membership foundation: add tenant users/memberships, roles, permissions, role bindings, branch access, server-side authorization helpers, audited Supreme Admin mutation paths, and Supabase RLS policies connected to the Phase 02 control plane and Phase 03 resolver.
+Phase 04 — Supreme Admin Configuration Studio, followed by Core Master Data and the clean-room BCP-parity CargoGrid module rebuild sequence.
 
 
 ## Phase 03 Configuration Resolver Status
@@ -198,8 +323,7 @@ Tooling was repaired in Phase 03 so `npm run lint`, `npm run typecheck`, `npm te
 
 ## Next Recommended Phase
 
-Phase 04 — RBAC and membership foundation: add tenant users/memberships, roles, permissions, role bindings, branch access, server-side authorization helpers, audited Supreme Admin mutation paths, and Supabase RLS policies connected to the Phase 02 control plane and Phase 03 resolver.
-Phase 03 — Developer tooling repair and migration validation: repair `package.json`, restore runnable lint/typecheck/test/build commands, install or configure Supabase migration validation, and apply the Phase 02 migration locally before adding RBAC or operational logistics tables.
+Phase 05 — Core Master Data, after applying and validating the Phase 04 RBAC migration in an environment with Supabase CLI/local database support.
 
 ## Important File Paths
 
@@ -222,6 +346,43 @@ Phase 03 — Developer tooling repair and migration validation: repair `package.
 - `test/governance.test.mjs` — governance smoke tests.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
+- `docs/prompts/bcp-parity-feature-build-prompts.md` — standalone future build prompts for clean-room BCP-equivalent CargoGrid-native modules.
+- `docs/build-log/phase-03-9.md` — Phase 03.9 documentation-only build log.
+- `docs/build-log/phase-03-10.md` — Phase 03.10 full prompt-pack reconciliation build log.
+- `docs/build-log/phase-04.md` — Phase 04 RBAC schema and permission catalog build log.
+- `lib/rbac/permission-catalog.ts` — CargoGrid permission namespace, reserved permission, role template, and gate-order catalog.
+- `test/rbac-permission-catalog.test.ts` — RBAC permission catalog regression tests.
+- `lib/auth/authorization.ts` — server-only authorization helpers for tenant access, Supreme Admin access, module gates, feature gates, permission gates, and combined action gates.
+- `test/authorization.test.ts` — authorization helper tests for Supreme Admin access, tenant isolation, denied gates, valid gates, and tenant request resolution.
+- `supabase/migrations/20260707000000_rbac_permission_catalog.sql` — RBAC schema and permission catalog migration.
+- `supabase/migrations/20260707010000_core_master_data_foundation.sql` — Core Master Data schema migration.
+- `lib/master-data/repository.ts` — server-only Core Master Data repository helpers for customers, addresses, vendors, archiving, and listing; the Phase 05 migration also defines warehouses, rate zones, coverage areas, document types, notification templates, issue categories, and attendance policies as shared master records.
+- `test/master-data-repository.test.ts` — Core Master Data repository tests for customer/address/vendor flows, tenant isolation, and permission denial.
+- `docs/build-log/phase-05.md` — Phase 05 Core Master Data Foundation build log.
+- `supabase/migrations/20260707020000_commercial_core_rebuild.sql` — Commercial Core schema migration.
+- `lib/commercial-core/repository.ts` — server-only Commercial Core repository helpers for leads, qualification, opportunities, sales activities, account ownership, and duplicate detection.
+- `test/commercial-core-repository.test.ts` — Commercial Core tests for flow, tenant isolation, permissions, duplicate detection, and migration structure.
+- `docs/build-log/phase-06.md` — Phase 06 Commercial Core Rebuild build log.
+- `supabase/migrations/20260707030000_rfq_inquiry_ticketing_rebuild.sql` — RFQ / Inquiry / Ticketing schema migration.
+- `lib/rfq/repository.ts` — server-only RFQ / Inquiry repository helpers for intake, assignment, status transitions, comments, exceptions, downstream links, and inquiry numbers.
+- `test/rfq-repository.test.ts` — RFQ / Inquiry tests for flow, tenant isolation, permissions, downstream links, and migration structure.
+- `docs/build-log/phase-07.md` — Phase 07 RFQ / Inquiry / Ticketing Rebuild build log.
+- `supabase/migrations/20260707040000_rate_request_procurement_rebuild.sql` — Rate Request & Procurement schema migration.
+- `lib/procurement/repository.ts` — server-only procurement repository helpers for rate requests, lanes, registration tokens, vendor responses, comparisons, proposals, and performance events.
+- `test/procurement-repository.test.ts` — procurement tests for flow, tenant isolation, permissions, selected cost handoff, and migration structure.
+- `docs/build-log/phase-08.md` — Phase 08 Rate Request & Procurement Rebuild build log.
+- `supabase/migrations/20260707050000_pricing_rate_management_rebuild.sql` — Pricing / Rate Management schema migration.
+- `lib/pricing/repository.ts` — server-only pricing repository helpers for lanes, selling rates, contract rates, surcharge rules, competitiveness snapshots, and approvals.
+- `test/pricing-repository.test.ts` — pricing tests for flow, tenant isolation, permissions, rate versioning, approval handoff, and migration structure.
+- `docs/build-log/phase-09.md` — Phase 09 Pricing / Rate Management Rebuild build log.
+- `supabase/migrations/20260707060000_quotation_rebuild.sql` — Quotation Rebuild schema migration.
+- `lib/quotations/repository.ts` — server-only quotation repository helpers for quote generation, lines, shipments, cost contributions, margin checks, approvals, expiry, public verification, and quote-to-job conversion placeholders.
+- `test/quotation-repository.test.ts` — quotation tests for flow, tenant isolation, permissions, margin floor checks, downstream conversion placeholders, and migration structure.
+- `docs/build-log/phase-10.md` — Phase 10 Quotation Rebuild build log.
+- `supabase/migrations/20260707070000_target_kpi_sales_performance_rebuild.sql` — Target, KPI & Sales Performance schema migration.
+- `lib/sales-performance/repository.ts` — server-only sales performance repository helpers for target periods, sales targets, assignments, achievements, KPI snapshots, win-rate snapshots, revenue/margin snapshots, and dashboard snapshots.
+- `test/sales-performance-repository.test.ts` — sales performance tests for flow, tenant isolation, permissions, snapshots, and migration structure.
+- `docs/build-log/phase-11.md` — Phase 11 Target, KPI & Sales Performance Rebuild build log.
 - `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
 - `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.

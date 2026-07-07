@@ -30,9 +30,52 @@ CargoGrid must preserve this clean data flow: lead converts to account/customer;
 
 BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
 
-## Corrected Phase Sequence Addendum
+## Correct Phase Sequence After Phase 03.10
 
-Future planning must include these clean-room phases after the control-plane/config foundation: Commercial Core; RFQ/Quotation; Pricing/Procurement; Job Order and quote-to-job conversion; shipment/tracking; public tracking; customer portal; document/POD; TMS; WMS; billing readiness; invoicing/AR; Finance Lite and DSO; AP; accounting; Notification/Outreach with WhatsApp/email; Sales Performance and target achievement; Marketing optional; Attendance/location optional; Recruitment optional; loyalty; integration hub; import/export; analytics; Supreme Admin configuration UI; regression, security, performance, deployment, smoke test, and release candidate.
+- Phase 04 — Supreme Admin Configuration Studio
+- Phase 05 — Core Master Data
+- Phase 06 — Commercial Core Rebuild
+- Phase 07 — RFQ / Inquiry / Ticketing Rebuild
+- Phase 08 — Rate Request & Procurement Rebuild
+- Phase 09 — Pricing / Rate Management Rebuild
+- Phase 10 — Quotation Rebuild
+- Phase 11 — Target, KPI & Sales Performance Rebuild
+- Phase 12 — Finance Lite / DSO / AR Rebuild
+- Phase 13 — Communication & Notification Rebuild
+- Phase 14 — Attendance / Workforce / Location Rebuild
+- Phase 15 — Issue Report / Internal Ticket Rebuild
+- Phase 16 — Job Order Core
+- Phase 17 — Numbering / Resi / Tracking Number Engine
+- Phase 18 — Public Tracking
+- Phase 19 — Customer Portal
+- Phase 20 — Document Center & POD
+- Phase 21 — TMS First/Middle/Last Mile
+- Phase 22 — WMS Multi Warehouse/Racking/Labeling
+- Phase 23 — Inventory Ledger
+- Phase 24 — WMS Inbound/Outbound
+- Phase 25 — Billing Readiness
+- Phase 26 — Invoicing & AR
+- Phase 27 — Vendor Payable / AP
+- Phase 28 — Accounting / GL
+- Phase 29 — Financial Reports
+- Phase 30 — Loyalty
+- Phase 31 — Integration Hub/API/Webhook
+- Phase 32 — Import/Export
+- Phase 33 — Reporting/KPI
+- Phase 34 — Regression Suite
+- Phase 35 — Security Hardening
+- Phase 36 — Performance
+- Phase 37 — Deployment
+- Phase 38 — Smoke Test
+- Phase 39 — Release Candidate
+
+
+
+## Phase 03.10 Prompt-Pack Reconciliation Addendum
+
+All build prompts must use the corrected phase sequence and treat every module as a clean-room CargoGrid-native build. Control Plane, Config Resolver, RBAC, Supreme Admin, Core Master Data, Security, Regression, Deployment, and Release Candidate work must support BCP-parity modules as business requirements only, never as implementation sources. Every prompt must preserve connected-module flow, no duplicate user input, shared source-of-truth master records, full Supreme Admin customization, Supabase RLS-first security, and React/Next.js + Supabase + Vercel delivery.
+
+RBAC permission catalogs must include BCP-parity namespaces such as `crm.*`, `customers.*`, `leads.*`, `pipeline.*`, `rfq.*`, `tickets.*`, `rate_requests.*`, `procurement.*`, `pricing.*`, `quotations.*`, `sales_targets.*`, `finance_lite.*`, `ar.*`, `notifications.*`, `campaigns.*`, `attendance.*`, `issues.*`, plus logistics, finance, platform, reporting, and `supreme.*` namespaces. Reserved `supreme.*` permissions are global-only and must never be assignable to tenant roles.
 
 ## How to use this file
 
