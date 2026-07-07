@@ -23,6 +23,9 @@ Build the Commercial Core Rebuild as a CargoGrid-native module from scratch. Cov
 Module-specific data model starting point:
 - Suggested CargoGrid-owned tables to evaluate: accounts/customers, customer_contacts, customer_addresses, leads, lead_qualification_events, opportunities, opportunity_stage_events, sales_activities, sales_plans, account_owners, account_merge_requests, account_merge_events, account_mappings, shared_account_owners.
 
+Required Commercial Core flow:
+- Implement and document this sequence before Job Order work starts: Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. Do not let Job Order require duplicate customer/account/contact/address/cargo/rate input that Commercial Core, RFQ, or Quotation already captured.
+
 Standalone context:
 - CargoGrid is a clean-room greenfield SaaS built from scratch on Supabase, React/Next.js, and Vercel.
 - BCP is business reference only for capability understanding; do not copy, import, port, adapt, mechanically translate, or reuse any BCP code, schema, migration, component, utility, asset, data, environment/config, tenant-specific logic, or UGC-specific logic.

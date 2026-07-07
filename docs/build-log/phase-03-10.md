@@ -18,12 +18,16 @@ Phase 03.10 reconciles the CargoGrid prompt pack and supporting governance refer
 
 ## Prompts Reconciled
 
+Follow-up reconciliation tightening added an authoritative phase coverage map to the main prompt pack so Phases 06–15 explicitly point to the standalone BCP-parity prompt library, matching build logs, and required upstream/downstream flows. Commercial Core now explicitly documents the required Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order sequence before Job Order work begins.
+
+
 - Control Plane prompts now support the full module catalog, including BCP-parity modules and downstream logistics/finance/reporting modules.
 - Config Resolver prompts now include the full hierarchy: Global default → Plan default → Tenant override → Branch override → Warehouse override → Customer override → Service override → Module/Feature override.
 - RBAC prompts now require permissions across BCP-parity, logistics, finance, reporting, integration, and Supreme Admin namespaces, and reserve `supreme.*` permissions as global-only.
 - Core Master Data prompts now identify shared master records for all downstream modules.
 - Supreme Admin prompts now require full no-code configuration of modules, feature flags, roles, workflows, statuses, fields, numbering, templates, approvals, SLA, notifications, pricing, margin, billing, accounting, loyalty, menu/navigation, labels, portal, public tracking, and import/export behavior.
 - Commercial, Job Order, TMS, WMS, billing, accounting, loyalty, security, regression, deployment, smoke test, and release candidate prompts now reinforce upstream/downstream relationships and no duplicate user input.
+- The main prompt pack now includes an authoritative phase coverage map that resolves how main-pack prompts and the BCP-parity prompt library jointly cover the corrected Phase 04–39 sequence.
 
 ## Documentation-Only Confirmation
 
@@ -42,10 +46,12 @@ RBAC, Master Data, Control Plane, Supreme Admin, Security, Regression, Deploymen
 - `npm run lint`: pass.
 - `npm run typecheck`: pass.
 - `npm test`: pass.
+- `npm run build`: pass after local dependency installation; package manifests and lockfiles were not changed or committed in this documentation-only phase.
 - `npm run build`: pass with a pre-existing Next.js warning that `package-lock.json` contains invalid JSON while Next attempts lockfile patching; this documentation-only phase did not modify package manifests or application code.
 
 ## Remaining Risks
 
 - The reconciled prompts are implementation guidance only; future phases must still design schemas, RLS policies, UI, server actions, tests, migrations, and release artifacts in small PR-sized tasks.
+- Local dependencies may need to be installed before running quality gates in fresh checkouts; package manifests and lockfiles are intentionally unchanged by this documentation-only phase.
 - The repository lockfile appears to contain pre-existing invalid JSON that Next.js reports during build lockfile patching even though the build exits successfully; this phase leaves package files unchanged to remain documentation-only.
 - Future implementation PRs must continue to document no-copy compliance and upstream/downstream module relationships in their phase build logs.

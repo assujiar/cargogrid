@@ -71,6 +71,27 @@ Phase 03.9 adds `docs/prompts/bcp-parity-feature-build-prompts.md`, a standalone
 - Phase 38 — Smoke Test
 - Phase 39 — Release Candidate
 
+
+## Authoritative Phase Coverage Map
+
+The sections below include legacy prompt bodies reconciled to the corrected sequence. Phases 06–15 are implemented as standalone BCP-parity prompts in `docs/prompts/bcp-parity-feature-build-prompts.md`; copy those prompts one at a time before starting Phase 16 Job Order. If a later section heading contains a continuation note, it belongs to the phase shown in this map and must write that phase build log.
+
+| Phase | Prompt location | Build log | Required upstream/downstream rule |
+| --- | --- | --- | --- |
+| 04 — Supreme Admin Configuration Studio | Main prompt pack Prompt 04A/04B and 04C continuation | `docs/build-log/phase-04.md` | Configures modules, RBAC boundaries, workflows, statuses, templates, approvals, SLA, notifications, pricing, billing, accounting, loyalty, menus, labels, portal/tracking, and import/export behavior before tenant modules depend on them. |
+| 05 — Core Master Data | Main prompt pack Phase 05 | `docs/build-log/phase-05.md` | Owns shared customers/accounts, contacts, addresses, branches, warehouses, users, roles, vendors, service/cargo/vehicle/rate/payment/tax/document/notification/issue/attendance records. |
+| 06 — Commercial Core Rebuild | BCP-parity prompt library | `docs/build-log/phase-06.md` | Lead → Qualified Lead → Opportunity → RFQ → Quotation → Approved Quote → Customer/Account → Job Order. |
+| 07 — RFQ / Inquiry / Ticketing Rebuild | BCP-parity prompt library | `docs/build-log/phase-07.md` | RFQ/inquiry/ticket records feed rate request, quotation, documents, assignment, SLA, exceptions, and activity timeline. |
+| 08 — Rate Request & Procurement Rebuild | BCP-parity prompt library | `docs/build-log/phase-08.md` | Vendor responses and selected costs feed quotation and future job costing. |
+| 09 — Pricing / Rate Management Rebuild | BCP-parity prompt library | `docs/build-log/phase-09.md` | Selling/buying/customer contract rates feed quotation, billing readiness, job profitability, and reports. |
+| 10 — Quotation Rebuild | BCP-parity prompt library | `docs/build-log/phase-10.md` | Approved quotations convert to Job Order without duplicate customer/address/cargo/rate input. |
+| 11 — Target, KPI & Sales Performance Rebuild | BCP-parity prompt library | `docs/build-log/phase-11.md` | KPI snapshots read lead/RFQ/quote/job/revenue/margin facts rather than duplicating them. |
+| 12 — Finance Lite / DSO / AR Rebuild | BCP-parity prompt library | `docs/build-log/phase-12.md` | AR and DSO read billing readiness, invoice evidence, payment terms, invoices, collections, and profitability. |
+| 13 — Communication & Notification Rebuild | BCP-parity prompt library | `docs/build-log/phase-13.md` | Event-triggered messages consume job/shipment/invoice/RFQ/customer facts and audit outbound messages. |
+| 14 — Attendance / Workforce / Location Rebuild | BCP-parity prompt library | `docs/build-log/phase-14.md` | Attendance and location policy records connect to branch/team/user visibility without hardcoded tenant behavior. |
+| 15 — Issue Report / Internal Ticket Rebuild | BCP-parity prompt library | `docs/build-log/phase-15.md` | Internal issues link to shipment/job/customer/vendor where relevant and feed escalation/reporting. |
+| 16–39 | Main prompt pack sections below | Matching `docs/build-log/phase-XX.md` | Operational, finance, reporting, hardening, deployment, smoke, and release prompts consume upstream phase records and must not create disconnected silos. |
+
 ## How to use this prompt pack
 
 Use one prompt at a time. One prompt equals one small Codex task / one branch / one PR.
@@ -3017,6 +3038,7 @@ Output:
 
 ---
 
+# Phase 04 — Supreme Admin Configuration Studio — Prompt 04C Full No-Code Behavior UI Continuation
 # Phase 04 — Supreme Admin Configuration Studio — Full No-Code Behavior UI
 
 ## Prompt 27A — Build Supreme Admin Configuration Studio
