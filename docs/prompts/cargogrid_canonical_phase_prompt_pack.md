@@ -4,7 +4,7 @@
 
 This file is the only authoritative future executable prompt source for CargoGrid. Older prompt files, including `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md`, are historical/redirect-only references and must not be used as active executable prompt sources.
 
-Use one future prompt at a time. One prompt equals one phase or approved subphase, one branch, and one PR-sized unit of work. Do not execute future prompts from this shell. This shell defines global rules, phase type expectations, roadmap pointers, and placeholder indexes only.
+Use one future prompt at a time. One prompt equals one phase or approved subphase, one branch, and one PR-sized unit of work. This file now contains ready-to-copy future prompts where explicitly marked, and operators must execute only one prompt at a time.
 
 Every future executable prompt must declare:
 
@@ -155,7 +155,7 @@ The authoritative recovery queue is `docs/roadmap/recovery-execution-queue.md`. 
 
 ## 19. Future Prompt Index
 
-Do not write or execute full future prompts in this shell. Add executable prompts below only in future PR-sized updates when requested.
+This file contains ready-to-copy future prompts only where a phase is explicitly marked ready-to-copy. Operators must execute only one prompt at a time and must not treat placeholder phases as executable prompts.
 
 | Phase | Title | Phase Type | Status | Prompt Placeholder |
 | --- | --- | --- | --- | --- |
@@ -171,13 +171,13 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 | Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 21 |
 | Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
 | Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 21 |
-| Phase 17-39 | Future logistics canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
-| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 22 |
-| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 22 |
-| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 22 |
-| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 22 |
-| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 22 |
-| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 22 |
+| Phase 17-39 | Future logistics canonical phases | TBD per phase | Not ready-to-copy; see Section 22 policy | Reference canonical phase map |
+| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 23 |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 23 |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 23 |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 23 |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 23 |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 23 |
 
 ## 20. Ready-to-Copy Recovery Prompts
 
@@ -604,7 +604,6 @@ Required Concrete Artifacts:
 Not Complete If:
 - Only repository interfaces, proposed methods, TODOs, docs, or string-presence tests are added.
 - Duplicate job order schema, duplicate job order tables, or business migrations are created.
-- Duplicate job order schema or business migrations are created.
 Definition of Done:
 - Job Order backend behavior is executable, audited, tenant-isolated, permission-aware, and uses existing Phase 16A tables.
 Quality Gate:
@@ -647,7 +646,6 @@ Required Concrete Artifacts:
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
 Not Complete If:
 - Only AppShell preview, preview cards, static mock screens, docs, or TODO-only tests are added.
-- Only AppShell preview cards, static mock screens, docs, or TODO-only tests are added.
 Definition of Done:
 - Internal users can access real Job Order UI paths and perform permitted operations through Phase 16B runtime without duplicate upstream data entry.
 Quality Gate:
@@ -735,7 +733,6 @@ Required Concrete Artifacts:
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
 Not Complete If:
 - Only documentation changes, documentation checklists, or build-log-only edits are made without regression/security/hardening tests or concrete fixes.
-- Only documentation/checklists are changed and no regression/security/hardening tests or concrete fixes are added.
 Definition of Done:
 - Job Order implementation has strengthened test coverage, security posture, RLS confidence, service-role leak protection, migration validation status, index/performance review, and locked documentation context.
 Quality Gate:
@@ -753,7 +750,13 @@ Completion Report:
 ```
 
 
-## 22. Ready-to-Copy HRIS Future Prompts
+## 22. Phase 17-39 Prompt Generation Policy
+
+Phase 17 through Phase 39 prompts are not yet ready-to-copy. Before Phase 17 starts, create a separate prompt-pack expansion PR that adds compact ready-to-copy prompts for Phase 17 through Phase 39 or for the next approved subset.
+
+Do not pretend Phase 17 through Phase 39 prompts are already ready-to-copy. Until that expansion PR is merged, operators must use `docs/roadmap/canonical-phase-map.md` only to understand Phase 17 through Phase 39 roadmap placement, not as executable prompt text.
+
+## 23. Ready-to-Copy HRIS Future Prompts
 
 HRIS Phases 40 through 45 remain after Phase 39 and must not interrupt the logistics ERP core path unless the user explicitly prioritizes HRIS later. Use one prompt at a time; do not execute later HRIS prompts from an earlier phase.
 

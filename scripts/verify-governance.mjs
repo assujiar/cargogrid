@@ -15,9 +15,11 @@ const requiredFiles = [
 ];
 
 const requiredContextSections = [
-  "## Script Status",
-  "## Current Build Phase",
-  "## Next Recommended Phase"
+  "## Canonical Roadmap Authority",
+  "## Current Canonical Status",
+  "## Current Next Action",
+  "## Migration Status",
+  "## Prompt Authority"
 ];
 
 async function assertFileExists(path) {

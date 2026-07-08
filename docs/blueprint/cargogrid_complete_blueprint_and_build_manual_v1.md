@@ -30,7 +30,7 @@ CargoGrid must preserve this clean data flow: lead converts to account/customer;
 
 BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. Codex must not assume CRM/RFQ/quotation/pricing/procurement/DSO/AR already exist because they existed in BCP. Use `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` as a business capability checklist only.
 
-## Correct Phase Sequence After Phase 03.10
+## Historical Phase Sequence Note After Phase 03.10 (Not Authoritative)
 
 - Phase 04 — Supreme Admin Configuration Studio
 - Phase 05 — Core Master Data
