@@ -147,11 +147,11 @@ Done when requested documents, prompt shells, roadmaps, audits, or validation re
 
 ## 17. Canonical Roadmap Summary
 
-The authoritative roadmap is `docs/roadmap/canonical-phase-map.md`. Future prompts must reference that file instead of copying the full roadmap. Current recovery rules reclassify historical contract/preview-only work, treat historical Job Order Core as canonical Phase 16A, reserve canonical Phase 24 for WMS Inbound/Outbound, and block Phase 16B until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+The authoritative roadmap is `docs/roadmap/canonical-phase-map.md`. Future prompts must reference that file instead of copying the full roadmap. Current recovery rules reclassify historical contract/preview-only work, treat historical Job Order Core as canonical Phase 16A, reserve canonical Phase 24 for WMS Inbound/Outbound, and block Phase 16B until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
 ## 18. Recovery Execution Queue Summary
 
-The authoritative recovery queue is `docs/roadmap/recovery-execution-queue.md`. Future recovery prompts must follow Phase 16A.1 through Phase 16A.6 order unless the user explicitly defers an item. Recovery work must not be relabeled as historical Phase 12, 13, 14, 15, or 16.
+The authoritative recovery queue is `docs/roadmap/recovery-execution-queue.md`. Future recovery prompts must follow Phase 16A.1 through Phase 16A.8 order unless the user explicitly defers an item. Recovery work must not be relabeled as historical Phase 12, 13, 14, 15, or 16.
 
 ## 19. Future Prompt Index
 
@@ -165,11 +165,19 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 | Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 20 |
-| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery gate | See Section 21 |
+| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | Migration + Configuration | Prompt slot only; future ready-to-copy prompt required | TBD |
+| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | Runtime/Backend + Validation | Prompt slot only; future ready-to-copy prompt required | TBD |
+| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery/shipment-detail gate | See Section 21 |
 | Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 21 |
 | Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
 | Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 21 |
-| Phase 17+ | Future canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
+| Phase 17-39 | Future logistics canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
+| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend | Prompt slot only; after Phase 39 | TBD |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime/Backend + UI | Prompt slot only; after Phase 40 | TBD |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime/Backend + UI | Prompt slot only; after Phase 41 | TBD |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime/Backend | Prompt slot only; after Phase 42 | TBD |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Runtime/Backend + UI | Prompt slot only; after Phase 43 | TBD |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Runtime/Backend + UI + Hardening | Prompt slot only; after Phase 44 | TBD |
 
 ## 20. Ready-to-Copy Recovery Prompts
 
