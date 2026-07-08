@@ -483,6 +483,9 @@ Files to Read First:
 Required Verification:
 - Verify supabase/migrations/20260707240000_job_order_core.sql exists.
 - Verify Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred.
+Files Not to Modify unless required:
+- Do not create or rename Supabase business migrations.
+- Do not create duplicate job order tables or rewrite the Phase 16A migration.
 Scope:
 - Consume the existing Phase 16A Job Order schema. Do not create duplicate job order, shipment, package, leg, event, document-link, cost, charge, or status-history tables.
 - Implement server-only repository/runtime/server actions for job creation and updates, shipment creation, event append, cost/charge add, and document link handling.
@@ -495,6 +498,7 @@ Required Concrete Artifacts:
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16b-job-order-runtime.md.
 Not Complete If:
 - Only repository interfaces, proposed methods, TODOs, docs, or string-presence tests are added.
+- Duplicate job order schema, duplicate job order tables, or business migrations are created.
 - Duplicate job order schema or business migrations are created.
 Definition of Done:
 - Job Order backend behavior is executable, audited, tenant-isolated, permission-aware, and uses existing Phase 16A tables.
@@ -526,6 +530,8 @@ Files to Read First:
 - docs/roadmap/recovery-execution-queue.md
 - docs/build-log/phase-16a-job-order-core-schema.md
 - docs/build-log/phase-16b-job-order-runtime.md
+Files Not to Modify unless required:
+- Do not create business migrations or duplicate job order schema.
 Scope:
 - Add routed internal Job Order UI with page/route, list, detail, create/edit form, status/event views, packages, legs, costs, charges, and document links.
 - Include loading, empty, and error states; filter/search; role/module/feature visibility; form validation; and real server-action/repository integration.
@@ -535,6 +541,7 @@ Required Concrete Artifacts:
 - Tests for rendering, loading/empty/error states, filter/search, validation, role/module visibility, permission denial, and successful server-action integration.
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
 Not Complete If:
+- Only AppShell preview, preview cards, static mock screens, docs, or TODO-only tests are added.
 - Only AppShell preview cards, static mock screens, docs, or TODO-only tests are added.
 Definition of Done:
 - Internal users can access real Job Order UI paths and perform permitted operations through Phase 16B runtime without duplicate upstream data entry.
@@ -566,6 +573,8 @@ Files to Read First:
 - docs/build-log/phase-16a-job-order-core-schema.md
 - docs/build-log/phase-16b-job-order-runtime.md
 - docs/build-log/phase-16c-job-order-internal-ui.md
+Files Not to Modify unless required:
+- Do not create business migrations or duplicate job order schema.
 Scope:
 - Connect approved quotation, RFQ, and manual allowed source to Job Order using existing runtime and Supreme Admin configuration gates.
 - Connect Job Order to shipment events, costs, charges, documents, billing readiness placeholders, notifications, and reporting surfaces/placeholders where downstream modules are not fully built.
@@ -609,6 +618,8 @@ Files to Read First:
 - docs/build-log/phase-16b-job-order-runtime.md
 - docs/build-log/phase-16c-job-order-internal-ui.md
 - docs/build-log/phase-16d-job-order-workflow-integration.md
+Files Not to Modify unless required:
+- Do not create business migrations or duplicate job order schema.
 Scope:
 - Expand regression tests across schema, runtime, UI, and integration flows.
 - Perform security checks, RLS review, tenant isolation review, no service-role leak checks, migration validation or blocker documentation, performance/index review, and docs/build-log/context lock.
@@ -618,6 +629,7 @@ Required Concrete Artifacts:
 - Migration validation output or documented blocker/root cause if the environment cannot run it.
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
 Not Complete If:
+- Only documentation changes, documentation checklists, or build-log-only edits are made without regression/security/hardening tests or concrete fixes.
 - Only documentation/checklists are changed and no regression/security/hardening tests or concrete fixes are added.
 Definition of Done:
 - Job Order implementation has strengthened test coverage, security posture, RLS confidence, service-role leak protection, migration validation status, index/performance review, and locked documentation context.
