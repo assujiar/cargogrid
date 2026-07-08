@@ -69,7 +69,8 @@ Before any implementation PR is considered complete, confirm:
 
 Use these files as the main reference:
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md`
-- `docs/prompts/cargogrid_codex_prompt_pack_v1.md`
+- `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` — only authoritative future executable prompt source.
+- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md` — historical/redirect-only; do not copy future prompts from them.
 - `CARGOGRID_CONTEXT.md`
 - `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 

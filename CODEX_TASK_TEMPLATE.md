@@ -19,7 +19,18 @@ Read these before editing:
 - `AGENTS.md`
 - `CARGOGRID_CONTEXT.md`
 - Relevant section only from `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md`
-- Relevant prompt only from `docs/prompts/cargogrid_codex_prompt_pack_v1.md`
+- Relevant prompt only from `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`
+
+
+## Canonical Prompt and Recovery Rules
+
+- `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` is the only future executable prompt source.
+- Old prompt files are historical/redirect-only; do not copy future prompts from `docs/prompts/cargogrid_codex_prompt_pack_v1.md` or `docs/prompts/bcp-parity-feature-build-prompts.md`.
+- Historical Phases 12 through 15 are contract/preview-only until recovered through canonical Phase 16A.1 through Phase 16A.4 or explicitly deferred by the user.
+- Historical Phase 16 Menu/UI is out-of-sequence contract/preview-only until recovered through canonical Phase 16A.5 or explicitly deferred by the user.
+- Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A; canonical Phase 24 is WMS Inbound/Outbound.
+- Phase 16B must not start until Phase 16A.1 through Phase 16A.6, plus any later inserted pre-16B recovery/shipment-detail gates in `docs/roadmap/canonical-phase-map.md`, are complete or explicitly deferred by the user.
+- Future implementation prompts must include Phase Type, Required Concrete Artifacts, Not Complete If, Definition of Done, and the No Contract-Only Completion Rule.
 
 ## Scope Rules
 
