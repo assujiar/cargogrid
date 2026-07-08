@@ -1,4 +1,8 @@
-# Phase 16 — Menu / Module / UI Configuration Rebuild
+# Historical Phase 16 — Menu / Module / UI Configuration Rebuild
+
+## Recovery Reclassification Note
+
+Out-of-sequence historical Menu/UI contract/preview-only. Recovery prompt is Phase 16A.5.
 
 ## Summary
 

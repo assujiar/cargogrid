@@ -1,4 +1,8 @@
-# Phase 24 — Job Order Core Schema
+# Historical Phase 24 — Job Order Core Schema (Reclassified as Canonical Phase 16A)
+
+## Recovery Reclassification Note
+
+Historical Job Order Core reclassified as canonical Phase 16A. Canonical Phase 24 is WMS Inbound/Outbound.
 
 ## Summary
 

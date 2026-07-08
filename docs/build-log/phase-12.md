@@ -1,5 +1,9 @@
 # Phase 12 — Finance Lite / DSO / AR Rebuild
 
+## Recovery Reclassification Note
+
+Historical contract/preview-only. Recovery prompt is Phase 16A.1.
+
 ## Summary
 
 Phase 12 implemented a PR-sized CargoGrid-native Finance Lite / DSO / AR foundation from scratch. This phase intentionally does not create Supabase migrations yet; it adds the server-only repository contract, proposed data model constants, connected-flow documentation, UI surface preview, tests, and build-log/context updates for the future migration/UI implementation phase.
