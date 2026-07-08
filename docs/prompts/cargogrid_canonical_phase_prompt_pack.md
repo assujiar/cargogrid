@@ -6,17 +6,7 @@ This file is the only authoritative future executable prompt source for CargoGri
 
 Use one future prompt at a time. One prompt equals one phase or approved subphase, one branch, and one PR-sized unit of work. This file now contains ready-to-copy future prompts where explicitly marked, and operators must execute only one prompt at a time.
 
-Every future executable prompt must declare:
-
-- Phase Type
-- Completion Mode
-- Required Concrete Artifacts
-- Not Complete If
-- Definition of Done
-- Files to Read First
-- Files Not to Modify unless required
-- Quality Gate
-- Completion Report
+Every future executable prompt must comply with the Prompt Quality Rubric in Section 15 and must declare every required section listed there. If a required section does not apply to a phase, the prompt must say `Not applicable for this phase because...` and explain why.
 
 ## 2. Clean-Room Greenfield Rule
 
@@ -99,7 +89,65 @@ A phase is not complete if it only adds:
 - tests that only verify string presence
 - build logs saying migration/runtime/UI remains future work
 
-## 15. Prompt Length and Context Safety Rule
+## 15. Prompt Quality Rubric
+
+Every future executable implementation prompt must be specific enough that an AI agent can determine all of the following before editing files:
+
+1. what to build;
+2. what not to build;
+3. which files to read first;
+4. which existing schema/runtime must be reused;
+5. whether the phase is migration, runtime/backend, UI, integration, hardening, validation, or release;
+6. what concrete artifacts must exist before completion;
+7. what test cases must exist;
+8. what security, tenant isolation, RLS, permission, module, feature, entitlement, audit, and clean-room checks must pass;
+9. what downstream/upstream modules it must connect to;
+10. what counts as incomplete or unacceptable work.
+
+Each future executable prompt must include these sections, in substance and preferably by name:
+
+- Phase Name
+- Phase Type
+- Execution Boundary
+- Completion Mode
+- Files to Read First
+- Existing Artifacts to Reuse
+- Scope
+- Explicit Non-Goals
+- Required Data Model / Schema Work
+- Required Runtime / Backend Work
+- Required UI Work, if applicable
+- Required Integration Work
+- Required Configuration / Supreme Admin Work
+- Required Subscription / Package Entitlement Work
+- Security / RLS / Permission Requirements
+- Audit / Event / History Requirements
+- Required Tests
+- Not Complete If
+- Definition of Done
+- Quality Gate
+- Completion Report
+
+For phases where one section is not applicable, the prompt must explicitly say `Not applicable for this phase because...` rather than silently omitting it. A prompt that omits a required section, hides it behind a vague catch-all, or leaves applicability to agent guesswork must be hardened before execution.
+
+### Vague-Wording Rule
+
+Future executable prompts must avoid vague wording such as:
+
+- `where applicable` without explaining when it applies;
+- `placeholder` without explaining expected boundaries;
+- `foundation` without concrete artifacts;
+- `support` without schema/runtime/test criteria;
+- `integration` without naming source and target modules;
+- `configuration` without saying who controls it and where it is stored;
+- `audit` without saying what event or mutation is audited;
+- `equivalent` without requiring justification for why the equivalent design is normalized and safer.
+
+### Context-Safety Rule
+
+Each prompt should remain compact enough for Claude/Codex Plus, but clarity has priority over brevity. If a phase cannot be made clear under approximately 2,200 words, split it into subphases instead of making a vague prompt.
+
+## 16. Prompt Length and Context Safety Rule
 
 Every future prompt must be short enough for Claude/Codex Plus usage. Each prompt must:
 
@@ -119,7 +167,7 @@ Recommended maximum prompt size:
 - 1,500 to 2,200 words for complex integration/regression phases
 - split into subphases if longer than 2,200 words
 
-## 16. Phase Type Definition of Done
+## 17. Phase Type Definition of Done
 
 ### Migration
 
@@ -145,943 +193,589 @@ Done only when security, regression, performance, reliability, or accessibility 
 
 Done when requested documents, prompt shells, roadmaps, audits, or validation reports are created or updated; no unauthorized product feature or business migration is added; required checks are run; and the build log states that the phase is documentation/validation-only by design.
 
-## 17. Canonical Roadmap Summary
+## 18. Canonical Roadmap Summary
 
 The authoritative roadmap is `docs/roadmap/canonical-phase-map.md`. Future prompts must reference that file instead of copying the full roadmap. Current recovery rules reclassify historical contract/preview-only work, treat historical Job Order Core as canonical Phase 16A, reserve canonical Phase 24 for WMS Inbound/Outbound, and block Phase 16B until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
-## 18. Recovery Execution Queue Summary
+## 19. Recovery Execution Queue Summary
 
 The authoritative recovery queue is `docs/roadmap/recovery-execution-queue.md`. Future recovery prompts must follow Phase 16A.1 through Phase 16A.8 order unless the user explicitly defers an item. Recovery work must not be relabeled as historical Phase 12, 13, 14, 15, or 16.
 
-## 19. Future Prompt Index
+## 20. Future Prompt Index
 
-This file contains ready-to-copy future prompts only where a phase is explicitly marked ready-to-copy. Operators must execute only one prompt at a time and must not treat placeholder phases as executable prompts.
+This file contains ready-to-copy future prompts only where a phase is explicitly marked ready-to-copy. Operators must execute only one prompt at a time and must not treat placeholder phases as executable prompts. All prompts must comply with the Prompt Quality Rubric; any prompt that fails the rubric must be hardened before execution.
 
 | Phase | Title | Phase Type | Status | Prompt Placeholder |
 | --- | --- | --- | --- | --- |
-| Phase 16A.1 | Contract Recovery: Finance Lite / DSO / AR Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.2 | Contract Recovery: Communication & Notification Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.3 | Contract Recovery: Attendance / Workforce / Location Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | Migration + Configuration Schema Implementation | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | Runtime/Backend Alignment | Ready-to-copy prompt added | See Section 20 |
-| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery/shipment-detail gate | See Section 21 |
-| Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 21 |
-| Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
-| Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 21 |
-| Phase 17 | Numbering / Resi / Tracking Number Engine | Migration + Runtime/Backend + Configuration | Ready-to-copy prompt added | See Section 22 |
-| Phase 18 | Public Tracking | Runtime/Backend + Public UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 19 | Customer Portal | Runtime/Backend + UI + Access Control | Ready-to-copy prompt added | See Section 22 |
-| Phase 20 | Document Center & POD | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 21 | TMS First/Middle/Last Mile | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 22 | WMS Multi Warehouse/Racking/Labeling | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 23 | Inventory Ledger | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 22 |
-| Phase 24 | WMS Inbound/Outbound | Runtime/Backend + UI + Integration | Ready-to-copy prompt added | See Section 22 |
-| Phase 25 | Billing Readiness | Migration + Runtime/Backend + Integration | Ready-to-copy prompt added | See Section 22 |
-| Phase 26 | Invoicing & AR | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 27 | Vendor Payable / AP | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 28 | Accounting / GL | Migration + Runtime/Backend + Posting Engine | Ready-to-copy prompt added | See Section 22 |
-| Phase 29 | Financial Reports | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 30 | Loyalty | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 31 | Integration Hub/API/Webhook | Migration + Runtime/Backend + API | Ready-to-copy prompt added | See Section 22 |
-| Phase 32 | Import/Export | Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 33 | Reporting/KPI | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 34 | Regression Suite | Hardening + Test Expansion | Ready-to-copy prompt added | See Section 23 |
-| Phase 35 | Security Hardening | Security Hardening | Ready-to-copy prompt added | See Section 23 |
-| Phase 36 | Performance | Performance Hardening | Ready-to-copy prompt added | See Section 23 |
-| Phase 37 | Deployment | Deployment Readiness | Ready-to-copy prompt added | See Section 23 |
-| Phase 38 | Smoke Test | Validation + Smoke Test | Ready-to-copy prompt added | See Section 23 |
-| Phase 39 | Release Candidate | Release Candidate Lock | Ready-to-copy prompt added | See Section 23 |
-| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 24 |
-| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 24 |
-| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 24 |
-| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 24 |
-| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 24 |
-| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 24 |
+| Phase 16A.1 | Contract Recovery: Finance Lite / DSO / AR Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.2 | Contract Recovery: Communication & Notification Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.3 | Contract Recovery: Attendance / Workforce / Location Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | Migration + Configuration Schema Implementation | Ready-to-copy prompt added | See Section 21 |
+| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | Runtime/Backend Alignment | Ready-to-copy prompt added | See Section 21 |
+| Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery/shipment-detail gate | See Section 22 |
+| Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 22 |
+| Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 22 |
+| Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 22 |
+| Phase 17 | Numbering / Resi / Tracking Number Engine | Migration + Runtime/Backend + Configuration | Ready-to-copy prompt added | See Section 23 |
+| Phase 18 | Public Tracking | Runtime/Backend + Public UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 19 | Customer Portal | Runtime/Backend + UI + Access Control | Ready-to-copy prompt added | See Section 23 |
+| Phase 20 | Document Center & POD | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 21 | TMS First/Middle/Last Mile | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 22 | WMS Multi Warehouse/Racking/Labeling | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 23 | Inventory Ledger | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 23 |
+| Phase 24 | WMS Inbound/Outbound | Runtime/Backend + UI + Integration | Ready-to-copy prompt added | See Section 23 |
+| Phase 25 | Billing Readiness | Migration + Runtime/Backend + Integration | Ready-to-copy prompt added | See Section 23 |
+| Phase 26 | Invoicing & AR | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 27 | Vendor Payable / AP | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 28 | Accounting / GL | Migration + Runtime/Backend + Posting Engine | Ready-to-copy prompt added | See Section 23 |
+| Phase 29 | Financial Reports | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 30 | Loyalty | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 31 | Integration Hub/API/Webhook | Migration + Runtime/Backend + API | Ready-to-copy prompt added | See Section 23 |
+| Phase 32 | Import/Export | Runtime/Backend + UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 33 | Reporting/KPI | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 23 |
+| Phase 34 | Regression Suite | Hardening + Test Expansion | Ready-to-copy prompt added | See Section 24 |
+| Phase 35 | Security Hardening | Security Hardening | Ready-to-copy prompt added | See Section 24 |
+| Phase 36 | Performance | Performance Hardening | Ready-to-copy prompt added | See Section 24 |
+| Phase 37 | Deployment | Deployment Readiness | Ready-to-copy prompt added | See Section 24 |
+| Phase 38 | Smoke Test | Validation + Smoke Test | Ready-to-copy prompt added | See Section 24 |
+| Phase 39 | Release Candidate | Release Candidate Lock | Ready-to-copy prompt added | See Section 24 |
+| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 25 |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 25 |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 25 |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 25 |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 25 |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 25 |
 
-## 20. Ready-to-Copy Recovery Prompts
+## 21. Ready-to-Copy Recovery Prompts
 
 ### Phase 16A.1 — Finance Lite / DSO / AR Migration and Runtime Alignment
 
 ```text
-Work on Phase 16A.1 — Finance Lite / DSO / AR Migration and Runtime Alignment. Do not execute Phase 16A.2 or any later prompt.
-
-Phase Type: Migration + Runtime/Backend Alignment.
-Completion Mode: Convert historical Phase 12 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-12.md
-- lib/finance-lite/repository.ts
-Scope:
-- Add or verify normalized Finance Lite / DSO / AR tables for customer_billing_profiles, ar_records, ar_import_batches, outstanding_invoice_snapshots, aging_buckets, collection_status_events, billing_readiness_links, invoice_evidence_links, job_profitability_snapshots, or equivalent normalized tables.
-- Avoid duplicate payment_terms if payment terms already exist in Core Master Data; reference/reuse the existing source of truth instead.
-- Add tenant_id, RLS, supporting indexes, constraints, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
-- Preserve clean lead -> customer -> quotation -> job -> shipment/POD -> billing readiness -> invoice/payment -> AR/accounting/profitability flow.
-Required Concrete Artifacts:
-- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
-- Server-only runtime actions/repository methods aligned to the schema.
-- Tests for tenant isolation, denial paths, audit writes, DSO/AR flows, payment-term reuse, and billing/POD/invoice links.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md.
-Not Complete If:
-- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
-- payment_terms are duplicated instead of reusing an existing Core Master Data source.
-- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
-Definition of Done:
-- Historical Phase 12 is no longer contract-only for the implemented/verified Finance Lite scope.
-- Runtime writes are server-only, audited, tenant-isolated, and connected to billing readiness, invoice evidence, AR, and profitability records.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm concrete tables/equivalents added or verified.
-- Confirm payment_terms were not duplicated.
-- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
-- Confirm no future prompt was executed and no Phase 16B work was started.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.1 — Finance Lite / DSO / AR Migration and Runtime Alignment.
+Phase Type: Migration + Runtime/Backend.
+Execution Boundary: Execute only Phase 16A.1. Do not execute Phase 16A.2 or later prompts. Do not build UI beyond minimal server/runtime test fixtures needed for this phase.
+Completion Mode: Convert historical Phase 12 contract/preview-only work into concrete migration/runtime alignment. If a required artifact is missing, do not mark complete without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-12.md; docs/build-log/phase-16a-job-order-core-schema.md.
+Existing Artifacts to Reuse: Reuse Core Master Data customer/account/contact, branch, currency, payment-term, address, job/shipment, quotation, invoice/payment, document/POD, audit log, module/feature/permission, and tenant configuration artifacts where they already exist. Reuse Core Master Data payment terms if present; do not duplicate payment_terms. If a named artifact does not exist, document the absence and create only the Finance/AR artifact required by this phase.
+Scope: Implement Finance Lite / DSO / AR schema/runtime from scratch for customer billing profiles, AR records, AR import batches, outstanding invoice snapshots, aging buckets, collection status events, billing-readiness links, invoice/POD/document evidence links, job profitability snapshots, and currency-aware amounts. If an alternative table design is used, the completion report must explain why it is normalized, safer, and not a weakened equivalent.
+Explicit Non-Goals: Do not build full accounting/GL, AP, invoice UI, payment gateway integration, customer portal, business dashboards, or Phase 16A.2+ modules.
+Required Data Model / Schema Work: If required Finance/AR tables do not already exist, create real Supabase migrations with tenant_id, indexes, uniqueness constraints, FKs, RLS, and audit/event coverage. AR status events and collection events must be append-only. Include DSO/outstanding snapshot tables or a documented server-side snapshot builder contract backed by executable runtime/tests.
+Required Runtime / Backend Work: Add server-only repository/actions for AR creation, status transition, collection event append, invoice evidence linking, payment-term resolution/reuse, billing/POD/invoice links, DSO snapshot creation or calculation, tenant/module/feature/permission checks, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.1 is migration/runtime recovery only; do not add preview-only UI.
+Required Integration Work: Connect by FK or validated reference to customer/account/contact, billing readiness, POD/document evidence, invoice, payment, job profitability, and currency master data where available. If a source module is not implemented yet, document the explicit boundary and use nullable/typed future-safe references rather than copying source data.
+Required Configuration / Supreme Admin Work: Add or reuse configuration tables for AR statuses, aging buckets, collection statuses, and DSO snapshot schedule/thresholds controlled by Supreme Admin, not tenant-specific code.
+Required Subscription / Package Entitlement Work: Enforce Finance/AR module and feature entitlement gates for runtime reads/writes.
+Security / RLS / Permission Requirements: Tenant isolation, RLS policies, server-side permission denial, module denial, feature denial, and no service-role/browser exposure are mandatory.
+Audit / Event / History Requirements: Audit AR creation, status transition, collection event append, evidence link mutation, payment-term override/use, and snapshot generation. Status and collection history must be append-only.
+Required Tests: AR creation, AR status transition, collection event append, invoice evidence link, payment-term reuse, DSO snapshot logic/server-side builder, tenant isolation, permission denial, module denial, feature denial, and audit writes.
+Not Complete If: Only contracts/docs/tests-for-strings are added; payment_terms are duplicated; required migrations/runtime/tests/RLS/audit are missing; AR status history is mutable; integrations copy source data instead of referencing source records; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Finance Lite / DSO / AR has real schema/runtime or verified existing schema/runtime, append-only history, server-side DSO snapshot behavior, connected references, RLS/security/audit coverage, and passing required tests.
+Quality Gate: Run node -e "JSON.parse(require('fs').readFileSync('package-lock.json','utf8')); console.log('package-lock ok')"; npm ci; npm run lint; npm run typecheck; npm test; npm run build; git diff --check. Run migration validation when migrations are changed.
+Completion Report: List files changed, migrations/runtime/tests created, reused artifacts, explicit deferrals, migration validation, quality-gate results, clean-room confirmation, and confirmation that CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md were updated.
 ```
 
 ### Phase 16A.2 — Communication & Notification Migration and Runtime Alignment
 
 ```text
-Work on Phase 16A.2 — Communication & Notification Migration and Runtime Alignment. Do not execute Phase 16A.3 or any later prompt.
-
-Phase Type: Migration + Runtime/Backend Alignment.
-Completion Mode: Convert historical Phase 13 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-13.md
-- lib/communications/repository.ts
-Scope:
-- Add or verify normalized Communication & Notification tables for message_templates, email_campaigns, email_campaign_logs, whatsapp_templates, whatsapp_message_logs, notification_rules, escalation_rules, recipient_rules, outbound_message_audit_logs, event_notification_links, or equivalent normalized tables.
-- Connect RFQ, job, shipment, invoice, POD, billing readiness, and AR events to notification rules without duplicate data entry.
-- Store no provider secrets in browser/client code; provider secrets must remain server-only.
-- Add tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
-Required Concrete Artifacts:
-- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
-- Server-only notification runtime for rule resolution, message/template handling, logging, escalation/recipient rules, and event links.
-- Tests for tenant isolation, provider-secret safety, denial paths, audit writes, rule resolution, event links, and append-only outbound logs.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-2-communications-notifications-recovery.md.
-Not Complete If:
-- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
-- Provider secrets can reach browser/client code.
-- RFQ/job/shipment/invoice/POD/billing readiness/AR event linkage is omitted without explicit user-approved deferral.
-Definition of Done:
-- Historical Phase 13 is no longer contract-only for the implemented/verified Communication & Notification scope.
-- Runtime notification behavior is server-only, audited, tenant-isolated, and connected to operational/billing/AR events.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm concrete tables/equivalents added or verified.
-- Confirm provider secrets are not exposed to client/browser code.
-- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, and event-rule links.
-- Confirm no future prompt was executed and no Phase 16B work was started.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.2 — Communication & Notification Migration and Runtime Alignment.
+Phase Type: Migration + Runtime/Backend.
+Execution Boundary: Execute only Phase 16A.2 after Phase 16A.1 is complete or explicitly deferred. Do not execute Phase 16A.3 or later prompts.
+Completion Mode: Convert historical Phase 13 contract/preview-only work into concrete notification schema/runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-13.md; docs/build-log/phase-16a-job-order-core-schema.md.
+Existing Artifacts to Reuse: Reuse tenant, user/profile, customer/contact, RFQ, quotation, job/shipment, POD/document, billing readiness, invoice, AR, issue/escalation, attendance, module/feature/permission, audit log, and Supreme Admin config artifacts where present. Do not duplicate contacts or event source data.
+Scope: Implement notification templates, notification rules, outbound message logs, provider configuration metadata, event links, recipient resolution, delivery status history, and server-only dispatch preparation. Provider secrets must stay server-only.
+Explicit Non-Goals: Do not integrate with a live external provider unless explicitly requested; do not build marketing automation, chat, customer portal, Phase 16A.3+ modules, or provider credentials in client/browser code.
+Required Data Model / Schema Work: Create/verify tenant-scoped tables for templates, rules, recipient groups/resolution rules, provider config references, outbound logs, delivery/status events, and source event links. Distinguish templates, rules, logs, provider configuration, event links, and recipient resolution as separate concerns.
+Required Runtime / Backend Work: Add server-only logic for rule matching, recipient resolution, template rendering with safe variables, provider-secret boundary checks, outbound log append, delivery/status event append, module/feature/permission checks, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.2 is migration/runtime recovery only; Supreme Admin UI can be a later UI phase unless explicitly scoped.
+Required Integration Work: Notification events must reference RFQ, quotation, job, shipment, POD, billing readiness, invoice, AR, issue/escalation, and attendance events where the source module exists. If a source module is absent or deferred, record the exact deferral and preserve typed source-module/source-record fields without copying source data.
+Required Configuration / Supreme Admin Work: Provider configuration metadata, template ownership, rule enablement, channels, event triggers, retry policy, recipient policies, and tenant defaults must be controlled by Supreme Admin/config tables; secrets must be stored only in server-side secret storage or secret references.
+Required Subscription / Package Entitlement Work: Enforce notification module/channel/feature entitlement gates before rule evaluation and dispatch preparation.
+Security / RLS / Permission Requirements: Tenant isolation, RLS, server-only mutations, no client provider credentials, permission denial, module denial, feature denial, and provider secret boundary tests are mandatory.
+Audit / Event / History Requirements: Audit template/rule/provider config changes, rule evaluation decisions, outbound log append, delivery status changes, and dispatch denial. Outbound logs and delivery events must be append-only.
+Required Tests: Rule matching, recipient resolution, disabled module denial, provider secret boundary, outbound log append, delivery/status append, tenant isolation, permission denial, feature denial, and audit writes.
+Not Complete If: Templates/rules/logs/provider config are conflated; provider credentials appear in client/browser code; only docs/contracts are added; event links copy source data; required tests/RLS/audit/runtime are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Notification schema/runtime can resolve recipients, match rules, append outbound logs/events, enforce security/entitlements, and link to available source events through references.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, schema/runtime/tests, reused artifacts, source modules linked/deferred, provider secret handling, migration validation, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-2-communication-notification-recovery.md.
 ```
 
 ### Phase 16A.3 — Attendance / Workforce / Location Migration and Runtime Alignment
 
 ```text
-Work on Phase 16A.3 — Attendance / Workforce / Location Migration and Runtime Alignment. Do not execute Phase 16A.4 or any later prompt.
-
-Phase Type: Migration + Runtime/Backend Alignment.
-Completion Mode: Convert historical Phase 14 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-14.md
-- lib/attendance/repository.ts
-Scope:
-- Add or verify normalized Attendance / Workforce / Location tables for attendance_records, workforce_locations, branch_location_policies, check_in_out_events, attendance_visibility_rules, attendance_audit_events, geolocation_policy_rules, attendance_policy_configs, or equivalent normalized tables.
-- Validate geolocation server-side; never trust client-only location validation.
-- Add tenant_id, RLS, indexes, constraints, audit triggers/events, append-only check-in/out events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
-Required Concrete Artifacts:
-- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
-- Server-only attendance runtime for policy lookup, geolocation validation, check-in/check-out event creation, summary updates, visibility, and audit writes.
-- Tests for tenant isolation, geolocation boundaries, denial paths, audit writes, append-only events, duplicate daily records, and visibility rules.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-3-attendance-workforce-location-recovery.md.
-Not Complete If:
-- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
-- Geolocation validation is only client-side.
-- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
-Definition of Done:
-- Historical Phase 14 is no longer contract-only for the implemented/verified Attendance / Workforce / Location scope.
-- Runtime attendance behavior is server-only, audited, tenant-isolated, and policy-driven through configuration.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm concrete tables/equivalents added or verified.
-- Confirm server-side geolocation validation.
-- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
-- Confirm no future prompt was executed and no Phase 16B work was started.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.3 — Attendance / Workforce / Location Migration and Runtime Alignment.
+Phase Type: Migration + Runtime/Backend.
+Execution Boundary: Execute only Phase 16A.3 after earlier 16A recovery prompts are complete or explicitly deferred. Do not execute Phase 16A.4 or later prompts.
+Completion Mode: Convert historical Phase 14 contract/preview-only work into concrete attendance/workforce/location schema/runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-14.md; docs/build-log/phase-16a-job-order-core-schema.md.
+Existing Artifacts to Reuse: Reuse tenant, branch, user/profile, role/permission, module/feature, audit log, shipment/job/leg assignment, vendor/fleet/driver references, and Supreme Admin configuration artifacts where present.
+Scope: Implement separate attendance policies, check-in/out events, attendance summaries, location/geofence policies, workforce assignments, visibility rules, and server-side geolocation validation.
+Explicit Non-Goals: Do not build payroll, HRIS, mobile apps, live GPS tracking, route optimization, or Phase 16A.4+ modules.
+Required Data Model / Schema Work: Create/verify tenant-scoped migrations for policies, check-in/out append-only events, summaries, geofence/location policies, workforce assignments to branch/job/shipment/leg where available, and visibility rules. Add tenant_id, RLS, FKs, indexes, constraints, and audit/event structures.
+Required Runtime / Backend Work: Add server-only check-in, check-out, duplicate prevention, check-out-without-check-in denial, geofence validation, branch policy enforcement, assignment validation, summary builder, module/feature/permission gates, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.3 is migration/runtime recovery only; do not add attendance preview UI.
+Required Integration Work: Link workforce assignments to branches, jobs, shipments, shipment legs, fleet/driver/vendor references where available. Do not copy job/shipment/customer data into attendance rows.
+Required Configuration / Supreme Admin Work: Attendance policies, geofence radius, branch/location rules, visibility rules, required evidence, and summary periods must be configurable through Supreme Admin/config tables.
+Required Subscription / Package Entitlement Work: Enforce attendance, workforce assignment, location/geofence, and visibility feature entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS, server-side geolocation validation, permission denial, module denial, feature denial, and no privileged client mutation paths are mandatory.
+Audit / Event / History Requirements: Check-in/out events must be append-only. Audit policy changes, check-in/out attempts, denied geofence checks, assignment changes, summary generation, and visibility rule changes.
+Required Tests: Duplicate check-in prevention, check-out without check-in denial, geofence validation, branch policy enforcement, assignment validation, tenant isolation, permission denial, module/feature denial, summary generation, and audit events.
+Not Complete If: Check-in/out history can be overwritten; geolocation validation is client-only; only contracts/docs are added; policies/assignments/visibility are conflated; required tests/RLS/audit/runtime are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Attendance/workforce/location has concrete schema/runtime, append-only event behavior, server-side validation, configuration-driven policies, entitlement/security enforcement, and passing tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, migrations/runtime/tests, reused artifacts, linked/deferred operational modules, migration validation, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-3-attendance-workforce-location-recovery.md.
 ```
 
 ### Phase 16A.4 — Issue Report / Internal Ticket / Exception Migration and Runtime Alignment
 
 ```text
-Work on Phase 16A.4 — Issue Report / Internal Ticket / Exception Migration and Runtime Alignment. Do not execute Phase 16A.5 or any later prompt.
-
-Phase Type: Migration + Runtime/Backend Alignment.
-Completion Mode: Convert historical Phase 15 contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-15.md
-- lib/issues/repository.ts
-Scope:
-- Add or verify normalized Issue Report / Internal Ticket / Exception tables for internal_issues, issue_categories, issue_assignments, issue_status_events, issue_severity_rules, issue_timeline_events, issue_documents, issue_escalations, issue_entity_links, or equivalent normalized tables.
-- Connect issue records to shipment, job, customer, vendor, RFQ, invoice, document, notification, and reporting records by reference/link tables without duplicating source data.
-- Add tenant_id, RLS, indexes, constraints, audit triggers/events, append-only status/timeline/assignment/escalation history, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
-Required Concrete Artifacts:
-- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
-- Server-only issue runtime for creation, assignment, status transitions, timeline, documents, escalation, entity links, and audit writes.
-- Tests for tenant isolation, denial paths, audit writes, append-only events, severity/escalation rules, entity links, and duplicate-data avoidance.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-4-issues-exceptions-recovery.md.
-Not Complete If:
-- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
-- Entity connections duplicate shipment/job/customer/vendor/RFQ/invoice/document facts instead of linking to sources of truth.
-- Tenant_id, RLS, indexes, audit triggers/events, runtime actions, or tests are missing without explicit user-approved deferral.
-Definition of Done:
-- Historical Phase 15 is no longer contract-only for the implemented/verified Issue / Ticket / Exception scope.
-- Runtime issue behavior is server-only, audited, tenant-isolated, and connected to operational, notification, and reporting records.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm concrete tables/equivalents added or verified.
-- Confirm source-of-truth entity links without duplicate data.
-- Confirm tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, and tests.
-- Confirm no future prompt was executed and no Phase 16B work was started.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.4 — Issue Report / Internal Ticket / Exception Migration and Runtime Alignment.
+Phase Type: Migration + Runtime/Backend.
+Execution Boundary: Execute only Phase 16A.4 after earlier 16A recovery prompts are complete or explicitly deferred. Do not execute Phase 16A.5 or later prompts.
+Completion Mode: Convert historical Phase 15 contract/preview-only work into concrete issue/exception schema/runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-15.md; docs/build-log/phase-16a-job-order-core-schema.md.
+Existing Artifacts to Reuse: Reuse tenant, branch, user/profile, role/permission, customer/vendor, RFQ, quotation, job/shipment, invoice, document/POD, notification, audit log, and Supreme Admin config artifacts where present.
+Scope: Implement issue categories, issue records, assignments, severity, status history, timeline events, escalation rules/events, documents, and entity links for internal tickets/exceptions.
+Explicit Non-Goals: Do not build full helpdesk omnichannel support, customer portal issue UI, notification provider dispatch, or Phase 16A.5+ modules.
+Required Data Model / Schema Work: Create/verify tenant-scoped migrations for issue categories, records, assignments, severity/status configuration, append-only status history, timeline events, escalation rules/events, document links, and polymorphic entity links. Entity links must reference source records instead of copying source data from job/shipment/customer/vendor/RFQ/invoice/document.
+Required Runtime / Backend Work: Add server-only issue creation, assignment change, status transition, escalation rule evaluation, timeline append, entity link creation, document link creation, module/feature/permission gates, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.4 is migration/runtime recovery only; do not add preview-only issue UI.
+Required Integration Work: Link issues to job, shipment, customer, vendor, RFQ, quotation, invoice, POD/document, notification event, and attendance/workforce event records where available. If a target module is absent, document the deferral and preserve typed reference fields.
+Required Configuration / Supreme Admin Work: Issue category, severity, status workflow, escalation thresholds, assignment queues, visibility, SLA, and document requirements must be Supreme Admin/config-table controlled.
+Required Subscription / Package Entitlement Work: Enforce issue/exception, escalation, document-link, and cross-module linking feature entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS, server-only mutations, permission denial, module denial, feature denial, and safe cross-module reference validation are mandatory.
+Audit / Event / History Requirements: Audit issue creation, assignment changes, status transitions, escalation events, timeline appends, entity links, document links, and configuration changes. Status history/timeline must be append-only.
+Required Tests: Issue creation, assignment change, status transition, escalation rule, timeline append, entity link, document link, tenant isolation, permission denial, module/feature denial, and audit writes.
+Not Complete If: Entity links copy source records; status/timeline history is mutable; only contracts/docs are added; escalation is undocumented or untested; required tests/RLS/audit/runtime are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Issue/exception schema/runtime supports auditable tickets, assignments, status/timeline history, escalation, document/source links, tenant security, entitlements, and passing tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, migrations/runtime/tests, reused artifacts, linked/deferred modules, migration validation, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-4-issue-exception-recovery.md.
 ```
 
 ### Phase 16A.5 — Menu / Module / UI Configuration Migration and Runtime Alignment
 
 ```text
-Work on Phase 16A.5 — Menu / Module / UI Configuration Migration and Runtime Alignment. Do not execute Phase 16A.6 or any later prompt.
-
-Phase Type: Migration + Runtime/Backend Alignment.
-Completion Mode: Convert historical Phase 16 Menu/UI contract-only work into concrete CargoGrid migration/runtime alignment, or document an explicit user-approved deferral. Do not complete as docs/preview/contract-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16.md
-- lib/navigation/repository.ts
-Scope:
-- Add or verify normalized Menu / Module / UI Configuration tables for menu_configs, module_navigation_items, feature_visibility_rules, role_menu_bindings, tenant_menu_overrides, ui_label_configs, navigation_audit_events, or equivalent normalized tables.
-- Connect to modules, module_features, roles, permissions, tenant settings, Supreme Admin configuration, and UI rendering.
-- Ensure tenant behavior is data/config-driven and never hardcoded per tenant.
-- Add tenant_id, RLS, indexes, constraints, audit triggers/events, server-only runtime actions/repository behavior, validation, tenant/module/feature/permission gates, and tests.
-Required Concrete Artifacts:
-- Supabase migration(s) or verified existing schema coverage for the required tables/equivalents.
-- Server-only navigation runtime for menu resolution, feature visibility, role bindings, tenant overrides, label configs, and audit writes.
-- UI rendering integration only as needed to consume runtime config; avoid broad UI rewrites.
-- Tests for tenant isolation, no hardcoded tenant behavior, denial paths, audit writes, module/feature/role/permission links, and resolved navigation output.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-5-menu-module-ui-config-recovery.md.
-Not Complete If:
-- Work only proposes a model, repository contract, AppShell preview, tests for strings, or docs.
-- Tenant-specific behavior is hardcoded in code instead of stored in configuration tables.
-- Connections to modules, module_features, roles, permissions, tenant settings, Supreme Admin configuration, or UI rendering are omitted without explicit user-approved deferral.
-Definition of Done:
-- Historical Phase 16 is no longer contract-only for the implemented/verified Menu / Module / UI Configuration scope.
-- Runtime navigation/config behavior is server-only, audited, tenant-isolated, permission-aware, and Supreme Admin configurable.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm concrete tables/equivalents added or verified.
-- Confirm no hardcoded tenant behavior.
-- Confirm tenant_id, RLS, indexes, constraints, audit triggers/events, server-only runtime actions, tests, and UI runtime alignment.
-- Confirm no future prompt was executed and no Phase 16B work was started.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.5 — Menu / Module / UI Configuration Migration and Runtime Alignment.
+Phase Type: Migration + Runtime/Backend.
+Execution Boundary: Execute only Phase 16A.5 after earlier 16A recovery prompts are complete or explicitly deferred. Do not execute Phase 16A.6 or later prompts.
+Completion Mode: Convert historical Phase 16 contract/preview-only work into concrete menu/module/UI configuration schema/runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-16.md; docs/build-log/phase-16a-job-order-core-schema.md.
+Existing Artifacts to Reuse: Reuse RBAC roles/permissions, tenant module entitlements, feature flags/entitlements, Supreme Admin configuration tables, audit logs, and existing navigation repository/contracts where present.
+Scope: Implement config-driven menu resolution, role-menu binding, module/feature visibility, tenant overrides, UI label configuration, runtime menu resolver, and audit events.
+Explicit Non-Goals: Do not hardcode tenant-specific UI behavior; do not build unrelated product screens; do not execute Phase 16B; do not replace RBAC or subscription systems.
+Required Data Model / Schema Work: Create/verify tenant-scoped migrations for menu configs, navigation items, feature visibility rules, role-menu bindings, tenant menu overrides, UI label configs, and navigation audit events with tenant_id, RLS, indexes, uniqueness constraints, and FKs to RBAC/module/feature artifacts.
+Required Runtime / Backend Work: Add server-only runtime menu resolver that respects tenant module entitlement, feature entitlement, role, permission, and Supreme Admin configuration. Add mutation paths for menu config, role binding, override, label config, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.5 is migration/runtime alignment only; full UI may be a later UI phase. Do not add preview-only UI as completion evidence.
+Required Integration Work: Integrate with RBAC permissions, module catalog, feature catalog, subscription/package entitlements, Supreme Admin configuration, and AppShell/navigation consumers without hardcoded tenant behavior.
+Required Configuration / Supreme Admin Work: Menu definitions, role bindings, module/feature visibility, tenant overrides, UI labels, locale labels, and default menu policies must be controlled through Supreme Admin/config tables.
+Required Subscription / Package Entitlement Work: Runtime resolver must deny or hide modules/features disabled by tenant plan/package entitlement before role/permission visibility is applied.
+Security / RLS / Permission Requirements: Tenant isolation, RLS, server-only config mutations, permission denial, module denial, feature denial, entitlement denial, and no privileged browser client are mandatory.
+Audit / Event / History Requirements: Audit menu config changes, navigation item changes, role binding changes, tenant overrides, label overrides, resolver-affecting feature/module changes, and denied sensitive mutations.
+Required Tests: Menu resolution, module disabled, feature disabled, permission denial, entitlement denial, tenant override, label override, role binding, tenant isolation, RLS coverage, and audit logs.
+Not Complete If: Tenant UI behavior is hardcoded; resolver ignores entitlement/feature/role/permission/config; only contracts/docs/preview UI are added; required migrations/runtime/tests/RLS/audit are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Menu/module/UI configuration has concrete schema/runtime resolver, Supreme Admin controlled configuration, entitlement-aware visibility, tenant-safe RLS/security, audit coverage, and passing tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, migrations/runtime/tests, reused artifacts, resolver behavior, migration validation, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-5-menu-module-ui-configuration-recovery.md.
 ```
 
 ### Phase 16A.6 — Contract Recovery Regression and Documentation Lock
 
 ```text
-Work on Phase 16A.6 — Contract Recovery Regression and Documentation Lock. Do not start Phase 16B.
-
-Phase Type: Hardening + Documentation Lock.
-Completion Mode: Verify and lock the Phase 16A.1 through Phase 16A.5 recovery state. Do not build new product features, create new business migrations, or continue Phase 16B.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md
-- docs/build-log/phase-16a-2-communications-notifications-recovery.md
-- docs/build-log/phase-16a-3-attendance-workforce-location-recovery.md
-- docs/build-log/phase-16a-4-issues-exceptions-recovery.md
-- docs/build-log/phase-16a-5-menu-module-ui-config-recovery.md
-Scope:
-- Verify Phase 16A.1 through Phase 16A.5 are no longer contract-only, or each has an explicit user-approved deferral.
-- Verify recovered modules have migrations or documented explicit deferrals.
-- Verify tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, docs, and build logs for each recovered module.
-- Verify old prompt files are deprecated/redirect-only and the canonical prompt pack is the only executable future prompt source.
-- Run the full quality gate and document results.
-Required Concrete Artifacts:
-- Updated CARGOGRID_CONTEXT.md.
-- New docs/build-log/phase-16a-6-contract-recovery-regression.md with regression findings, file references, quality-gate output, deferrals if any, and Phase 16B gate status.
-- Documentation-only corrections if needed to lock prompt authority/deprecation status; no product features or business migrations.
-Not Complete If:
-- Any Phase 16A.1 through Phase 16A.5 item remains contract-only without explicit user-approved deferral.
-- Missing tenant_id, RLS, indexes, audit triggers/events, server-only runtime actions, tests, docs, or build logs are ignored instead of fixed or explicitly deferred.
-- Old prompt files remain presented as executable future prompt sources.
-- Phase 16B is started.
-Definition of Done:
-- Contract recovery status is verified and documented.
-- Canonical prompt pack is confirmed as the only executable future prompt source.
-- Phase 16B remains blocked unless all recovery items are complete or explicitly deferred.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm Phase 16A.1 through Phase 16A.5 recovery/deferral status.
-- Confirm old prompt files are deprecated and canonical prompt pack is the only executable future prompt source.
-- Confirm no future prompt was executed.
-- Confirm no features or migrations were created.
-- Confirm full quality-gate results.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16A.6 — Contract Recovery Regression and Documentation Lock.
+Phase Type: Hardening + Validation + Documentation Lock.
+Execution Boundary: Execute only Phase 16A.6 after Phase 16A.1 through Phase 16A.5 are complete or explicitly user-deferred. Do not execute Phase 16A.7, Phase 16B, or later prompts.
+Completion Mode: Verify and lock recovery status for Phase 16A.1 through Phase 16A.5. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-12.md through docs/build-log/phase-16.md; docs/build-log/phase-16a-1-finance-lite-dso-ar-recovery.md through docs/build-log/phase-16a-5-menu-module-ui-configuration-recovery.md if present.
+Existing Artifacts to Reuse: Reuse build logs, migrations, tests, repository/runtime files, context notes, and roadmap recovery documents produced by Phase 16A.1 through Phase 16A.5.
+Scope: Run regression/documentation lock for recovered Finance/AR, Notification, Attendance/Workforce/Location, Issue/Exception, and Menu/Module/UI Configuration modules. Verify actual migrations/runtime/tests or explicit user-approved deferrals; no silent deferrals.
+Explicit Non-Goals: Do not create product features, business migrations, new UI, or Phase 16A.7+ runtime. Do not repair missing module work unless explicitly asked; report it as blocker/deferral requirement.
+Required Data Model / Schema Work: Not applicable for this phase because Phase 16A.6 is validation/documentation lock only; it may inspect migrations but must not create business migrations unless separately requested.
+Required Runtime / Backend Work: Not applicable for this phase because Phase 16A.6 validates prior runtime artifacts and should not add application logic.
+Required UI Work, if applicable: Not applicable for this phase because no UI is in scope.
+Required Integration Work: Validate documented integration links from recovered modules to job/shipment, customer, billing/POD/invoice/AR, notifications, attendance, issues, menu/config, RBAC, entitlements, audit, and Supreme Admin configuration.
+Required Configuration / Supreme Admin Work: Verify each recovered module documents Supreme Admin/config-table control for configurable behavior or an explicit user-approved deferral.
+Required Subscription / Package Entitlement Work: Verify each recovered module enforces or defers module/feature/package entitlement gates with explicit user approval.
+Security / RLS / Permission Requirements: Verify tenant_id, RLS, indexes, permission/module/feature denial tests, and no privileged browser/client secret usage for each recovered module.
+Audit / Event / History Requirements: Verify audit writes and append-only event/history requirements for AR, notifications, attendance, issues, and navigation/menu configuration.
+Required Tests: Run existing test suite and add documentation/regression tests only if needed to verify prompt/build-log rules. Search cleanup for vague contract-only phrases in 16A.1-16A.5 build logs, including `contract-only`, `preview-only`, `future work`, `placeholder`, `where applicable`, and `or equivalent`; each remaining match must be explained as historical context or blocker.
+Not Complete If: Any 16A.1-16A.5 module lacks migration/runtime/tests without explicit user-approved deferral; recovery matrix is missing; silent deferrals exist; contract-only language is unexplained; quality gate fails without documented environment limitation; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: A recovery matrix lists each recovered module, migration status, runtime status, tests, RLS, audit, known deferrals, and next blocker; CARGOGRID_CONTEXT.md and build log are updated; Phase 16B remains blocked unless all 16A.1-16A.8 gates are complete or explicitly deferred.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check. Migration validation is required only if migrations were changed, which should not happen in this validation phase.
+Completion Report: List files changed, recovery matrix summary, contract-only phrase search results, deferrals/blockers, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-6-contract-recovery-regression.md.
 ```
-
 
 ### Phase 16A.7 — Shipment Detail Expansion Schema and Configuration
 
 ```text
-Work on Phase 16A.7 — Shipment Detail Expansion Schema and Configuration. Do not execute Phase 16A.8, continue Phase 16B, build runtime features, or create unrelated business migrations.
-
+Phase Name: Phase 16A.7 — Shipment Detail Expansion Schema and Configuration.
 Phase Type: Migration + Configuration Schema Implementation.
-Completion Mode: Implement concrete schema/configuration; No Contract-Only Completion Rule applies.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-- supabase/migrations/20260707240000_job_order_core.sql
-Scope:
-- Extend the existing Job Order Core schema before Job Order runtime is built; do not duplicate logistics_jobs, shipments, or existing shipment child tables.
-- Structurally support multidrop, multi-pickup, multi-service, multi-leg, split, consolidated, parent-child, and grouped shipments.
-- Support multi-currency charges/costs, multi-koli/package details, multi-SKU/item details, package/item dimensions and weight, volumetric/chargeable weight, cargo classification, dangerous goods, temperature control, special handling, insurance value, declared value, and COD/value-collection placeholders.
-- Support stop sequence with stop-level contact/address/time window/instruction, service-level config, fleet requirements, own/vendor fleet, vehicle/body type, driver/crew placeholder, route constraints, SLA/milestone template placeholder, tenant-configurable required fields, tenant-configurable package/koli/SKU fields, and plan/package access to advanced shipment features.
-Required Concrete Artifacts:
-- Safe migration extending Job Order Core with normalized child tables where needed, e.g. shipment_stops, shipment_stop_contacts, shipment_services, shipment_service_requirements, shipment_items, shipment_skus, shipment_package_items, shipment_dimensions, shipment_currency_amounts, shipment_fleet_requirements, shipment_service_configs, shipment_required_field_configs, shipment_feature_entitlements, or justified equivalents.
-- tenant_id on tenant-scoped tables; FKs to logistics_jobs, shipments, shipment_legs, customers, addresses, service_types, package_types, units, currencies, vendors, branches, and related master data where available.
-- RLS policies, indexes, unique/check constraints, audit triggers, and configuration schema entries/tables for shipment behavior.
-- Module/feature/permission gates plus Supreme Admin and subscription/package entitlement representation for multidrop, multi-pickup, multi-service, multi-currency, SKU detail, own fleet, vendor fleet, advanced koli/package detail, and SLA/milestone templates.
-- Tests for schema, RLS, audit triggers, config gates, entitlement gates, and no duplicate logistics_jobs/shipments table creation.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-7-shipment-detail-expansion.md.
-Not Complete If:
-- Only proposed tables, repository constants, AppShell preview, interfaces, docs, or TODOs are added.
-- Existing shipment schema is ignored, duplicate logistics_jobs or shipments tables are created, or no RLS/audit/entitlement exists.
-Definition of Done:
-- Real migration safely extends existing Job Order Core; tenant_id/RLS/policies/audit/indexes exist.
-- Shipment detail structurally supports multidrop, multi-service, multi-currency, multi-koli, multi-SKU, and fleet requirements.
-- Supreme Admin configuration and package gating are represented; tests prove schema and guardrails; build log and CARGOGRID_CONTEXT.md are updated.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks for changed migrations.
-Completion Report:
-- List files changed.
-- Confirm Phase 16A.7 concrete migration/config artifacts and tests.
-- Confirm no duplicate logistics_jobs or shipments table was created.
-- Confirm tenant_id, RLS, audit logs, module/feature/permission gates, Supreme Admin configurability, and subscription/package entitlement checks.
-- Confirm Phase 16A.8 and Phase 16B were not executed.
-- Confirm no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 16A.7 after Phase 16A.1 through Phase 16A.6 are complete or explicitly user-deferred. Do not execute Phase 16A.8, Phase 16B, or later prompts.
+Completion Mode: Expand shipment detail schema/configuration before Job Order runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-16a-job-order-core-schema.md; supabase/migrations/20260707240000_job_order_core.sql.
+Existing Artifacts to Reuse: Reuse logistics_jobs, shipments, shipment_packages, shipment_legs, shipment_events, shipment_costs, shipment_charges, shipment_documents_link, shipment_status_history, currencies, addresses, customers, contacts, service types, package types, vendors/fleet references, RBAC, entitlements, audit, and Supreme Admin config artifacts where present.
+Scope: Add schema/configuration coverage for multidrop, multi-pickup, multi-service, multi-leg, split shipment, consolidation, parent-child shipment, multi-currency charges/costs, multi-koli, multi-SKU, package dimensions, item dimensions, volumetric and chargeable weight, dangerous goods, temperature control, declared value, insurance, stop-level contact/address/time window/instruction, fleet requirements, own fleet vs vendor fleet, vehicle/body type, SLA/milestone templates, tenant-configurable required fields, and plan/package entitlement gates.
+Explicit Non-Goals: Do not duplicate logistics_jobs or shipments; do not build runtime actions/UI; do not execute Phase 16A.8 or Phase 16B; do not create unrelated TMS/WMS/billing modules.
+Required Data Model / Schema Work: Create/verify migrations that extend the existing Job Order schema with normalized shipment stops, service requirements, package/koli details, SKU/item details, dimensions/weight calculations, charges/cost currency details, fleet requirements, shipment relationships, SLA/milestone templates, required-field configuration, and entitlement gates. Use FKs to existing core tables and justify any alternative normalized table names/designs.
+Required Runtime / Backend Work: Not applicable for this phase because runtime validation/actions belong to Phase 16A.8; this phase may add schema validation tests only.
+Required UI Work, if applicable: Not applicable for this phase because no UI is in scope.
+Required Integration Work: Preserve links to logistics_jobs, shipments, shipment legs/events, customers/contacts/addresses, service/package/currency masters, vendor/fleet records, costs/charges, documents, and future TMS/WMS/billing flows through references instead of duplicate core tables.
+Required Configuration / Supreme Admin Work: Add/verify configuration tables for required fields, service-specific fields, stop rules, fleet requirements, SLA/milestone templates, dangerous goods/temperature/insurance requirements, and package/plan controls stored in Supreme Admin-controlled configuration.
+Required Subscription / Package Entitlement Work: Add/verify plan/package/module/feature entitlement gates for multidrop, multiservice, multicurrency, multi-SKU, dangerous goods, temperature control, insurance, and fleet requirement features.
+Security / RLS / Permission Requirements: Every tenant-scoped table must include tenant_id, RLS, tenant indexes, FKs, and permission/module/feature/entitlement validation tests.
+Audit / Event / History Requirements: Add/verify audit or event structures for shipment detail configuration changes, stop/detail mutations planned for Phase 16A.8, and SLA/milestone template changes.
+Required Tests: No duplicate core tables, FK coverage, tenant_id/RLS coverage, config gates, entitlement gates, multidrop schema coverage, multiservice schema coverage, multicurrency schema coverage, multi-SKU schema coverage, package/dimension/weight coverage, and migration validation.
+Not Complete If: logistics_jobs or shipments are duplicated; schema relies on JSON blobs where normalized tables are required; required FK/RLS/config/entitlement/audit coverage is missing; only docs/contracts are added; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Shipment detail schema/configuration is normalized, tenant-isolated, RLS-protected, entitlement/config-aware, linked to existing Job Order tables, and ready for Phase 16A.8 runtime validation.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus applicable Supabase migration validation.
+Completion Report: List files changed, migrations/tests, reused Job Order artifacts, no-duplicate-table proof, config/entitlement coverage, migration validation, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-7-shipment-detail-expansion.md.
 ```
 
 ### Phase 16A.8 — Shipment Detail Runtime and Validation Alignment
 
 ```text
-Work on Phase 16A.8 — Shipment Detail Runtime and Validation Alignment. Do not continue Phase 16B or build unrelated product features.
-
+Phase Name: Phase 16A.8 — Shipment Detail Runtime and Validation Alignment.
 Phase Type: Runtime/Backend Alignment.
-Completion Mode: Implement concrete server-only runtime/validation for the Phase 16A.7 shipment detail model; No Contract-Only Completion Rule applies.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/recovery-reconciliation-spec.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-- docs/build-log/phase-16a-7-shipment-detail-expansion.md
-- supabase/migrations/20260707240000_job_order_core.sql
-Scope:
-- Build server-only create/update/read runtime for shipment stops, items/SKU/package detail, multi-service requirements, and fleet requirements.
-- Validate multidrop and multi-pickup sequence, package/koli/SKU totals, multi-currency cost/charge inputs, service/fleet requirements against tenant entitlement, and required fields from Supreme Admin/tenant configuration.
-- Prevent duplicate upstream data entry by reusing existing customer/contact/address/service/cargo/rate/quotation/job/shipment records; do not duplicate logistics_jobs or shipments tables.
-- Enforce tenant_id isolation, RLS-aware access, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks, and audit records for sensitive changes.
-Required Concrete Artifacts:
-- Server-only repositories/actions with real read/write logic.
-- Validation helpers, entitlement checks, module/feature/permission gates, and audit logging.
-- Tests for success path, tenant isolation, permission denial, module denial, feature denial, package entitlement denial, multidrop validation, multi-service validation, multi-currency validation, multi-koli/SKU validation, fleet config validation, and no duplicate upstream data entry.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-8-shipment-detail-runtime.md.
-Not Complete If:
-- Only TypeScript interfaces, repository contracts, proposed methods, docs, or TODOs are added.
-- No real read/write logic, entitlement validation, audit logging, or runtime behavior tests exist.
-Definition of Done:
-- Runtime actions are server-only and executable; validation is real.
-- Entitlements and Supreme Admin configuration are enforced; no duplicate user input is introduced; tests pass; build log and CARGOGRID_CONTEXT.md are updated.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm Phase 16A.8 runtime, validation, entitlement, and audit behavior.
-- Confirm tenant isolation, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks, and no duplicate logistics_jobs/shipments tables.
-- Confirm Phase 16B was not executed and no unrelated product feature was built.
-- Confirm no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 16A.8 after Phase 16A.7 is complete or explicitly user-deferred. Do not execute Phase 16B or later prompts.
+Completion Mode: Add real runtime validation/alignment for expanded shipment details before Job Order server actions. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/recovery-reconciliation-spec.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-16a-job-order-core-schema.md; docs/build-log/phase-16a-7-shipment-detail-expansion.md; supabase/migrations/20260707240000_job_order_core.sql.
+Existing Artifacts to Reuse: Reuse Phase 16A/16A.7 Job Order and shipment detail schema, logistics_jobs, shipments, stops, packages/koli, SKU/item details, service requirements, fleet requirements, charges/cost currency fields, tenant config, entitlements, RBAC, audit, customer/contact/address/service/currency/package/fleet masters where present.
+Scope: Implement server-only runtime for stops, package/koli, SKU/item details, service requirements, fleet requirements, currency amounts, and config-driven required fields.
+Explicit Non-Goals: Do not build UI, public tracking, TMS dispatch, WMS inventory, billing, invoice, accounting, or Phase 16B job order server actions beyond shipment-detail runtime required here.
+Required Data Model / Schema Work: Not applicable for this phase because schema should be completed by Phase 16A.7; only add migrations if a required runtime constraint cannot be enforced safely without schema support, and document why.
+Required Runtime / Backend Work: Add server-only validators/repositories/actions for stop sequence, pickup/drop pairing, package total vs SKU total, currency validity, entitlement restrictions, fleet requirement constraints, tenant config required fields, duplicate upstream data prevention, module/feature/permission gates, and audit writes.
+Required UI Work, if applicable: Not applicable for this phase because Phase 16A.8 is runtime/backend alignment only.
+Required Integration Work: Runtime must reference upstream job/shipment/customer/contact/address/service/currency/package/fleet records rather than re-entering duplicate data, and must prepare clean downstream handoff to Phase 16B, tracking, TMS, WMS, billing readiness, POD/document, and reporting flows.
+Required Configuration / Supreme Admin Work: Required-field validation, service rules, stop rules, fleet constraints, dangerous goods/temperature/insurance requirements, SLA/milestone rules, and package/plan switches must be read from Supreme Admin/config tables.
+Required Subscription / Package Entitlement Work: Enforce entitlement restrictions for multidrop, multi-pickup, multiservice, multi-currency, multi-koli, multi-SKU, dangerous goods, temperature control, insurance, and fleet requirement features.
+Security / RLS / Permission Requirements: Enforce tenant isolation, server-only mutations, module disabled denial, feature disabled denial, entitlement denial, permission denial, and no service-role/browser exposure.
+Audit / Event / History Requirements: Audit shipment detail create/update/delete attempts, validation denials, stop/package/SKU/fleet/service/currency mutations, required-field configuration decisions, and entitlement denials. Append shipment detail events where operational history matters.
+Required Tests: Success path, invalid sequence, invalid pickup/drop pairing, package total vs SKU total mismatch, invalid currency, unauthorized feature, module disabled, feature disabled, entitlement denial, tenant isolation, permission denial, audit writes, and no duplicate upstream data entry.
+Not Complete If: Runtime accepts invalid sequence/currency/package/SKU totals; entitlement/config gates are bypassed; upstream customer/address/service/currency data is duplicated; only docs/contracts are added; required tests/security/audit/runtime are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Shipment detail runtime validates expanded detail data server-side, enforces config/entitlement/security, writes audit/history, avoids duplicate upstream input, and leaves Phase 16B ready to build against stable validated detail runtime.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation if migrations are changed.
+Completion Report: List files changed, runtime/tests, reused schema/artifacts, validation rules, no-duplicate-input proof, migration validation if any, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-8-shipment-detail-runtime.md.
 ```
 
-
-## 21. Ready-to-Copy Job Order Future Prompts
+## 22. Ready-to-Copy Job Order Future Prompts
 
 ### Phase 16B — Job Order Server Actions and Repository Runtime
 
 ```text
-Work on Phase 16B — Job Order Server Actions and Repository Runtime. Do not execute Phase 16C, 16D, or 16E.
-
+Phase Name: Phase 16B — Job Order Server Actions and Repository Runtime.
 Phase Type: Runtime/Backend Implementation.
-Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not complete as contract-only, docs-only, interface-only, or TODO-only work. Do not run until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-Required Verification:
-- Verify supabase/migrations/20260707240000_job_order_core.sql exists.
-- Verify Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred.
-Files Not to Modify unless required:
-- Do not create or rename Supabase business migrations.
-- Do not create duplicate job order tables or rewrite the Phase 16A migration.
-Scope:
-- Consume the existing Phase 16A Job Order schema. Do not create duplicate job order, shipment, package, leg, event, document-link, cost, charge, or status-history tables.
-- Implement server-only repository/runtime/server actions for job creation and updates, shipment creation, event append, cost/charge add, and document link handling.
-- Validate job creation from booking, RFQ, approved quotation, and manual internal creation only when Supreme Admin configuration permits.
-- Reuse customer/account/contact/address/service/cargo/rate/quotation data by reference or controlled snapshot; do not ask users to re-enter upstream data.
-- Enforce tenant isolation, module gates, feature gates, permission gates, validation, and audit logging.
-Required Concrete Artifacts:
-- Executable server-only repositories/actions/runtime wired to the existing schema.
-- Tests for tenant isolation, permission denial, module denial, feature denial, job creation, shipment creation, event append, cost/charge add, document link, and no duplicate schema.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16b-job-order-runtime.md.
-Not Complete If:
-- Only repository interfaces, proposed methods, TODOs, docs, or string-presence tests are added.
-- Duplicate job order schema, duplicate job order tables, or business migrations are created.
-Definition of Done:
-- Job Order backend behavior is executable, audited, tenant-isolated, permission-aware, and uses existing Phase 16A tables.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm Phase 16A.1 through Phase 16A.8 were complete or explicitly deferred before starting.
-- Confirm prompts 16C through 16E were not executed.
-- Confirm existing Phase 16A schema was consumed and no duplicate job order tables were created.
-- Confirm no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 16B. Do not execute Phase 16C, 16D, 16E, Phase 17, or any later prompt. Before editing runtime files, verify Phase 16A.1 through Phase 16A.8 are complete or explicitly user-deferred in the roadmap/build logs; stop and report the blocker if they are not.
+Completion Mode: Build real server-only Job Order runtime on top of the existing Phase 16A schema and any completed Phase 16A.7/16A.8 shipment-detail schema/runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; docs/build-log/phase-16a-job-order-core-schema.md; CARGOGRID_CONTEXT.md; supabase/migrations/20260707240000_job_order_core.sql; Phase 16A.1-16A.8 build logs when present; Phase 16A.7/16A.8 shipment detail schema/runtime artifacts when those phases are complete.
+Existing Artifacts to Reuse: Reuse logistics_jobs, shipments, shipment_packages, shipment_legs, shipment_events, shipment_costs, shipment_charges, shipment_documents_link, shipment_status_history, shipment detail tables from Phase 16A.7/16A.8 if present, customers/accounts/contacts, addresses, service types, cargo/package data, rates, quotations, procurement costs, currencies, documents/POD links, tenant config, RBAC, module/feature/package entitlements, and audit logs.
+Scope: Implement server-only runtime for job creation, job update, job read/list/detail, shipment creation, package/koli/item read/write when Phase 16A.8 exists, shipment event append, cost add/update, charge add/update, document link, status transition, cancellation/hold/reopen when configuration permits, and duplicate creation prevention.
+Explicit Non-Goals: Do not create UI routes, public tracking, TMS dispatch, WMS inventory, billing/invoice/accounting modules, external provider integrations, or duplicate schema/tables. Do not duplicate logistics_jobs, shipments, shipment_packages, shipment_legs, shipment_events, shipment_costs, shipment_charges, shipment_status_history, or shipment detail tables.
+Required Data Model / Schema Work: Not applicable for this phase because Phase 16B is runtime over existing Job Order schema. If a small migration is unavoidable for runtime correctness, document why, validate it, and prove it does not duplicate existing Job Order or shipment detail tables.
+Required Runtime / Backend Work: Validate allowed job creation sources: booking, RFQ, approved quotation, and manual internal creation only when Supreme Admin config permits. Reuse upstream customer, account, contact, address, service, cargo, rate, quotation, procurement cost, and shipment detail data. Use controlled snapshots only where immutable historical evidence is required. Enforce tenant/module/feature/permission/package entitlement gates in every read/write path.
+Required UI Work: Not applicable for this phase because UI belongs to Phase 16C; do not add AppShell cards or route UI as completion evidence.
+Required Integration Work: Connect runtime to upstream booking/RFQ/approved quotation/manual source records and downstream shipment events, costs, charges, documents/POD, billing readiness hooks, notifications hooks, reporting/KPI hooks, and audit timelines through references/events rather than duplicate user input.
+Required Configuration / Supreme Admin Work: Read job source permissions, status workflow, cancellation/hold/reopen permissions, required fields, numbering behavior, module/feature visibility, and validation rules from Supreme Admin/config tables instead of hardcoding tenant behavior.
+Required Subscription / Package Entitlement Work: Enforce plan/package entitlements for Job Order, shipment creation, advanced shipment detail, package/koli/SKU, costs, charges, document links, and workflow transitions.
+Security / RLS / Permission Requirements: Server-only runtime, tenant isolation, RLS-compatible queries, permission denial, module disabled denial, feature disabled denial, entitlement denial, source validation, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit job creation/update, shipment creation, shipment event append, package/koli/item mutation, cost/charge mutation, document link, status transition, cancellation, hold, reopen, denied source conversion, and entitlement/config denials. Status and operational events must be append-only where history matters.
+Required Tests: Every runtime action; tenant isolation; permission denial; module disabled; feature disabled; entitlement denial; invalid source; duplicate creation prevention; audit logging; controlled snapshot behavior; no duplicate schema/table creation; and package/koli/item behavior when Phase 16A.8 exists.
+Strong Not Complete If: Phase 16A.1-16A.8 gate is not complete/deferred; runtime is client-side; duplicate Job Order/shipment/detail tables are created; source validation is missing; manual creation ignores config; upstream data is duplicated instead of referenced; required tests/security/audit are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Job Order server runtime can create/read/update jobs and shipments, mutate operational details safely, enforce source/config/entitlement/security gates, append audit/history, avoid duplicate schema and duplicate upstream input, and pass required tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation if migrations are changed.
+Completion Report: List files changed, Phase 16A gate verification, runtime actions implemented, reused artifacts, source/config/entitlement rules, tests, migration validation if any, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16b-job-order-runtime.md.
 ```
 
 ### Phase 16C — Job Order Internal UI
 
 ```text
-Work on Phase 16C — Job Order Internal UI. Do not execute Phase 16D or 16E.
-
+Phase Name: Phase 16C — Job Order Internal UI.
 Phase Type: UI Implementation.
-Completion Mode: Build real internal Job Order UI backed by Phase 16B runtime. Do not complete as AppShell preview or preview cards.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-- docs/build-log/phase-16b-job-order-runtime.md
-Files Not to Modify unless required:
-- Do not create business migrations or duplicate job order schema.
-Scope:
-- Add routed internal Job Order UI with page/route, list, detail, create/edit form, status/event views, packages, legs, costs, charges, and document links.
-- Include loading, empty, and error states; filter/search; role/module/feature visibility; form validation; and real server-action/repository integration.
-- Preserve no-duplicate-input flow by pre-filling/reusing upstream booking/RFQ/approved quotation/customer/contact/address/service/cargo/rate data when available.
-Required Concrete Artifacts:
-- Route/page, list, detail, create/edit form, status/events, package/leg/cost/charge/document-link UI surfaces.
-- Tests for rendering, loading/empty/error states, filter/search, validation, role/module visibility, permission denial, and successful server-action integration.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
-Not Complete If:
-- Only AppShell preview, preview cards, static mock screens, docs, or TODO-only tests are added.
-Definition of Done:
-- Internal users can access real Job Order UI paths and perform permitted operations through Phase 16B runtime without duplicate upstream data entry.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm real Job Order route/page, list, detail, create/edit, status/events, packages, legs, costs, charges, document links, states, filters/search, role/module visibility, and tests.
-- Confirm Phase 16D/16E were not executed.
-- Confirm no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 16C after Phase 16B is complete. Do not execute Phase 16D, 16E, Phase 17, or later prompts.
+Completion Mode: Build real routed internal Job Order UI wired to Phase 16B server runtime. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-16a-job-order-core-schema.md; docs/build-log/phase-16b-job-order-runtime.md; supabase/migrations/20260707240000_job_order_core.sql.
+Existing Artifacts to Reuse: Reuse Phase 16B actions/repositories, Job Order/shipment schema, shipment detail runtime when present, AppShell/navigation config, RBAC/module/feature/entitlement helpers, customers/accounts/contacts, addresses, service/currency/package masters, quotation/RFQ/source data, costs/charges, documents/POD, shipment events, audit timeline, and shared UI components.
+Scope: Implement real routes, not AppShell preview cards: Job Order list, filters/search/status/date/customer/service/branch, detail page, create flow, edit flow, and status/action surfaces backed by server actions.
+Explicit Non-Goals: Do not build public tracking, TMS dispatch UI, WMS UI, billing/invoice/accounting UI, external provider screens, or unrelated navigation refactors. Do not implement runtime logic that belongs in server actions except thin UI wiring.
+Required Data Model / Schema Work: Not applicable for this phase because Phase 16C is UI over existing runtime/schema; do not create business migrations unless a user explicitly changes scope.
+Required Runtime / Backend Work: Reuse Phase 16B server actions. Add only route-level loaders/actions/adapters necessary to call existing runtime safely; do not bypass server-side authorization.
+Required UI Work: Add list page with filters/search/status/date/customer/service/branch; detail page with job header, customer, quotation/source, shipments, stops, packages/koli/SKU, legs, events, costs, charges, documents, and audit timeline; create flow from allowed source and manual flow only when config permits; edit flow respecting status/config/permissions; loading, empty, error, and denied states; role/module/feature visibility; and no duplicate input by prefilling/reusing source records.
+Required Integration Work: UI must display and submit references to source RFQ/quotation/booking/manual records, customers/contacts/addresses, shipment detail, events, costs/charges, documents/POD, and audit timeline through Phase 16B runtime without duplicating upstream facts.
+Required Configuration / Supreme Admin Work: UI visibility, labels, required fields, allowed manual creation, status actions, cancellation/hold/reopen, and field editability must come from Supreme Admin/config/runtime responses.
+Required Subscription / Package Entitlement Work: Hide or deny UI actions and sections based on module, feature, package, and plan entitlements, with server-side denial still authoritative.
+Security / RLS / Permission Requirements: Server actions remain the authorization boundary. UI must render denied states for permission/module/feature/entitlement failures and must not expose service-role keys or privileged clients.
+Audit / Event / History Requirements: UI actions that mutate jobs, shipments, events, costs, charges, documents, or statuses must call audited server paths and show audit/timeline data in detail view.
+Required Tests: Route rendering, list filters/search, detail sections, create form validation, update form validation, permission denial, module hidden/denied state, feature hidden/denied state, entitlement-denied state, create/update action wiring, loading/empty/error/denied states, and no duplicate input/prefill behavior.
+Strong Not Complete If: UI is only AppShell cards; routes are missing; forms bypass Phase 16B runtime; denied/error/loading/empty states are missing; visibility is only client-side with no server denial; upstream data is re-entered unnecessarily; required tests are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Internal Job Order UI provides routed list/detail/create/edit experiences, uses real server runtime, respects config/permissions/entitlements/status, avoids duplicate input, renders required states, and passes UI/runtime tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check. Migration validation is required only if migrations are changed, which should not occur in this UI phase.
+Completion Report: List files changed, routes/components/tests added, runtime reused, visibility/config behavior, denied/error states, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
 ```
 
 ### Phase 16D — Job Order Workflow Integration
 
 ```text
-Work on Phase 16D — Job Order Workflow Integration. Do not execute Phase 16E.
-
+Phase Name: Phase 16D — Job Order Workflow Integration.
 Phase Type: Integration Implementation.
-Completion Mode: Connect Job Order to approved upstream and downstream workflows through real identifiers, events, links, and tests. Do not complete as contract-only, docs-only, mocked-only, or TODO-only work. Documentation alone is not sufficient.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-- docs/build-log/phase-16b-job-order-runtime.md
-- docs/build-log/phase-16c-job-order-internal-ui.md
-Files Not to Modify unless required:
-- Do not create business migrations or duplicate job order schema.
-Scope:
-- Connect approved quotation, RFQ, and manual allowed source to Job Order using existing runtime and Supreme Admin configuration gates.
-- Connect Job Order to shipment events, costs, charges, documents, billing readiness placeholders, notifications, and reporting surfaces/placeholders where downstream modules are not fully built.
-- Prove no duplicate input: upstream customer/account/contact/address/service/cargo/rate/quotation facts must be referenced, transformed, or snapshotted only where justified.
-- Add event/history/audit records for workflow transitions and integration actions.
-Required Concrete Artifacts:
-- Working integration paths between upstream source records, Job Order, shipment events, costs, charges, document links, billing readiness placeholders, notifications, and reporting.
-- Regression/integration tests for source conversion, duplicate-input avoidance, event/history/audit writes, denial paths, and downstream link creation.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16d-job-order-workflow-integration.md.
-Not Complete If:
-- Integration is only documented, mocked, or represented by TODO placeholders.
-Definition of Done:
-- Approved upstream records can become Job Orders and produce downstream operational links/events without re-entering source data.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm approved quotation/RFQ/manual allowed sources are connected to Job Order.
-- Confirm downstream shipment events, costs, charges, documents, billing readiness placeholders, notifications, and reporting links.
-- Confirm no duplicate input, event/history/audit records, regression tests, and no Phase 16E execution.
-- Confirm no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 16D after Phase 16B and Phase 16C are complete. Do not execute Phase 16E, Phase 17, or later prompts.
+Completion Mode: Connect Job Order to upstream and downstream workflows through real identifiers, events, and audited transitions. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; docs/build-log/phase-16a-job-order-core-schema.md; docs/build-log/phase-16b-job-order-runtime.md; docs/build-log/phase-16c-job-order-internal-ui.md; supabase/migrations/20260707240000_job_order_core.sql.
+Existing Artifacts to Reuse: Reuse Phase 16B runtime, Phase 16C UI, RFQ/inquiry, quotation, approved quote, customer/account/contact/address, service/cargo/rate/procurement cost, shipment events, packages/stops/SKU/fleet details, cost/charge, document/POD, billing readiness, notification, reporting/KPI, tenant config, RBAC, entitlements, and audit/history artifacts where present.
+Scope: Implement RFQ -> quotation -> approved quote -> Job Order conversion; config-gated manual internal job creation; Job Order -> shipment events; Job Order -> cost/charge; Job Order -> documents/POD; Job Order -> billing readiness placeholder/link; Job Order -> notifications; and Job Order -> reporting/KPI links.
+Explicit Non-Goals: Do not build full billing, invoicing, accounting, tracking portal, TMS, WMS, notification provider delivery, or reporting dashboards beyond integration hooks/links required here.
+Required Data Model / Schema Work: Avoid new business migrations unless a required integration link cannot be represented by existing schema. If migration is unavoidable, it must be narrow, tenant-scoped, RLS-protected, indexed, audited, and validated.
+Required Runtime / Backend Work: Add server-only integration services/actions for source conversion, duplicate conversion prevention, downstream link creation, required upstream data validation, event/history/audit append, and denied conversion handling.
+Required UI Work: Add only UI wiring needed to expose integrated workflow actions in existing Phase 16C routes, such as convert approved quote to job, show source/downstream links, and display audit timeline updates. Do not add unrelated UI.
+Required Integration Work: Implement RFQ-to-quotation-to-approved-quote-to-Job Order flow; manual internal job only via config; Job Order to shipment events; Job Order to cost/charge; Job Order to documents/POD; Job Order to billing readiness placeholder/link; Job Order to notifications; Job Order to reporting/KPI. Each integration must name source module, target module, reference fields/events, duplicate-prevention behavior, and deferral if the target module is absent.
+Required Configuration / Supreme Admin Work: Conversion eligibility, manual job enablement, required upstream fields, downstream link creation rules, notification triggers, billing readiness trigger, reporting/KPI flags, and transition policies must come from Supreme Admin/config tables.
+Required Subscription / Package Entitlement Work: Enforce entitlements for conversion, manual jobs, shipment events, costs/charges, documents/POD, billing readiness links, notifications, and reporting/KPI links.
+Security / RLS / Permission Requirements: Enforce tenant isolation, server-only integration mutations, RLS-compatible access, permission denial, module disabled denial, feature disabled denial, entitlement denial, source ownership validation, and no privileged browser/client paths.
+Audit / Event / History Requirements: Append event/history/audit records for every source conversion, denied conversion, downstream link creation, shipment event, cost/charge link, document/POD link, billing readiness link, notification trigger, and reporting/KPI link.
+Required Tests: Source conversion, duplicate input prevention, duplicate conversion denial, downstream link creation, denied conversion, missing required upstream data, manual job config denial, entitlement denial, tenant isolation, module/feature/permission denial, and audit timeline entries.
+Strong Not Complete If: Integrations are only documented; source/target modules are not named; duplicate input/conversion is possible; manual jobs ignore config; downstream links are placeholders without typed references; audit/history is missing; required tests are missing; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Job Order participates in the connected logistics flow from RFQ/quotation/approved quote/manual source through shipment/events/costs/charges/documents/POD/billing readiness/notifications/reporting with audited, tenant-safe, entitlement-aware links and passing integration tests.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation if migrations are changed.
+Completion Report: List files changed, integrations implemented, source/target modules linked, deferrals, duplicate-prevention proof, tests, migration validation if any, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16d-job-order-workflow-integration.md.
 ```
 
 ### Phase 16E — Job Order Regression and Hardening
 
 ```text
-Work on Phase 16E — Job Order Regression and Hardening.
-
-Phase Type: Hardening.
-Completion Mode: Harden existing Phase 16A through 16D Job Order implementation. Do not complete as documentation-only work.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- docs/build-log/phase-16a-job-order-core-schema.md
-- docs/build-log/phase-16b-job-order-runtime.md
-- docs/build-log/phase-16c-job-order-internal-ui.md
-- docs/build-log/phase-16d-job-order-workflow-integration.md
-Files Not to Modify unless required:
-- Do not create business migrations or duplicate job order schema.
-Scope:
-- Expand regression tests across schema, runtime, UI, and integration flows.
-- Perform security checks, RLS review, tenant isolation review, no service-role leak checks, migration validation or blocker documentation, performance/index review, and docs/build-log/context lock.
-- Fix narrow defects found during hardening without broad refactors or unrelated module work.
-Required Concrete Artifacts:
-- Added/updated tests and focused fixes for Job Order regression/security/RLS/service-role/performance findings.
-- Migration validation output or documented blocker/root cause if the environment cannot run it.
-- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
-Not Complete If:
-- Only documentation changes, documentation checklists, or build-log-only edits are made without regression/security/hardening tests or concrete fixes.
-Definition of Done:
-- Job Order implementation has strengthened test coverage, security posture, RLS confidence, service-role leak protection, migration validation status, index/performance review, and locked documentation context.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-Completion Report:
-- List files changed.
-- Confirm regression tests, security checks, RLS review, no service-role leak checks, migration validation/blocker documentation, performance/index review, and docs/build-log/context lock.
-- Confirm no later prompt was executed and no unrelated features or migrations were created.
-- Confirm no BCP implementation artifact was copied or reused.
+Phase Name: Phase 16E — Job Order Regression and Hardening.
+Phase Type: Hardening + Regression Validation.
+Execution Boundary: Execute only Phase 16E after Phase 16A.1 through Phase 16A.8 and Phase 16B through Phase 16D are complete or explicitly user-deferred where allowed. Do not execute Phase 17 or later prompts.
+Completion Mode: Prove Job Order readiness through regression, security, migration, performance, and documentation hardening. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; docs/roadmap/recovery-execution-queue.md; CARGOGRID_CONTEXT.md; all Phase 16A.1-16A.8 build logs; docs/build-log/phase-16b-job-order-runtime.md; docs/build-log/phase-16c-job-order-internal-ui.md; docs/build-log/phase-16d-job-order-workflow-integration.md; supabase/migrations/20260707240000_job_order_core.sql.
+Existing Artifacts to Reuse: Reuse all Job Order schema/runtime/UI/integration tests, migrations, RLS policies, audit/event/history artifacts, entitlement/config helpers, build logs, and context updates from Phase 16A.1-16A.8 and 16B-16D.
+Scope: Build and execute a Job Order regression/hardening matrix covering recovered prerequisite modules, Job Order runtime, internal UI, workflow integrations, RLS/security, permission/module/feature/entitlement denials, migration validation, service-role leak scan, performance/index review, and final readiness status.
+Explicit Non-Goals: Do not build new product features, new business migrations, new UI surfaces, or Phase 17+ functionality. Fix only narrow defects discovered by regression if they are within Job Order hardening scope.
+Required Data Model / Schema Work: Review RLS, indexes, FK coverage, uniqueness constraints, and migration history for all job/shipment/detail tables. Do not create migrations unless required to fix a blocker; any migration must be narrow, validated, and documented.
+Required Runtime / Backend Work: Harden only existing Phase 16B/16D runtime paths where tests reveal defects in authorization, validation, audit, duplicate prevention, source conversion, or event append behavior.
+Required UI Work: Harden only existing Phase 16C UI where tests reveal defects in denied/loading/empty/error states, visibility, validation, or action wiring. Do not add unrelated UI.
+Required Integration Work: Validate end-to-end links across Phase 16A.1-16A.8 and 16B-16D, including RFQ/quotation/approved quote, customer/contact/address, shipment details/events, costs/charges, documents/POD, billing readiness, notifications, reporting/KPI, RBAC, entitlements, config, and audit timeline.
+Required Configuration / Supreme Admin Work: Verify required Job Order source, status, manual creation, required-field, visibility, transition, notification, billing readiness, and reporting/KPI behavior is controlled through Supreme Admin/config artifacts, not hardcoded tenant logic.
+Required Subscription / Package Entitlement Work: Verify and test module/feature/package entitlement denials for runtime, UI, and integration paths.
+Security / RLS / Permission Requirements: Perform RLS review for all job/shipment/detail tables, service-role leak scan, permission/module/feature/entitlement denial tests, tenant-isolation tests, and privileged-client/browser import scan.
+Audit / Event / History Requirements: Verify audit/event/history coverage for job create/update/status/cancel/hold/reopen, shipment creation/events, shipment details, costs/charges, documents/POD, source conversions, downstream links, denials, and config-driven actions.
+Required Tests: Test matrix across Phase 16A.1-16A.8 and Phase 16B-16D; RLS tests; service-role leak scan; permission/module/feature/entitlement denial tests; migration validation or explicit blocker; index/performance review for job/shipment/event/cost/charge queries; UI state tests; integration regression tests; and quality gate.
+Strong Not Complete If: Regression matrix is missing; RLS/security scans are missing; service-role leak scan is missing; entitlement denial tests are missing; migration validation/blocker is missing; index/performance review is missing; build log lacks risk register or readiness status; any required artifact is missing without explicit user-approved deferral.
+Definition of Done: Job Order has a documented test matrix, RLS/security review, leak scan, entitlement/permission denial coverage, migration validation status, performance/index review, risk register, final readiness status, updated context/build log, and passing quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation or explicit documented blocker.
+Completion Report: List files changed, regression matrix summary, RLS/security findings, service-role scan result, entitlement/permission test results, migration validation/blocker, performance/index review, risk register, readiness status, quality-gate results, clean-room confirmation, and updates to CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
 ```
 
-
-## 22. Ready-to-Copy Logistics Future Prompts
+## 23. Ready-to-Copy Logistics Future Prompts
 
 Phase 17 through Phase 39 are now ready-to-copy in this canonical prompt pack. Execute only one prompt at a time and do not execute these prompts during prompt-pack maintenance.
 
 ### Phase 17 — Numbering / Resi / Tracking Number Engine
 
 ```text
-Work on Phase 17 — Numbering / Resi / Tracking Number Engine. Do not execute Phase 18 or any later prompt.
-
+Phase Name: Phase 17 — Numbering / Resi / Tracking Number Engine.
 Phase Type: Migration + Runtime/Backend + Configuration.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build a configurable numbering engine for shipment numbers, job numbers, tracking numbers, resi numbers, invoice numbers, document numbers, warehouse references, and tenant-specific numbering sequences.
-Required Concrete Artifacts:
-- Supabase migration(s) for numbering templates, tenant overrides, sequence state/reservations, generated-number audit/history, and required RLS/indexes.
-- Server-only number generation/reservation/assignment runtime with collision tests and entitlement/configuration enforcement.
-- Tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-17-numbering-resi-tracking-engine.md.
-Required Capabilities:
-- Configurable prefix/suffix, date/branch/service/customer/module patterns, sequence reset rules, collision prevention, reserved numbers, tracking/resi assignment, Supreme Admin plan-level numbering templates, tenant overrides within package limits, and audit trail for generated numbers.
-Not Complete If:
-- Numbering is hardcoded, only constants/proposed formats are added, collision prevention is missing, or runtime generation does not exist.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 17 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 17 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 17. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 17; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse tenant, branch, customer, service, module catalog, shipment/job/invoice/document/warehouse references, Supreme Admin config, RBAC, entitlements, and audit logs.
+Scope: number templates, sequence state, reservations, generated-number history, assignment records, collision prevention, and custom tenant sequences for job number, shipment number, tracking number, resi number, invoice number, document number, warehouse reference, and tenant-defined sequences.
+Explicit Non-Goals: Do not hardcode tenant formats, do not create per-tenant code paths, and do not replace existing job/shipment/invoice/document tables.
+Required Data Model / Schema Work: Create/verify tenant-scoped tables for templates, pattern tokens, sequence state, reservations, generated history, assignment records, cancellation records, and audit/history, with RLS/indexes/FKs.
+Required Runtime / Backend Work: Implement server-only generation, reservation, assignment, cancellation, sequence reset, prefix/suffix/date/branch/service/customer/module token rendering, collision retry, and concurrency-safe sequence updates.
+Required UI Work: Not applicable for this phase because no UI is required unless a later admin UI phase is explicitly requested.
+Required Integration Work: Assign generated values to jobs, shipments, tracking/resi, invoices, documents, warehouse references, and custom sequences by reference without duplicating source records.
+Required Configuration / Supreme Admin Work: Supreme Admin controls templates, tokens, reset policies, tenant overrides, custom sequence permissions, and package limits.
+Required Subscription / Package Entitlement Work: Enforce package/feature entitlements for advanced/custom sequences, tracking/resi formats, and tenant overrides.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Concurrency/collision tests; generation; reservation; assignment; cancellation; reset policy; token rendering; tenant isolation; permission denial; module/feature/entitlement denial; audit history; no hardcoded tenant format.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 17 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-17-numbering-resi-tracking-engine.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 18 — Public Tracking
 
 ```text
-Work on Phase 18 — Public Tracking. Do not execute Phase 19 or any later prompt.
-
+Phase Name: Phase 18 — Public Tracking.
 Phase Type: Runtime/Backend + Public UI.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build safe public tracking based on shipment tracking number and shipment events.
-Required Concrete Artifacts:
-- Server-only/public-safe tracking lookup API or action, public UI page, visibility configuration, event projection, abuse guard placeholder, tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-18-public-tracking.md.
-Required Capabilities:
-- Public tracking lookup, public-safe event timeline, strict public/private data boundary, tenant data leakage prevention, configurable visibility rules, tracking token/hash support if needed, shipment event reuse, customer-friendly milestone labels, abuse/rate-limit guard placeholder, and public page UI.
-Not Complete If:
-- Public tracking uses private tenant data directly, no public/private data boundary exists, or only static mock UI is added.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 18 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 18 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 18. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 18; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse shipments, shipment_events, tracking/resi numbers, public-safe document/POD references, tenant public branding/config, event visibility config, and audit/rate-limit helpers where present.
+Scope: public-safe tracking projection layer, event visibility rules, tracking number/token lookup, invalid/not-found behavior, public route UI, and abuse/rate-limit placeholder with a clear implementation boundary.
+Explicit Non-Goals: Do not expose private shipment/customer/job/tenant data directly, do not require customer login, and do not build customer portal features.
+Required Data Model / Schema Work: Create migrations only if public-safe projection/config tables do not exist; any public projection must be tenant-scoped internally, RLS-safe, indexed, and limited to public fields.
+Required Runtime / Backend Work: Implement server/public-safe lookup by tracking number or token, projection shaping, event filtering, not-found responses, and an explicit abuse/rate-limit placeholder boundary.
+Required UI Work: Build public tracking route UI with valid, invalid, not-found, hidden-event, loading, and error states.
+Required Integration Work: Connect only to public-safe shipment/event/document/POD projections and configurable tenant branding; never query private job/customer records directly from public UI.
+Required Configuration / Supreme Admin Work: Supreme Admin controls public tracking enablement, event visibility, branding, POD/document visibility, token requirements, and abuse/rate-limit settings.
+Required Subscription / Package Entitlement Work: Enforce public tracking package/feature entitlement before returning projection data.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Valid tracking, invalid tracking, not found, hidden event, cross-tenant leakage prevention, public/private boundary, token lookup, disabled tracking, entitlement denial, and abuse/rate-limit placeholder behavior.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 18 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-18-public-tracking.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 19 — Customer Portal
 
 ```text
-Work on Phase 19 — Customer Portal. Do not execute Phase 20 or any later prompt.
-
+Phase Name: Phase 19 — Customer Portal.
 Phase Type: Runtime/Backend + UI + Access Control.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build the customer-facing portal foundation.
-Required Concrete Artifacts:
-- Access-control runtime, portal routes/UI, server-side customer data queries, entitlement/permission gates, denial-path tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-19-customer-portal.md.
-Required Capabilities:
-- Customer login/access model, customer profile visibility, RFQ/quotation/job/shipment visibility, shipment tracking view, document/POD access, billing/invoice visibility placeholders, role-based customer users, tenant/customer isolation, and portal feature entitlement.
-Not Complete If:
-- Customer portal is only AppShell preview, customer users can access other customer data, or no server-side access control exists.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 19 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 19 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 19. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 19; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse tenants, customer/accounts, contacts, portal users/profiles, RBAC/portal roles, RFQs, quotations, jobs, shipments, documents, invoices, public tracking projections, tenant config, entitlements, and audit logs.
+Scope: customer portal account mapping, portal roles, tenant/customer isolation, customer-visible RFQ/quotation/job/shipment/document/invoice views, and bounded self-service request placeholders.
+Explicit Non-Goals: Do not build public anonymous tracking, full billing/payment, support chat, or unrelated customer admin features.
+Required Data Model / Schema Work: Create/verify portal user-to-customer mapping, portal role, visibility policy, and request placeholder tables only if missing, with tenant_id/RLS/indexes/FKs.
+Required Runtime / Backend Work: Implement server-only portal access checks, customer identity resolution, visibility filtering, document access, self-service request placeholder creation with explicit boundaries, and denial paths.
+Required UI Work: Build customer portal routes for dashboard/list/detail views as scoped by tenant config, with loading/empty/error/denied states.
+Required Integration Work: Connect portal views to RFQ, quotation, job, shipment, document, invoice, and tracking records by customer identity and tenant config without copying data.
+Required Configuration / Supreme Admin Work: Supreme Admin controls portal enablement, visible modules, role capabilities, self-service request types, document visibility, invoice visibility, and labels.
+Required Subscription / Package Entitlement Work: Enforce customer portal module/feature/package entitlements and per-customer role permissions.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Customer A cannot see customer B; disabled portal; feature gating; portal role denial; document access; invoice visibility; server-side denial; tenant isolation; audit logging; self-service placeholder boundary.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 19 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-19-customer-portal.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 20 — Document Center & POD
 
 ```text
-Work on Phase 20 — Document Center & POD. Do not execute Phase 21 or any later prompt.
-
+Phase Name: Phase 20 — Document Center & POD.
 Phase Type: Migration + Runtime/Backend + UI.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build document management and POD evidence foundation.
-Required Concrete Artifacts:
-- Supabase migration(s), server-only document/POD runtime, UI surfaces, access-control tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-20-document-center-pod.md.
-Required Capabilities:
-- Document metadata, file reference storage abstraction, document type configuration, entity links to job/shipment/customer/vendor/invoice, POD upload and verification, document status/history, document access control, customer portal visibility rules, and audit trail.
-Not Complete If:
-- Only filenames are stored without metadata/access model, no entity link model exists, or no POD verification workflow exists.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 20 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 20 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 20. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 20; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse jobs, shipments, customers, vendors, invoices, issues, billing readiness, POD events, storage config, RBAC, tenant config, entitlements, and audit logs.
+Scope: document metadata, storage reference abstraction, document type config, entity links, status, bounded versioning placeholder, POD verification, visibility rules, access control, and audit trail.
+Explicit Non-Goals: Do not store raw file bytes in the database unless explicitly designed and justified; do not build full DMS OCR/e-signature/workflow beyond this phase.
+Required Data Model / Schema Work: Create/verify tenant-scoped tables for document metadata, storage references, document types, entity links, statuses, version placeholders, POD verification, visibility rules, and audit history.
+Required Runtime / Backend Work: Implement server-only metadata upload/create, storage-reference validation, entity linking, POD verification, visibility resolution, status changes, version placeholder handling, access checks, and audit writes.
+Required UI Work: Build document center/POD routes or components for list/detail/upload metadata/link/verify flows with loading/empty/error/denied states.
+Required Integration Work: Link documents to job, shipment, customer, vendor, invoice, issue, billing readiness, and POD where available by reference, not copied data.
+Required Configuration / Supreme Admin Work: Supreme Admin controls document types, required documents, POD rules, visibility, retention placeholder, status workflow, and storage provider references.
+Required Subscription / Package Entitlement Work: Enforce document center/POD feature and package entitlements, including customer-visible documents.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Upload metadata, storage reference validation, entity link, POD verification, customer visibility, permission denial, module/feature/entitlement denial, version placeholder, status transition, audit logs, and no raw DB bytes unless justified.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 20 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-20-document-center-pod.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 21 — TMS First/Middle/Last Mile
 
 ```text
-Work on Phase 21 — TMS First/Middle/Last Mile. Do not execute Phase 22 or any later prompt.
-
+Phase Name: Phase 21 — TMS First/Middle/Last Mile.
 Phase Type: Migration + Runtime/Backend + UI.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build transportation management for first-mile, middle-mile, and last-mile operations.
-Required Concrete Artifacts:
-- Supabase migration(s), server-only TMS runtime, UI surfaces, shipment/job linkage, task/trip tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-21-tms-first-middle-last-mile.md.
-Required Capabilities:
-- Trip planning, route planning, assignment to own fleet or vendor fleet, driver/vehicle assignment placeholders, pickup/delivery tasks, multi-drop execution, status events, route cost capture, SLA/milestone handling, and shipment/job integration.
-Not Complete If:
-- TMS duplicates shipment data instead of referencing Job Order/Shipment, no task/trip runtime exists, or only proposed tables are added.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 21 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 21 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 21. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 21; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse jobs, shipments, shipment stops/legs/events, addresses, drivers/users, vehicles/fleet placeholders, vendors, costs/charges, SLA config, RBAC, tenant config, entitlements, and audit logs.
+Scope: trip, route, stop/task, assignment, dispatch, driver/vehicle/vendor placeholders, own-fleet/vendor-fleet distinction, multi-drop execution, status events, route cost capture, SLA/milestone, and shipment/job links.
+Explicit Non-Goals: Do not duplicate shipment/job data, do not build WMS inventory, public tracking, accounting, or full fleet maintenance.
+Required Data Model / Schema Work: Create/verify tenant-scoped TMS tables for trips, routes, tasks/stops, assignments, dispatch status, fleet/vendor placeholders, route costs, SLA milestones, and event history with FKs/RLS/indexes.
+Required Runtime / Backend Work: Implement server-only trip creation, route planning, task assignment, dispatch, status transition, multi-drop sequence validation, own/vendor fleet assignment, route cost capture, SLA/milestone event append, and denials.
+Required UI Work: Build internal TMS routes for trip list/detail/dispatch/task status surfaces with loading/empty/error/denied states.
+Required Integration Work: Link trips/tasks to job/shipment/stops/legs/events/costs without duplicating source data.
+Required Configuration / Supreme Admin Work: Supreme Admin controls dispatch statuses, task types, SLA/milestones, fleet assignment rules, required fields, and cost capture rules.
+Required Subscription / Package Entitlement Work: Enforce TMS/dispatch/fleet/vendor feature and package entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Trip creation, task assignment, status transition, multi-drop sequence, vendor fleet assignment, own fleet assignment, cost capture, SLA milestone, tenant isolation, permission denial, module/feature/entitlement denial, audit events, and no duplicate job/shipment data.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 21 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-21-tms-first-middle-last-mile.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 22 — WMS Multi Warehouse/Racking/Labeling
 
 ```text
-Work on Phase 22 — WMS Multi Warehouse/Racking/Labeling. Do not execute Phase 23 or any later prompt.
-
+Phase Name: Phase 22 — WMS Multi Warehouse/Racking/Labeling.
 Phase Type: Migration + Runtime/Backend + UI.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build WMS foundation for multi-warehouse, zones, racks, bins, labels, and warehouse configuration.
-Required Concrete Artifacts:
-- Supabase migration(s), server-only WMS configuration/location runtime, UI surfaces, permission tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-22-wms-multi-warehouse-racking-labeling.md.
-Required Capabilities:
-- Warehouse zones, racks/bins/locations, storage type, label template config, LPN/license plate placeholder, SKU/item master linkage, warehouse user permissions, tenant/warehouse isolation, and inbound/outbound preparation.
-Not Complete If:
-- Warehouse layout is only documented, no location hierarchy exists, or no WMS access control exists.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 22 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 22 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 22. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 22; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse tenants, branches, warehouses if present, SKU/item master placeholders, documents/labels, RBAC, tenant config, entitlements, audit logs, and future inventory ledger links.
+Scope: warehouse zone/rack/bin/location hierarchy, location type/status/capacity placeholders, label template config, SKU/item linkage, warehouse roles/permissions, and tenant/warehouse isolation.
+Explicit Non-Goals: Do not build inbound/outbound execution or inventory ledger mutations; those belong to Phases 23 and 24.
+Required Data Model / Schema Work: Create/verify tenant-scoped warehouse, zone, rack, bin/location hierarchy, location type/status/capacity, label template, SKU/item linkage, and warehouse role tables with RLS/indexes/FKs.
+Required Runtime / Backend Work: Implement server-only hierarchy management, label template resolution, SKU/item linkage validation, warehouse role checks, and audit writes.
+Required UI Work: Build WMS setup routes for hierarchy browsing/editing and label template configuration with loading/empty/error/denied states.
+Required Integration Work: Link warehouse locations to SKU/item references, labels, future inventory ledger, and future inbound/outbound flows without duplicating SKU data.
+Required Configuration / Supreme Admin Work: Supreme Admin controls warehouse feature enablement, location types/statuses, capacity rules, label templates, and warehouse role defaults.
+Required Subscription / Package Entitlement Work: Enforce WMS, multi-warehouse, racking, labeling, and SKU linkage entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Location hierarchy, label config, SKU linkage, warehouse role permission denial, disabled module, feature/entitlement denial, tenant isolation, warehouse isolation, audit logs, and no inventory-ledger bypass.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 22 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-22-wms-multi-warehouse-racking-labeling.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 23 — Inventory Ledger
 
 ```text
-Work on Phase 23 — Inventory Ledger. Do not execute Phase 24 or any later prompt.
-
+Phase Name: Phase 23 — Inventory Ledger.
 Phase Type: Migration + Runtime/Backend.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build ledger-based inventory movement foundation.
-Required Concrete Artifacts:
-- Supabase migration(s), server-only ledger write/projection runtime, append-only protections, projection tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-23-inventory-ledger.md.
-Required Capabilities:
-- Append-only inventory ledger, stock balance projection, receiving/putaway/pick/pack/ship adjustment event types, lot/batch/serial placeholder, LPN linkage, job/order/shipment linkage, auditability, and no destructive stock overwrite.
-Not Complete If:
-- Inventory balance is mutable without ledger, no append-only movement model exists, or no stock projection tests exist.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 23 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 23 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 23. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 23; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse warehouses/locations from Phase 22, SKU/item references, jobs/orders/shipments, documents, WMS config, RBAC, tenant config, entitlements, and audit logs.
+Scope: append-only inventory movement ledger, projected stock balance query, movement types, lot/batch/serial/LPN placeholders, job/order/shipment/warehouse/location links, and no destructive balance overwrite.
+Explicit Non-Goals: Do not implement inbound/outbound workflows, accounting valuation, or mutable balance-only shortcuts.
+Required Data Model / Schema Work: Create/verify tenant-scoped append-only movement ledger, movement type config, projected balance view/query, lot/batch/serial/LPN placeholders, and source links with RLS/indexes/FKs.
+Required Runtime / Backend Work: Implement server-only ledger append, projection query, negative-stock rule enforcement when configured, source-link validation, correction/adjustment events, and audit writes.
+Required UI Work: Not applicable for this phase because Phase 23 is ledger/runtime; add UI only in a later WMS execution phase unless explicitly requested.
+Required Integration Work: Link movements to job/order/shipment/warehouse/location/document references and future inbound/outbound flows without duplicating source records.
+Required Configuration / Supreme Admin Work: Supreme Admin controls movement types, negative stock policy, lot/serial/LPN requirements, adjustment reasons, and projection settings.
+Required Subscription / Package Entitlement Work: Enforce inventory ledger, warehouse, lot/serial/LPN, adjustment, and transfer entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Ledger append, projection, negative stock rule if configured, receive/putaway/pick/pack/ship/adjustment/transfer movement types, tenant isolation, permission denial, audit logs, no mutable balance-only shortcut, and no destructive overwrite.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 23 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-23-inventory-ledger.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
 ### Phase 24 — WMS Inbound/Outbound
 
 ```text
-Work on Phase 24 — WMS Inbound/Outbound. Do not execute Phase 25 or any later prompt.
-
+Phase Name: Phase 24 — WMS Inbound/Outbound.
 Phase Type: Runtime/Backend + UI + Integration.
-Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
-Files to Read First:
-- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
-- docs/roadmap/canonical-phase-map.md
-- docs/roadmap/recovery-execution-queue.md
-- CARGOGRID_CONTEXT.md
-Scope:
-- Build WMS inbound and outbound flows on top of Phase 22 and Phase 23.
-Required Concrete Artifacts:
-- Server-only WMS flow runtime, UI task surfaces, inventory ledger integrations, shipment/job/document/POD links, integration tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-24-wms-inbound-outbound.md.
-Required Capabilities:
-- ASN/inbound receiving, putaway, picking, packing, staging, dispatch, outbound confirmation, inventory ledger writes, document/POD linkage, and shipment/job linkage.
-Not Complete If:
-- Inbound/outbound only changes status without ledger movement, no warehouse task flow exists, or no integration with shipment/job exists.
-- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
-Definition of Done:
-- Phase 24 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
-Quality Gate:
-- npm ci
-- npm run lint
-- npm run typecheck
-- npm test
-- npm run build
-- git diff --check
-- Applicable migration validation/checks when migrations are created or modified.
-Completion Report:
-- List files changed.
-- Confirm Phase 24 concrete artifacts and required capabilities.
-- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
-- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+Execution Boundary: Execute only Phase 24. Do not execute any later phase prompt. Follow the canonical phase map and do not build unrelated modules.
+Completion Mode: Implement concrete CargoGrid artifacts for Phase 24; do not complete as documentation-only, contract-only, TODO-only, or preview-only work. Do not mark complete if any required artifact is missing without explicit user-approved deferral.
+Files to Read First: docs/prompts/cargogrid_canonical_phase_prompt_pack.md; docs/roadmap/canonical-phase-map.md; CARGOGRID_CONTEXT.md; relevant prior phase build logs and migrations named by this prompt.
+Existing Artifacts to Reuse: Reuse warehouse/location hierarchy from Phase 22, inventory ledger from Phase 23, SKU/item references, jobs/shipments, documents/POD, TMS dispatch hooks, RBAC, tenant config, entitlements, and audit logs.
+Scope: ASN/inbound order, receiving, QC placeholder, putaway, pick wave placeholder, pick task, pack, staging, dispatch, outbound confirmation, inventory ledger writes, and shipment/job/document/POD links.
+Explicit Non-Goals: Do not duplicate inventory balances, bypass ledger writes, build accounting, or replace TMS shipment/job records.
+Required Data Model / Schema Work: Create migrations only for narrow inbound/outbound entities missing from prior phases, with tenant_id/RLS/indexes/FKs/audit; otherwise reuse existing WMS/ledger schema.
+Required Runtime / Backend Work: Implement server-only receiving, QC placeholder, putaway, pick wave placeholder, pick task, pack, staging, dispatch, outbound confirmation, ledger write orchestration, denial paths, and audit writes.
+Required UI Work: Build WMS inbound/outbound routes for ASN/inbound receipt, putaway, picking, packing, staging, dispatch, and confirmation with loading/empty/error/denied states.
+Required Integration Work: Connect inbound/outbound to inventory ledger, job/shipment, documents/POD, warehouse locations, and TMS dispatch hooks without duplicate entry.
+Required Configuration / Supreme Admin Work: Supreme Admin controls receiving rules, QC requirement placeholder, putaway strategy, pick wave config, pack rules, dispatch confirmation rules, and required documents.
+Required Subscription / Package Entitlement Work: Enforce WMS inbound, outbound, QC, wave picking, dispatch, and ledger entitlements.
+Security / RLS / Permission Requirements: Tenant isolation, RLS for tenant-scoped tables, server-only sensitive mutations, permission denial, module disabled denial, feature disabled denial, entitlement denial, and no service-role/client leaks are mandatory.
+Audit / Event / History Requirements: Audit all sensitive mutations and configuration changes; append event/history rows for operational, status, generated/reserved, ledger, or workflow events where history matters.
+Required Tests: Inbound receiving to ledger, putaway, picking, packing, staging, dispatch, outbound confirmation, permission denial, module/feature/entitlement denial, tenant/warehouse isolation, audit logs, document/POD link, shipment/job link, and no ledger bypass.
+Strong Not Complete If: Work is vague, docs-only, contract-only, preview-only, TODO-only, missing required schema/runtime/UI/integration/tests/security/audit/build-log/context updates, uses hardcoded tenant behavior, duplicates upstream data instead of referencing it, or lacks explicit user-approved deferral for a required artifact.
+Definition of Done: Phase 24 has concrete artifacts matching its phase type, reuses existing sources of truth, enforces tenant/security/permission/entitlement/config/audit requirements, includes exact tests, updates CARGOGRID_CONTEXT.md and docs/build-log/phase-24-wms-inbound-outbound.md, and passes the quality gate.
+Quality Gate: Run package-lock JSON parse, npm ci, npm run lint, npm run typecheck, npm test, npm run build, git diff --check, plus migration validation when migrations are changed.
+Completion Report: List files changed, artifacts created, existing artifacts reused, non-goals respected, tests added, migration validation if applicable, quality-gate results, clean-room confirmation, and confirmation that no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
-
 
 ### Phase 25 — Billing Readiness
 
@@ -1426,7 +1120,7 @@ Completion Report:
 ```
 
 
-## 23. Ready-to-Copy Hardening and Release Prompts
+## 24. Ready-to-Copy Hardening and Release Prompts
 
 Use one hardening/release prompt at a time. Do not execute the prompt text while maintaining this prompt pack.
 
@@ -1637,7 +1331,7 @@ Completion Report:
 - Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
-## 24. Ready-to-Copy HRIS Future Prompts
+## 25. Ready-to-Copy HRIS Future Prompts
 
 HRIS Phases 40 through 45 remain after Phase 39 and must not interrupt the logistics ERP core path unless the user explicitly prioritizes HRIS later. Use one prompt at a time; do not execute later HRIS prompts from an earlier phase.
 
