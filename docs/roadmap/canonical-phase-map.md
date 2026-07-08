@@ -47,7 +47,9 @@ This document is the authoritative CargoGrid phase sequence and status map after
 | Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | recovery queue | Must convert historical Phase 15 contract preview into canonical migration/runtime alignment or be explicitly deferred. |
 | Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | recovery queue | Must convert historical Phase 16 contract preview into canonical migration/runtime alignment or be explicitly deferred. |
 | Phase 16A.6 | Contract Recovery Regression and Documentation Lock | recovery queue | Must lock regression/documentation after recovery phases or be explicitly deferred. |
-| Phase 16B | Job Order Server Actions and Repository Runtime | not started | Must wait until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user. |
+| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | recovery queue | Must reserve shipment detail schema/configuration expansion for multidrop, multi-service, multi-currency, multi-koli, multi-SKU, configurable fleet requirements, Supreme Admin configuration, and subscription/package entitlement gates before Phase 16B starts, or be explicitly deferred. |
+| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | recovery queue | Must reserve shipment detail runtime and validation alignment before Phase 16B starts, or be explicitly deferred. |
+| Phase 16B | Job Order Server Actions and Repository Runtime | not started | Must wait until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user. |
 | Phase 16C | Job Order Internal UI | not started | Depends on Phase 16B sequencing. |
 | Phase 16D | Job Order Workflow Integration | not started | Depends on Phase 16B/16C sequencing. |
 | Phase 16E | Job Order Regression and Hardening | not started | Depends on Phase 16B/16C/16D sequencing. |
@@ -74,10 +76,17 @@ This document is the authoritative CargoGrid phase sequence and status map after
 | Phase 37 | Deployment | not started | Future canonical phase. |
 | Phase 38 | Smoke Test | not started | Future canonical phase. |
 | Phase 39 | Release Candidate | not started | Future canonical phase. |
+| Phase 40 | HRIS Core Master Data and Organization Structure | not started | Future HRIS phase after the logistics ERP core path. |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | not started | Future HRIS phase after Phase 40. |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | not started | Future HRIS phase after Phase 41. |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | not started | Future HRIS phase after Phase 42. |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | not started | Future HRIS phase after Phase 43. |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | not started | Future HRIS phase after Phase 44. |
 
 ## Gates
 
 - Do not jump backward to historical Phase 12, 13, 14, 15, or 16 labels.
-- Execute recovery only through Phase 16A.1 through Phase 16A.6, unless the user explicitly defers one or more recovery steps.
-- Do not start Phase 16B until every Phase 16A.1 through Phase 16A.6 recovery item is complete or explicitly deferred by the user.
+- Execute recovery only through Phase 16A.1 through Phase 16A.8, unless the user explicitly defers one or more recovery steps.
+- Do not start Phase 16B until every Phase 16A.1 through Phase 16A.8 recovery/shipment-detail item is complete or explicitly deferred by the user.
+- HRIS Phases 40 through 45 remain after Phase 39 and must not interrupt the logistics ERP core path unless explicitly prioritized later.
 - Do not create product features or business migrations during roadmap recovery/documentation-only tasks.

@@ -88,6 +88,8 @@ The prompt library requires every future BCP-parity feature to enforce clean-roo
 - Phase 14 — Attendance / Workforce / Location Rebuild
 - Phase 15 — Issue Report / Internal Ticket Rebuild
 - Phase 16 — Job Order Core
+- Phase 16A.7 — Shipment Detail Expansion Schema and Configuration
+- Phase 16A.8 — Shipment Detail Runtime and Validation Alignment
 - Phase 17 — Numbering / Resi / Tracking Number Engine
 - Phase 18 — Public Tracking
 - Phase 19 — Customer Portal
@@ -111,6 +113,12 @@ The prompt library requires every future BCP-parity feature to enforce clean-roo
 - Phase 37 — Deployment
 - Phase 38 — Smoke Test
 - Phase 39 — Release Candidate
+- Phase 40 — HRIS Core Master Data and Organization Structure
+- Phase 41 — Recruitment, Applicant Tracking, and Public Job Portal
+- Phase 42 — Employee Lifecycle, Documents, Leave, Claims, and HR Operations
+- Phase 43 — Payroll, Benefits, Compensation, Tax, and Statutory Configuration
+- Phase 44 — HRIS Performance, KPI, Disciplinary, Training, and HR Analytics
+- Phase 45 — HRIS Portal, Self-Service, Approval Workflow, and Final Hardening
 
 
 ## Phase 03.10 Full Prompt Pack Reconciliation Status
@@ -169,6 +177,12 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 09: Pricing / Rate Management Rebuild added CargoGrid-native rate lane, selling rate, customer contract rate, domestic/EXIM/import DTD/LTL rule, surcharge, minimum charge, rate version, competitiveness snapshot, rate proposal approval schema, server-only repository helpers, RLS policies, audit triggers, and tests while reusing vendor buying rates from procurement.
 - Phase 10: Quotation Rebuild added CargoGrid-native quotation generation, versions, line items, multi-shipment quotation details, cost contributions, margin floor checks, approvals, expiry events, document/public verification records, quote-to-job conversion placeholders, server-only repository helpers, RLS policies, audit triggers, and tests while preserving RFQ → Quotation → Approved Quote → Customer/Account → Job Order without duplicate customer/contact/address/service/cargo/rate input.
 - Phase 11: Target, KPI & Sales Performance Rebuild added CargoGrid-native target periods, sales targets, user/team targets, target achievement events, commercial KPI snapshots, win-rate snapshots, revenue/margin snapshots, dashboard snapshots, performance audit events, server-only repository helpers, RLS policies, audit triggers, and tests while consuming lead/RFQ/quotation/deal/revenue facts instead of duplicating commercial records.
+
+## Roadmap Slot Update: Shipment Detail and HRIS
+
+A documentation-only roadmap update added Phase 16A.7 — Shipment Detail Expansion Schema and Configuration and Phase 16A.8 — Shipment Detail Runtime and Validation Alignment after Phase 16A.6 and before Phase 16B. Phase 16B must not start until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred in the canonical recovery queue. The shipment detail slots exist so Job Order runtime is not built on an under-detailed shipment model and can later support multidrop, multi-service, multi-currency, multi-koli, multi-SKU, configurable fleet requirements, Supreme Admin configuration, and subscription/package entitlement gates.
+
+The canonical roadmap also added HRIS Phase 40 through Phase 45 after Phase 39: HRIS Core Master Data and Organization Structure; Recruitment, Applicant Tracking, and Public Job Portal; Employee Lifecycle, Documents, Leave, Claims, and HR Operations; Payroll, Benefits, Compensation, Tax, and Statutory Configuration; HRIS Performance, KPI, Disciplinary, Training, and HR Analytics; and HRIS Portal, Self-Service, Approval Workflow, and Final Hardening. HRIS must remain after the logistics ERP core path through Phase 39 unless explicitly prioritized later. No future prompt was executed, no product feature was built, no application logic was modified, and no business migration was created for this roadmap-slot update.
 
 ## Script Status
 
@@ -250,6 +264,8 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 14 — Attendance / Workforce / Location Rebuild
 - Phase 15 — Issue Report / Internal Ticket Rebuild
 - Phase 16 — Job Order Core
+- Phase 16A.7 — Shipment Detail Expansion Schema and Configuration
+- Phase 16A.8 — Shipment Detail Runtime and Validation Alignment
 - Phase 17 — Numbering / Resi / Tracking Number Engine
 - Phase 18 — Public Tracking
 - Phase 19 — Customer Portal
@@ -273,6 +289,12 @@ Phase 00 — Project Governance and Persistent Build Memory.
 - Phase 37 — Deployment
 - Phase 38 — Smoke Test
 - Phase 39 — Release Candidate
+- Phase 40 — HRIS Core Master Data and Organization Structure
+- Phase 41 — Recruitment, Applicant Tracking, and Public Job Portal
+- Phase 42 — Employee Lifecycle, Documents, Leave, Claims, and HR Operations
+- Phase 43 — Payroll, Benefits, Compensation, Tax, and Statutory Configuration
+- Phase 44 — HRIS Performance, KPI, Disciplinary, Training, and HR Analytics
+- Phase 45 — HRIS Portal, Self-Service, Approval Workflow, and Final Hardening
 
 ## Next Recommended Phase
 

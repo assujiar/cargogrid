@@ -35,9 +35,9 @@ Instead, all recovery work is performed under Phase 16A.x:
 
 ## Phase 16B Gate
 
-Phase 16B — Job Order Server Actions and Repository Runtime must wait until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Phase 16B — Job Order Server Actions and Repository Runtime must wait until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
-This gate is mandatory because Phase 16B would create runtime behavior that could otherwise hardcode assumptions about incomplete contract-preview modules. Waiting for recovery or explicit deferral ensures the Job Order runtime is built against the intended canonical architecture, avoids duplicate user input, preserves shared source-of-truth flows, and keeps downstream integrations aligned before product feature work resumes.
+This gate is mandatory because Phase 16B would create runtime behavior that could otherwise hardcode assumptions about incomplete contract-preview modules. Waiting for recovery or explicit deferral ensures the Job Order runtime is built against the intended canonical architecture, avoids duplicate user input, preserves shared source-of-truth flows, and keeps downstream integrations aligned before product feature work resumes. Shipment detail expansion must also be reserved before Phase 16B so Job Order runtime is not built on an under-detailed shipment model and can support multidrop, multi-service, multi-currency, multi-koli, multi-SKU, configurable fleet requirements, Supreme Admin configuration, and subscription/package entitlement gates.
 
 ## Execution Order
 
@@ -47,7 +47,13 @@ This gate is mandatory because Phase 16B would create runtime behavior that coul
 4. Phase 16A.4 — Recover Issue Report / Internal Ticket / Exception migration and runtime alignment, or explicitly defer.
 5. Phase 16A.5 — Recover Menu / Module / UI Configuration migration and runtime alignment, or explicitly defer.
 6. Phase 16A.6 — Run recovery regression and documentation lock, or explicitly defer.
-7. Only after all six recovery items are complete or explicitly deferred may Phase 16B begin.
+7. Phase 16A.7 — Reserve Shipment Detail Expansion Schema and Configuration, or explicitly defer.
+8. Phase 16A.8 — Reserve Shipment Detail Runtime and Validation Alignment, or explicitly defer.
+9. Only after all eight recovery/shipment-detail items are complete or explicitly deferred may Phase 16B begin.
+
+## Future HRIS Placement
+
+HRIS is a large horizontal module and must not interrupt the logistics ERP core path before Phase 39 unless explicitly prioritized later. HRIS is queued after Release Candidate as Phase 40 through Phase 45: HRIS Core Master Data and Organization Structure; Recruitment, Applicant Tracking, and Public Job Portal; Employee Lifecycle, Documents, Leave, Claims, and HR Operations; Payroll, Benefits, Compensation, Tax, and Statutory Configuration; HRIS Performance, KPI, Disciplinary, Training, and HR Analytics; and HRIS Portal, Self-Service, Approval Workflow, and Final Hardening.
 
 ## Current State
 
@@ -56,3 +62,5 @@ This gate is mandatory because Phase 16B would create runtime behavior that coul
 - Product features: not built in this recovery task.
 - Business migrations: not created in this recovery task.
 - Phase 16B: not started.
+- Phase 16A.7 and Phase 16A.8: queued before Phase 16B for shipment detail expansion and validation alignment.
+- HRIS Phase 40 through Phase 45: queued after Phase 39, not before the logistics ERP release-candidate path.
