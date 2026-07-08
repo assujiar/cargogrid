@@ -53,8 +53,7 @@ This context file records the current implementation memory only. It must not du
 - Phase 16A: Job Order Core Schema, reclassified from historical Phase 24.
 - Phase 16A.1 through Phase 16A.8: queued before Phase 16B.
 - Phase 16B onward: not started.
-- Phase 17 through Phase 33: ready-to-copy prompts are now available in the canonical prompt pack, but these phases have not been executed.
-- Phase 34 through Phase 39: future logistics hardening/release phases remain not ready-to-copy until Prompt 9C or equivalent.
+- Phase 17 through Phase 39: ready-to-copy prompts are now available in the canonical prompt pack, but these phases have not been executed.
 - Phase 40 through Phase 45 HRIS: future after Phase 39 unless explicitly prioritized.
 
 ## Current Next Action
@@ -75,7 +74,7 @@ Phase 16B must not start until Phase 16A.1 through Phase 16A.8 are complete or e
 
 ## Prompt Authority
 
-Future executable prompts must come only from `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`. Phase 17 through Phase 33 are ready-to-copy there; Phase 34 through Phase 39 remain pending/not ready-to-copy until Prompt 9C or equivalent.
+Future executable prompts must come only from `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`. Phase 17 through Phase 39 are ready-to-copy there, but they have not been executed.
 
 Old prompt files are historical/redirect-only and must not be used as active executable prompt sources:
 
@@ -87,7 +86,7 @@ The No Contract-Only Completion Rule applies to all implementation phases.
 ## Test Status
 
 - Node tests validate governance documentation, repository contracts, migration catalogs, and phase-specific rules that have been implemented so far.
-- Full quality-gate results for the latest cleanup are recorded in `docs/build-log/final-recovery-gaps-before-16a1.md`. Prompt-pack maintenance for ready prompts 17-24 is recorded in `docs/build-log/ready-prompts-17-24.md`; ready prompts 25-33 are recorded in `docs/build-log/ready-prompts-25-33.md`.
+- Full quality-gate results for the latest cleanup are recorded in `docs/build-log/final-recovery-gaps-before-16a1.md`. Prompt-pack maintenance for ready prompts 17-24 is recorded in `docs/build-log/ready-prompts-17-24.md`; ready prompts 25-33 are recorded in `docs/build-log/ready-prompts-25-33.md`; ready prompts 34-39 are recorded in `docs/build-log/ready-prompts-34-39.md`.
 
 ## Clean-Room Confirmation
 
