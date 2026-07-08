@@ -1,30 +1,31 @@
 # Deprecated Historical Prompt Index — BCP-Parity Feature Build Prompts
 
-## Deprecated for Future Phase Execution
+## Status
 
-This file is deprecated for all future CargoGrid phase execution. It is preserved for historical reference only.
+This file is deprecated for future phase execution and is preserved for historical reference only.
 
-Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` instead for all future executable phase prompts.
+Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` instead for every future executable CargoGrid phase prompt.
 
-Do not copy future phase prompts from this file. Do not execute prompts from this file. Do not use this file as an active implementation source.
+## Historical Purpose
 
-## Clean-Room Boundary Reminder
+This file previously recorded BCP-parity planning prompts as a clean-room business-capability reference. Its executable future prompts have been removed during roadmap recovery so CargoGrid has a single active prompt authority.
 
-BCP may only be used as human business-process reference for logistics process understanding, pain points, module requirements, and operating lessons. No BCP code, schema, migration, component, utility, asset, branding, tenant-specific behavior, environment value, or implementation artifact may be copied, ported, adapted, imported, mechanically translated, or reused in CargoGrid.
+## Required Operator Guidance
 
-## Historical Status
+- Do not copy future phase prompts from this file.
+- Do not execute future phase work from this file.
+- Do not treat this file as an active roadmap authority.
+- Do not recreate duplicate executable Phase 16B instructions here.
+- Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` for current prompt rules, gates, and future executable prompts.
 
-- Original role: historical BCP-parity prompt planning checklist.
-- Current role: historical index/redirect only.
-- Active prompt authority: `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`.
-- Recovery authority: `docs/roadmap/recovery-reconciliation-spec.md`, `docs/roadmap/canonical-phase-map.md`, and `docs/roadmap/recovery-execution-queue.md`.
+## Canonical References
 
-## Removed Executable Future Prompts
+- `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`
+- `docs/roadmap/recovery-reconciliation-spec.md`
+- `docs/roadmap/canonical-phase-map.md`
+- `docs/roadmap/recovery-execution-queue.md`
+- `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md`
 
-The full executable future prompts previously stored in this file have been removed to prevent duplicate or conflicting phase execution instructions.
+## Clean-Room Reminder
 
-This file intentionally does not contain an executable Phase 16B prompt or any other future executable phase prompt. All future prompt execution must be sourced from `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` only.
-
-## Historical Reading Guidance
-
-If this file is referenced by old documentation, interpret the reference as a historical clean-room capability checklist pointer only. Operators must open the canonical prompt pack before executing any future phase work.
+BCP feature parity means rebuilding comparable capabilities from scratch inside CargoGrid, not copying implementation. BCP remains requirements/business-process reference only. No BCP source code, schema, migration, component, utility, asset, tenant-specific logic, environment/configuration, or branding may be copied, ported, adapted, imported, or mechanically translated into CargoGrid.
