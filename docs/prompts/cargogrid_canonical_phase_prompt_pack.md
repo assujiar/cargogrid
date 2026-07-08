@@ -179,7 +179,16 @@ This file contains ready-to-copy future prompts only where a phase is explicitly
 | Phase 22 | WMS Multi Warehouse/Racking/Labeling | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
 | Phase 23 | Inventory Ledger | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 22 |
 | Phase 24 | WMS Inbound/Outbound | Runtime/Backend + UI + Integration | Ready-to-copy prompt added | See Section 22 |
-| Phase 25-39 | Future logistics canonical phases | TBD per phase | Not ready-to-copy; see Section 22 policy | Reference canonical phase map |
+| Phase 25 | Billing Readiness | Migration + Runtime/Backend + Integration | Ready-to-copy prompt added | See Section 22 |
+| Phase 26 | Invoicing & AR | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 27 | Vendor Payable / AP | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 28 | Accounting / GL | Migration + Runtime/Backend + Posting Engine | Ready-to-copy prompt added | See Section 22 |
+| Phase 29 | Financial Reports | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 30 | Loyalty | Migration + Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 31 | Integration Hub/API/Webhook | Migration + Runtime/Backend + API | Ready-to-copy prompt added | See Section 22 |
+| Phase 32 | Import/Export | Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 33 | Reporting/KPI | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 22 |
+| Phase 34-39 | Future logistics canonical hardening/release phases | TBD per phase | Not ready-to-copy; pending Prompt 9C or equivalent | Reference canonical phase map |
 | Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 23 |
 | Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 23 |
 | Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 23 |
@@ -758,9 +767,9 @@ Completion Report:
 ```
 
 
-## 22. Ready-to-Copy Logistics Future Prompts and Phase 25-39 Policy
+## 22. Ready-to-Copy Logistics Future Prompts and Phase 34-39 Policy
 
-Phase 17 through Phase 24 are ready-to-copy below. Execute only one prompt at a time and do not execute these prompts during prompt-pack maintenance. Phase 25 through Phase 39 remain not ready-to-copy until a later prompt-pack expansion PR (Prompt 9B/9C or equivalent) adds compact executable prompts. Operators must use `docs/roadmap/canonical-phase-map.md` only for Phase 25 through Phase 39 placement, not as executable prompt text.
+Phase 17 through Phase 33 are ready-to-copy below. Execute only one prompt at a time and do not execute these prompts during prompt-pack maintenance. Phase 34 through Phase 39 remain not ready-to-copy until a later prompt-pack expansion PR (Prompt 9C or equivalent) adds compact executable prompts. Operators must use `docs/roadmap/canonical-phase-map.md` only for Phase 34 through Phase 39 placement, not as executable prompt text.
 
 ### Phase 17 — Numbering / Resi / Tracking Number Engine
 
@@ -1064,6 +1073,349 @@ Quality Gate:
 Completion Report:
 - List files changed.
 - Confirm Phase 24 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+
+### Phase 25 — Billing Readiness
+
+```text
+Work on Phase 25 — Billing Readiness. Do not execute Phase 26 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + Integration.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build billing readiness engine from operational evidence.
+Required Concrete Artifacts:
+- Supabase migration(s) or verified schema additions, server-only readiness engine, evidence/blocker checks, approval/hold lifecycle runtime, aggregation tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-25-billing-readiness.md.
+Required Capabilities:
+- Billing readiness records; job/shipment/POD/cost/charge evidence checks; missing-document blockers; approval workflow placeholder; billing hold/release; billable charge aggregation; customer billing profile reuse; and audit trail.
+Not Complete If:
+- Billing readiness is only a status field, POD/document/evidence checks are missing, or no job/shipment linkage exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 25 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 25 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 26 — Invoicing & AR
+
+```text
+Work on Phase 26 — Invoicing & AR. Do not execute Phase 27 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build invoicing and AR implementation using Billing Readiness and Finance Lite recovery.
+Required Concrete Artifacts:
+- Supabase migration(s) or schema alignment, server-side invoice lifecycle, invoice UI, AR linkage runtime, portal-safe visibility, tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-26-invoicing-ar.md.
+Required Capabilities:
+- Invoice draft; invoice line items; tax placeholder/config; invoice approval; invoice issuance; invoice evidence links; payment allocation placeholder; AR status update; multi-currency invoice support if enabled; and customer portal visibility.
+Not Complete If:
+- Invoices are disconnected from billing readiness, AR is duplicated instead of linked, or no server-side invoice lifecycle exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 26 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 26 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 27 — Vendor Payable / AP
+
+```text
+Work on Phase 27 — Vendor Payable / AP. Do not execute Phase 28 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build AP and vendor payable foundation.
+Required Concrete Artifacts:
+- Supabase migration(s), server-only payable lifecycle, vendor payable UI, cost/vendor/job/shipment matching runtime, tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-27-vendor-payable-ap.md.
+Required Capabilities:
+- Vendor bill; payable line items; cost matching to shipment/job/vendor; payable approval; payable hold/release; payment status; vendor document evidence; AP aging placeholder; and audit trail.
+Not Complete If:
+- Vendor payable duplicates shipment costs instead of linking, no approval/status lifecycle exists, or no tenant/vendor isolation exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 27 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 27 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 28 — Accounting / GL
+
+```text
+Work on Phase 28 — Accounting / GL. Do not execute Phase 29 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + Posting Engine.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build double-entry accounting foundation.
+Required Concrete Artifacts:
+- Supabase migration(s), server-only posting engine, posting validation, period lock runtime, AR/AP posting placeholders, tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-28-accounting-gl.md.
+Required Capabilities:
+- Chart of accounts; journal entries; journal lines; posting rules; AR/AP posting placeholders; revenue/cost accrual placeholders; currency handling; period lock; audit trail; and posting validation.
+Not Complete If:
+- Accounting is single-entry, journal lines do not balance, or no posting validation exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 28 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 28 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 29 — Financial Reports
+
+```text
+Work on Phase 29 — Financial Reports. Do not execute Phase 30 or any later prompt.
+
+Phase Type: Runtime/Backend + Reporting UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build financial reporting layer from accounting, AR, AP, revenue, cost, and profitability sources.
+Required Concrete Artifacts:
+- Server-side reporting queries/projections, reporting UI, export placeholder, permission-filter tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-29-financial-reports.md.
+Required Capabilities:
+- P&L placeholder/report; balance sheet placeholder/report; AR/AP aging; job profitability; revenue/cost/margin reporting; currency filter; tenant/branch/customer filters; export placeholder; and role-based visibility.
+Not Complete If:
+- Reports are static mocks, reports duplicate accounting data, or no permission filters exist.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 29 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 29 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 30 — Loyalty
+
+```text
+Work on Phase 30 — Loyalty. Do not execute Phase 31 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build customer loyalty engine.
+Required Concrete Artifacts:
+- Supabase migration(s), server-only loyalty ledger/rules runtime, portal/internal UI, fraud/adjustment audit tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-30-loyalty.md.
+Required Capabilities:
+- Loyalty program config; tier rules; point earning; point redemption; cashback/discount placeholder; transaction ledger; customer portal visibility; expiry rules; and fraud/adjustment audit.
+Not Complete If:
+- Points are mutable balances without ledger, no earning/redemption rules exist, or no customer linkage exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 30 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 30 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 31 — Integration Hub / API / Webhook
+
+```text
+Work on Phase 31 — Integration Hub / API / Webhook. Do not execute Phase 32 or any later prompt.
+
+Phase Type: Migration + Runtime/Backend + API.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build integration hub for external systems.
+Required Concrete Artifacts:
+- Supabase migration(s), API key management runtime, webhook subscription/event queue APIs, inbound endpoint pattern, audit tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-31-integration-hub-api-webhook.md.
+Required Capabilities:
+- API key management; webhook subscriptions; webhook event queue; retry/dead-letter placeholder; inbound API endpoint pattern; outbound event signing placeholder; integration audit logs; and module/feature entitlement gates.
+Not Complete If:
+- Integrations are only documented, API secrets are exposed to client, or no webhook event log exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 31 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 31 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 32 — Import / Export
+
+```text
+Work on Phase 32 — Import / Export. Do not execute Phase 33 or any later prompt.
+
+Phase Type: Runtime/Backend + UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build data import/export framework.
+Required Concrete Artifacts:
+- Server-side import/export framework, batch/result persistence or verified schema, upload/parser placeholder, mapping UI, validation tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-32-import-export.md.
+Required Capabilities:
+- Import templates; CSV/XLSX upload placeholder or parser; validation errors; import batch records; row-level results; export jobs; permission checks; audit trail; and module-specific import mapping.
+Not Complete If:
+- Import/export is only a button, no validation/result tracking exists, or no audit trail exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 32 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 32 concrete artifacts and required capabilities.
+- Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
+- Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 33 — Reporting / KPI
+
+```text
+Work on Phase 33 — Reporting / KPI. Do not execute Phase 34 or any later prompt.
+
+Phase Type: Runtime/Backend + Reporting UI.
+Completion Mode: Implement concrete CargoGrid artifacts for this phase. Follow the global rules in this prompt pack, including clean-room greenfield work, no BCP code/schema/assets/data/config reuse, No Contract-Only Completion, tenant_id and RLS for tenant-scoped tables, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks where applicable, server-only mutations, audit logging, no duplicate user input, connected-module architecture, tests, docs/build-log update, and CARGOGRID_CONTEXT.md update.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build cross-module reporting and KPI layer.
+Required Concrete Artifacts:
+- Server-side KPI source queries/snapshots, dashboard/reporting UI, filter/export placeholders, access-control tests, updated CARGOGRID_CONTEXT.md, and docs/build-log/phase-33-reporting-kpi.md.
+Required Capabilities:
+- Operational KPI; sales KPI; shipment KPI; warehouse KPI placeholder; finance KPI; HRIS KPI placeholder after Phase 40+; dashboard snapshots; filters by tenant/branch/user/customer/service/date; export placeholder; and role-based visibility.
+Not Complete If:
+- Dashboards are static cards, no real source data/snapshots exist, or no access control exists.
+- Work is documentation-only, contract-only, TODO-only, preview-only, or disconnected from the canonical data flow.
+Definition of Done:
+- Phase 33 has concrete runtime/schema/UI/integration artifacts matching its Phase Type, is tenant-isolated and audited where applicable, is configurable through Supreme Admin/package gates, avoids duplicate input, and connects to upstream/downstream CargoGrid modules through shared identifiers, events, ledgers, or public-safe projections.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks when migrations are created or modified.
+Completion Report:
+- List files changed.
+- Confirm Phase 33 concrete artifacts and required capabilities.
 - Confirm tenant_id/RLS, gates/entitlements, Supreme Admin configurability, server-only mutations, audit logging, tests, build log, and CARGOGRID_CONTEXT.md updates where applicable.
 - Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
