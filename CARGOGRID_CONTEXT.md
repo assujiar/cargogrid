@@ -529,3 +529,7 @@ Historical build logs have been reclassified at the top of each affected file:
 - Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A; canonical Phase 24 is WMS Inbound/Outbound.
 
 This recovery documentation update did not build product features, did not create business migrations, and did not execute Phase 16B.
+
+## Shipment Detail Future Prompts Status
+
+A documentation-only prompt-pack update added compact ready-to-copy future prompts for Phase 16A.7 — Shipment Detail Expansion Schema and Configuration and Phase 16A.8 — Shipment Detail Runtime and Validation Alignment in `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`. The prompts were not executed, no product feature was built, no business migration was created, and Phase 16B was not continued. The prompts require concrete artifacts, enforce the No Contract-Only Completion Rule, preserve tenant isolation/RLS/audit/module-feature-permission gates/Supreme Admin configurability/subscription-package entitlements, and prohibit duplicate `logistics_jobs` or `shipments` tables.
