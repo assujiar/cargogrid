@@ -60,8 +60,6 @@ This context file records the current implementation memory only. It must not du
 
 The next executable prompt is Phase 16A.1 from `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`.
 
-Phase 16A.1 must not be started until the final recovery cleanup in `docs/build-log/final-recovery-gaps-before-16a1.md` is merged.
-
 Phase 16B must not start until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
 ## Migration Status
@@ -86,8 +84,8 @@ The No Contract-Only Completion Rule applies to all implementation phases.
 ## Test Status
 
 - Node tests validate governance documentation, repository contracts, migration catalogs, and phase-specific rules that have been implemented so far.
-- Full quality-gate results for the latest cleanup are recorded in `docs/build-log/final-recovery-gaps-before-16a1.md`. Prompt-pack maintenance for ready prompts 17-24 is recorded in `docs/build-log/ready-prompts-17-24.md`; ready prompts 25-33 are recorded in `docs/build-log/ready-prompts-25-33.md`; ready prompts 34-39 are recorded in `docs/build-log/ready-prompts-34-39.md`.
+- Full quality-gate results for the latest cleanup are recorded in `docs/build-log/final-recovery-gaps-before-16a1.md`. Prompt-pack maintenance for ready prompts 17-24 is recorded in `docs/build-log/ready-prompts-17-24.md`; ready prompts 25-33 are recorded in `docs/build-log/ready-prompts-25-33.md`; ready prompts 34-39 are recorded in `docs/build-log/ready-prompts-34-39.md`. Final verification for ready-to-copy prompts from Phase 16A.1 through Phase 45, including prompt-specific anti-contract-only checks, is recorded in `docs/build-log/future-prompt-pack-16a1-to-45-verification.md`.
 
 ## Clean-Room Confirmation
 
-No BCP source code, database schema, migrations, seed data, RLS policies, SQL functions, stored procedures, components, utilities, hooks, API handlers, background jobs, scripts, test fixtures, assets, logos, icons, images, themes, brand tokens, copywriting, tenant-specific logic, environment values, or configuration were copied, imported, ported, adapted, mechanically translated, or reused for the final recovery cleanup.
+No BCP source code, database schema, migrations, seed data, RLS policies, SQL functions, stored procedures, components, utilities, hooks, API handlers, background jobs, scripts, test fixtures, assets, logos, icons, images, themes, brand tokens, copywriting, tenant-specific logic, environment values, or configuration were copied, imported, ported, adapted, mechanically translated, or reused for the final prompt-pack verification.

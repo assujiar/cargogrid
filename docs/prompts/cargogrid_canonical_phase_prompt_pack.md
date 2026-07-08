@@ -601,7 +601,7 @@ Completion Report:
 Work on Phase 16B — Job Order Server Actions and Repository Runtime. Do not execute Phase 16C, 16D, or 16E.
 
 Phase Type: Runtime/Backend Implementation.
-Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not run until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
+Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not complete as contract-only, docs-only, interface-only, or TODO-only work. Do not run until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/canonical-phase-map.md
@@ -690,7 +690,7 @@ Completion Report:
 Work on Phase 16D — Job Order Workflow Integration. Do not execute Phase 16E.
 
 Phase Type: Integration Implementation.
-Completion Mode: Connect Job Order to approved upstream and downstream workflows through real identifiers, events, links, and tests. Documentation alone is not sufficient.
+Completion Mode: Connect Job Order to approved upstream and downstream workflows through real identifiers, events, links, and tests. Do not complete as contract-only, docs-only, mocked-only, or TODO-only work. Documentation alone is not sufficient.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/canonical-phase-map.md
@@ -1471,7 +1471,7 @@ Completion Report:
 Work on Phase 35 — Security Hardening. Do not execute Phase 36 or later.
 
 Phase Type: Security Hardening.
-Completion Mode: Encode, run, and apply security hardening for existing CargoGrid surfaces. This hardening phase must not be checklist-only.
+Completion Mode: Encode, run, and apply security hardening for existing CargoGrid surfaces. Do not complete as contract-only, docs-only, checklist-only, or TODO-only work. This hardening phase must not be checklist-only.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/recovery-reconciliation-spec.md
@@ -1505,7 +1505,7 @@ Completion Report:
 Work on Phase 36 — Performance. Do not execute Phase 37 or later.
 
 Phase Type: Performance Hardening.
-Completion Mode: Improve or measurably verify performance for existing implemented modules; not notes-only.
+Completion Mode: Improve or measurably verify performance for existing implemented modules. Do not complete as contract-only, docs-only, notes-only, or TODO-only work.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/recovery-reconciliation-spec.md
@@ -1539,7 +1539,7 @@ Completion Report:
 Work on Phase 37 — Deployment. Do not execute Phase 38 or later.
 
 Phase Type: Deployment Readiness.
-Completion Mode: Prepare and verify the production deployment path; documentation must include runnable checks.
+Completion Mode: Prepare and verify the production deployment path; documentation must include runnable checks. Do not complete as contract-only, docs-only, checklist-only, or TODO-only work.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/recovery-reconciliation-spec.md
@@ -1572,7 +1572,7 @@ Completion Report:
 Work on Phase 38 — Smoke Test. Do not execute Phase 39 or later.
 
 Phase Type: Validation + Smoke Test.
-Completion Mode: Execute and document smoke validation for release-candidate readiness; validation/audit phase may be documentation-centered but must include executed or explicitly blocked checks.
+Completion Mode: Execute and document smoke validation for release-candidate readiness; validation/audit phase may be documentation-centered but must include executed or explicitly blocked checks. Do not complete as contract-only, docs-only, checklist-only, or TODO-only work.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/recovery-reconciliation-spec.md
@@ -1605,7 +1605,7 @@ Completion Report:
 Work on Phase 39 — Release Candidate.
 
 Phase Type: Release Candidate Lock.
-Completion Mode: Prepare the release-candidate status package. This validation/release phase may report status, but must not hide unresolved blockers.
+Completion Mode: Prepare the release-candidate status package. This validation/release phase may report status, but must not hide unresolved blockers. Do not complete as contract-only, docs-only, checklist-only, or TODO-only work.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/recovery-reconciliation-spec.md
