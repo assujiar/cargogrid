@@ -89,3 +89,27 @@ The No Contract-Only Completion Rule applies to all implementation phases.
 ## Clean-Room Confirmation
 
 No BCP source code, database schema, migrations, seed data, RLS policies, SQL functions, stored procedures, components, utilities, hooks, API handlers, background jobs, scripts, test fixtures, assets, logos, icons, images, themes, brand tokens, copywriting, tenant-specific logic, environment values, or configuration were copied, imported, ported, adapted, mechanically translated, or reused for the final prompt-pack verification.
+
+## Prompt Quality Rubric Update
+
+The canonical prompt pack now includes a strict Prompt Quality Rubric for future executable implementation prompts. Future prompts must clearly identify phase name/type, execution boundary, completion mode, files to read first, artifacts to reuse, scope, explicit non-goals, data model work, runtime/backend work, UI work when applicable, integration work, Supreme Admin configuration work, subscription/package entitlement work, security/RLS/permission requirements, audit/event/history requirements, required tests, incomplete-work criteria, definition of done, quality gate, and completion report. If a section is not applicable, future prompts must explicitly state `Not applicable for this phase because...` rather than omit the section.
+
+The rubric adds vague-wording and context-safety rules so future prompts cannot rely on unexplained phrases such as `where applicable`, `placeholder`, `foundation`, `support`, `integration`, `configuration`, `audit`, or `equivalent`. Prompts that fail the rubric must be hardened before execution. This update was documentation-only; no future phase prompt was executed, no product feature was built, no business migration was created, and no BCP implementation artifact was copied or reused.
+
+## Phase 16A.1-16A.8 Prompt Hardening Update
+
+The ready-to-copy recovery prompts for Phase 16A.1 through Phase 16A.8 have been hardened to follow the Prompt Quality Rubric. Each prompt now explicitly states its execution boundary, artifacts to reuse, non-goals, data model/schema work, runtime/backend work, UI applicability, integration work, Supreme Admin configuration expectations, subscription/package entitlement expectations, security/RLS/permission requirements, audit/event/history requirements, required tests, stronger incomplete-work criteria, definition of done, quality gate, and concrete completion report.
+
+This update was prompt-pack/documentation hardening only. Phase 16A.1 and later future prompts were not executed, no product feature was built, no business migration was created, and no BCP implementation artifact was copied or reused.
+
+## Phase 16B-16E Prompt Hardening Update
+
+The ready-to-copy Job Order prompts for Phase 16B through Phase 16E have been hardened to follow the Prompt Quality Rubric. Phase 16B now requires prerequisite gate verification, reuse of the existing Job Order and shipment detail schema, server-only runtime actions, controlled source validation, no duplicate Job Order/shipment/detail tables, entitlement/config/security/audit checks, and concrete runtime tests. Phase 16C now requires real routed internal UI rather than AppShell cards, complete list/detail/create/edit behavior, state handling, role/module/feature visibility, no duplicate upstream input, and UI tests. Phase 16D now requires explicit RFQ/quotation/approved quote/manual source to Job Order workflow links and downstream shipment event, cost/charge, document/POD, billing readiness, notification, reporting/KPI, event/history/audit tests. Phase 16E now requires a regression matrix across Phase 16A.1 through Phase 16A.8 and 16B through 16D, RLS review, service-role leak scan, denial tests, migration validation or blocker, index/performance review, risk register, and final readiness status.
+
+This update was prompt-pack/documentation hardening only. Phase 16B and later future prompts were not executed, no product feature was built, no business migration was created, and no BCP implementation artifact was copied or reused. The Phase 16B through Phase 16E prompts use explicit Strong Not Complete If criteria so partial runtime, UI, integration, or hardening work cannot be accepted silently.
+
+## Phase 17-24 Prompt Hardening Update
+
+The ready-to-copy logistics prompts for Phase 17 through Phase 24 have been hardened to follow the Prompt Quality Rubric. The prompts now explicitly define execution boundaries, artifacts to reuse, non-goals, required data model/schema work, runtime/backend work, UI applicability, integration work, Supreme Admin configuration, subscription/package entitlements, security/RLS/permission requirements, audit/event/history requirements, exact tests, Strong Not Complete If criteria, definitions of done, quality gates, and phase-specific build-log filenames.
+
+This update was prompt-pack/documentation hardening only. No future phase prompt was executed, no product feature was built, no business migration was created, and no BCP implementation artifact was copied or reused.
