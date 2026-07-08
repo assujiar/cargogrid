@@ -172,12 +172,12 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 | Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
 | Phase 16E | Job Order Regression and Hardening | Hardening | Ready-to-copy prompt added; depends on Phase 16B/16C/16D | See Section 21 |
 | Phase 17-39 | Future logistics canonical phases | TBD per phase | Placeholder only | Reference canonical phase map |
-| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend | Prompt slot only; after Phase 39 | TBD |
-| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime/Backend + UI | Prompt slot only; after Phase 40 | TBD |
-| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime/Backend + UI | Prompt slot only; after Phase 41 | TBD |
-| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime/Backend | Prompt slot only; after Phase 42 | TBD |
-| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Runtime/Backend + UI | Prompt slot only; after Phase 43 | TBD |
-| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Runtime/Backend + UI + Hardening | Prompt slot only; after Phase 44 | TBD |
+| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 22 |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 22 |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 22 |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 22 |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 22 |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 22 |
 
 ## 20. Ready-to-Copy Recovery Prompts
 
@@ -750,4 +750,212 @@ Completion Report:
 - Confirm regression tests, security checks, RLS review, no service-role leak checks, migration validation/blocker documentation, performance/index review, and docs/build-log/context lock.
 - Confirm no later prompt was executed and no unrelated features or migrations were created.
 - Confirm no BCP implementation artifact was copied or reused.
+```
+
+
+## 22. Ready-to-Copy HRIS Future Prompts
+
+HRIS Phases 40 through 45 remain after Phase 39 and must not interrupt the logistics ERP core path unless the user explicitly prioritizes HRIS later. Use one prompt at a time; do not execute later HRIS prompts from an earlier phase.
+
+### Phase 40 — HRIS Core Master Data and Organization Structure
+
+```text
+Work on Phase 40 — HRIS Core Master Data and Organization Structure. Do not execute Phase 41 or later. HRIS is after Phase 39 and must not interrupt the logistics ERP core path unless explicitly prioritized by the user.
+
+Phase Type: Migration + Runtime/Backend Foundation.
+Completion Mode: Implement concrete HRIS foundation; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Add tenant-scoped HRIS core foundation: company HR profile, organization structure, departments, divisions, positions, job levels, employment types, work locations, employee master data, identity/profile, contacts, emergency contacts, documents, reporting lines, supervisor mapping, employment status lifecycle, HR permissions, HR module/feature gates, HR audit logs, HR tenant configuration, and package entitlement checks.
+- Enforce tenant_id, RLS, indexes, constraints, audit triggers/events, Supreme Admin configurability, subscription/package entitlement checks, module/feature/permission gates, and server-only mutations.
+Required Concrete Artifacts:
+- Real migration(s), server-only runtime helpers/actions/repositories, RLS policies, tests, updated docs/build-log/phase-40-hris-core-master-data.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Only proposed HRIS tables are listed, no migration exists, no RLS exists, no runtime helper exists, no tests exist, or artifacts are docs/contract-only.
+Definition of Done:
+- HRIS core master data exists as concrete schema and runtime foundation; HRIS is gated by plan/module/feature entitlement; employee data is tenant-isolated and audited.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks.
+Completion Report:
+- List files changed; confirm concrete migration/runtime/tests; confirm tenant_id, RLS, gates, audit logs, Supreme Admin configurability, entitlement checks, and server-only mutations; confirm Phase 41+ not executed; confirm no BCP artifact copied.
+```
+
+### Phase 41 — Recruitment, Applicant Tracking, and Public Job Portal
+
+```text
+Work on Phase 41 — Recruitment, Applicant Tracking, and Public Job Portal. Do not execute Phase 42 or later.
+
+Phase Type: Migration + Runtime + Public UI Foundation.
+Completion Mode: Implement concrete recruitment and public portal capability; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-40-hris-core-master-data.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build job requisitions, job postings, public job portal, application form, candidate profile, applicant tracking pipeline, interview schedule, interviewer assignment, assessment notes, offer process, hiring approval, candidate documents, referral source, recruitment analytics, public/private posting controls, and package entitlement checks for job portal and applicant volume.
+- Enforce tenant_id, RLS, public read policy only for published job postings, tenant/private data separation, module/feature/permission gates, audit logs, Supreme Admin configurability, entitlement checks, and server-only mutations.
+Required Concrete Artifacts:
+- Schema/migration, server-only runtime, public safe job portal route, admin recruitment route, RLS/public policies, audit logs, tests, docs/build-log/phase-41-recruitment-job-portal.md, and context update.
+Not Complete If:
+- Only private admin tables are listed, no public job portal route exists, no applicant flow exists, no RLS separation exists, or work is docs/contract-only.
+Definition of Done:
+- Published jobs are safely public, applicant flow works, tenant recruitment data stays private, and recruitment actions are gated/audited.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks.
+Completion Report:
+- List files changed; confirm public portal/admin route/applicant flow/RLS separation/tests; confirm Phase 42+ not executed; confirm no BCP artifact copied.
+```
+
+### Phase 42 — Employee Lifecycle, Documents, Leave, Claims, and HR Operations
+
+```text
+Work on Phase 42 — Employee Lifecycle, Documents, Leave, Claims, and HR Operations. Do not execute Phase 43 or later.
+
+Phase Type: Migration + Runtime + UI.
+Completion Mode: Implement concrete HR operations; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-40-hris-core-master-data.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build onboarding, probation, contract renewal, mutation/transfer, promotion/demotion, resignation/termination, employee document management, leave policy/balance/request, claim/reimbursement policy/request, approval workflow, HR case management, employee self-service, manager approval, and HR audit trail.
+- Enforce tenant_id, RLS, module/feature/permission gates, audit logs, Supreme Admin configurability, subscription/package entitlement checks, document access controls, approval controls, and server-only mutations.
+Required Concrete Artifacts:
+- Schema/migration, runtime actions, internal UI, employee self-service UI, approval workflow, tests, docs/build-log/phase-42-hr-operations.md, and context update.
+Not Complete If:
+- Lifecycle/leave/claim flows are only tables, static UI, TODOs, or docs; no approvals/runtime/tests exist; tenant/RLS/gates/audit are missing.
+Definition of Done:
+- Employees, managers, and HR can perform lifecycle, document, leave, claim, and case operations through real gated/audited runtime and UI.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks.
+Completion Report:
+- List files changed; confirm schema/runtime/UI/approval/tests and tenant/RLS/gates/audit/entitlements/server-only mutations; confirm Phase 43+ not executed; confirm no BCP artifact copied.
+```
+
+### Phase 43 — Payroll, Benefits, Compensation, Tax, and Statutory Configuration
+
+```text
+Work on Phase 43 — Payroll, Benefits, Compensation, Tax, and Statutory Configuration. Do not execute Phase 44 or later.
+
+Phase Type: Migration + Runtime + Calculation Engine.
+Completion Mode: Implement concrete payroll foundation and calculations; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-40-hris-core-master-data.md
+- docs/build-log/phase-42-hr-operations.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build salary components, compensation package, payroll period/run, payslip, allowance, deduction, overtime, benefit plan, employee benefit enrollment, tax configuration, statutory contribution placeholders, payroll approval, payroll lock, payroll audit, multi-currency payroll if package-enabled, payroll export, and accounting integration placeholder.
+- Enforce strict permission gates, tenant_id, RLS, audit logs, Supreme Admin configurability, subscription/package entitlement checks, and server-only payroll mutations/calculations.
+Required Concrete Artifacts:
+- Schema/migration, payroll calculation service, server-only payroll actions, audit logs, tests for calculation/lock/approval/tenant isolation/permission denial, docs/build-log/phase-43-payroll-benefits-compensation.md, and context update.
+Not Complete If:
+- Only payroll tables are added without calculation/runtime logic, payroll lock/approval/audit/tests are missing, or work is docs/contract-only.
+Definition of Done:
+- Payroll foundation calculates, approves, locks, audits, exports, and gates payroll data with tenant isolation and package-aware behavior.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks.
+Completion Report:
+- List files changed; confirm calculation service/actions/tests/lock/approval/audit/tenant isolation/permission denial; confirm Phase 44+ not executed; confirm no BCP artifact copied.
+```
+
+### Phase 44 — HRIS Performance, KPI, Disciplinary, Training, and HR Analytics
+
+```text
+Work on Phase 44 — HRIS Performance, KPI, Disciplinary, Training, and HR Analytics. Do not execute Phase 45.
+
+Phase Type: Migration + Runtime + Reporting.
+Completion Mode: Implement concrete HR performance/development/reporting; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-40-hris-core-master-data.md
+- docs/build-log/phase-41-recruitment-job-portal.md
+- docs/build-log/phase-43-payroll-benefits-compensation.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build employee KPI, performance review cycle, goals, appraisal forms, manager review, peer/self review placeholder, disciplinary records, warning letters, training catalog, training assignment, certification, HR dashboard, attrition analytics, recruitment funnel analytics, payroll summary analytics, and attendance/leave analytics integration.
+- Enforce tenant_id, RLS, module/feature/permission gates, audit logs, Supreme Admin configurability, subscription/package entitlement checks, reporting access controls, and server-only mutations.
+Required Concrete Artifacts:
+- Schema/migration, runtime, reporting snapshots, internal UI/reporting, tests, docs/build-log/phase-44-hris-performance-analytics.md, and context update.
+Not Complete If:
+- Only KPI/reporting table lists, static dashboards, TODOs, or docs are added without runtime/reporting/tests and gates.
+Definition of Done:
+- HR performance, disciplinary, training, and analytics surfaces use real tenant-isolated audited data and gated reporting snapshots.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks.
+Completion Report:
+- List files changed; confirm schema/runtime/reporting snapshots/UI/tests and tenant/RLS/gates/audit/entitlements/server-only mutations; confirm Phase 45 not executed; confirm no BCP artifact copied.
+```
+
+### Phase 45 — HRIS Portal, Self-Service, Approval Workflow, and Final Hardening
+
+```text
+Work on Phase 45 — HRIS Portal, Self-Service, Approval Workflow, and Final Hardening.
+
+Phase Type: Integration + UI + Hardening.
+Completion Mode: Finalize concrete HRIS portal and cross-module integration; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-40-hris-core-master-data.md
+- docs/build-log/phase-41-recruitment-job-portal.md
+- docs/build-log/phase-42-hr-operations.md
+- docs/build-log/phase-43-payroll-benefits-compensation.md
+- docs/build-log/phase-44-hris-performance-analytics.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Finalize employee self-service portal, manager portal, HR admin portal, approval inbox, leave/claim/payroll/recruitment approval integration, notification integration, document access control, role-based menu visibility, package entitlement enforcement, regression suite, security hardening, audit review, performance review, and final HRIS documentation.
+- Enforce tenant_id, RLS, module/feature/permission gates, audit logs, Supreme Admin configurability, subscription/package entitlement checks, server-only mutations, and document/privacy controls.
+Required Concrete Artifacts:
+- Real routes/UI, server actions, integration tests, security tests, final docs/build-log/phase-45-hris-portal-final-hardening.md, and context lock.
+Not Complete If:
+- Portal/approval integration is only documented, mocked, static, or TODO-only; security/regression tests are missing; tenant/RLS/gates/audit/entitlements are incomplete.
+Definition of Done:
+- HRIS has integrated employee/manager/admin portals, approval inbox, notifications/documents/menu visibility, regression/security coverage, audit/performance review, and final documentation.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed; confirm routes/UI/server actions/integration tests/security tests/final docs/context lock; confirm no later prompt was executed; confirm no BCP artifact copied.
 ```
