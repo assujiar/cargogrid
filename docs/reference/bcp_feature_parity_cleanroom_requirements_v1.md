@@ -224,7 +224,7 @@ CargoGrid must also build modules that go beyond comparable BCP business capabil
 - Supreme Admin configuration UI.
 - Regression, security, performance, deployment, and release readiness.
 
-## Correct Phase Sequence After Phase 03.10
+## Historical Phase Sequence Note After Phase 03.10 (Not Authoritative)
 
 Pre-03.10 foundation phases remain Phase 00 through Phase 03.10. Future execution phases must use this sequence:
 
@@ -902,7 +902,7 @@ CargoGrid must also include modules beyond BCP:
 
 ## 5. Updated build sequence with BCP feature parity included
 
-## Correct Phase Sequence After Phase 03.10
+## Historical Phase Sequence Note After Phase 03.10 (Not Authoritative)
 
 - Phase 04 — Supreme Admin Configuration Studio
 - Phase 05 — Core Master Data
