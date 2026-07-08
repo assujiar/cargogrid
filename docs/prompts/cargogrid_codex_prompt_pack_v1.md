@@ -1,26 +1,30 @@
 # Deprecated Historical Prompt Index — CargoGrid Codex Prompt Pack v1
 
-## Deprecated for Future Phase Execution
+## Status
 
-This file is deprecated for all future CargoGrid phase execution. It is preserved for historical reference only.
+This file is deprecated for future phase execution and is preserved for historical reference only.
 
-Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` instead for all future executable phase prompts.
+Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` instead for every future executable CargoGrid phase prompt.
 
-Do not copy future phase prompts from this file. Do not execute prompts from this file. Do not treat any historical phase text that previously lived here as authoritative.
+## Historical Purpose
 
-## Historical Status
+This file previously served as an early CargoGrid prompt-pack index. Its executable future prompts have been removed during roadmap recovery so there is only one authoritative active prompt source.
 
-- Original role: early CargoGrid prompt pack and build guidance.
-- Current role: historical index/redirect only.
-- Active prompt authority: `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`.
-- Recovery authority: `docs/roadmap/recovery-reconciliation-spec.md`, `docs/roadmap/canonical-phase-map.md`, and `docs/roadmap/recovery-execution-queue.md`.
+## Required Operator Guidance
 
-## Removed Executable Future Prompts
+- Do not copy future phase prompts from this file.
+- Do not execute future phase work from this file.
+- Do not treat this file as an active roadmap authority.
+- Do not recreate duplicate executable Phase 16B instructions here.
+- Use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` for current prompt rules, gates, and future executable prompts.
 
-The full executable future prompts previously stored in this file have been removed to prevent duplicate or conflicting phase execution instructions.
+## Canonical References
 
-In particular, this file intentionally does not contain an executable Phase 16B prompt. Executable Phase 16B guidance must exist only in `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`, and Phase 16B must not start until the recovery gates in the canonical roadmap are satisfied or explicitly deferred by the user.
+- `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`
+- `docs/roadmap/recovery-reconciliation-spec.md`
+- `docs/roadmap/canonical-phase-map.md`
+- `docs/roadmap/recovery-execution-queue.md`
 
-## Historical Reading Guidance
+## Clean-Room Reminder
 
-If this file is referenced by old documentation, interpret the reference as a pointer to historical planning context only. Operators must open the canonical prompt pack before executing any future phase work.
+CargoGrid remains a clean-room, greenfield public SaaS product. BCP may be used only as human business-process reference, not as implementation source. No BCP source code, schema, migration, component, utility, asset, tenant-specific logic, environment/configuration, or branding may be copied, ported, adapted, imported, or mechanically translated into CargoGrid.
