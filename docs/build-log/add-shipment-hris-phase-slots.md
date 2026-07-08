@@ -39,3 +39,7 @@ Documentation-only roadmap, recovery queue, context, and prompt-index update. Ad
 
 - Ready-to-copy prompt bodies for Phase 16A.7, Phase 16A.8, and Phase 40 through Phase 45 are intentionally not added in this task; each should be added by a future PR-sized prompt-pack update when requested.
 - Future implementation of Phase 16A.7/16A.8 must preserve tenant isolation, RLS, Supreme Admin configurability, subscription/package entitlement gates, audit logging, server-only mutations, and no duplicate shipment input.
+
+## Follow-Up Consistency Note
+
+Updated stale context references so all current roadmap/context guidance now gates Phase 16B on Phase 16A.1 through Phase 16A.8, including the shipment detail expansion slots. This remains documentation-only and does not execute any prompt, build product features, create migrations, or modify application logic.

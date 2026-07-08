@@ -495,7 +495,7 @@ Feature development is paused until roadmap, phase, prompt, and tooling recovery
 
 The recovery spec confirms CargoGrid remains clean-room greenfield, BCP is business reference only, and no BCP code, schema, migration, component, asset, data, configuration, UGC-specific logic, or tenant-specific logic may be copied or reused. Future executable prompts must live only in `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`; `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md` are historical/redirect-only.
 
-Historical Phases 12 through 16 are contract-preview only as documented in the recovery spec. Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A — Job Order Core Schema, with `supabase/migrations/20260707240000_job_order_core.sql` retained as the historical migration filename. Canonical Phase 24 is WMS Inbound/Outbound. Phase 16B must not start until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Historical Phases 12 through 16 are contract-preview only as documented in the recovery spec. Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A — Job Order Core Schema, with `supabase/migrations/20260707240000_job_order_core.sql` retained as the historical migration filename. Canonical Phase 24 is WMS Inbound/Outbound. Phase 16B must not start until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
 ## Canonical Phase Map and Recovery Queue Status
 
@@ -505,9 +505,9 @@ Historical Phase 12 through Historical Phase 16 are reclassified as contract/pre
 
 Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A — Job Order Core Schema. The historical migration filename `supabase/migrations/20260707240000_job_order_core.sql` must remain traceable and must not be renamed without explicit approval and proven safety for every target environment.
 
-The recovery execution queue is documented in `docs/roadmap/recovery-execution-queue.md`. Recovery must proceed through Phase 16A.1 through Phase 16A.6, or those items must be explicitly deferred by the user. Operators must not jump backward to active Phase 12/13/14/15/16 labels.
+The recovery execution queue is documented in `docs/roadmap/recovery-execution-queue.md`. Recovery must proceed through Phase 16A.1 through Phase 16A.8, including the shipment detail expansion slots, or those items must be explicitly deferred by the user. Operators must not jump backward to active Phase 12/13/14/15/16 labels.
 
-Phase 16B — Job Order Server Actions and Repository Runtime remains not started. Phase 16B must not begin until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Phase 16B — Job Order Server Actions and Repository Runtime remains not started. Phase 16B must not begin until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 
 ## Canonical Prompt Pack Shell Status
 
