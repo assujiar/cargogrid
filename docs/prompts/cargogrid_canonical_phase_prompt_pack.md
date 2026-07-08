@@ -188,13 +188,18 @@ This file contains ready-to-copy future prompts only where a phase is explicitly
 | Phase 31 | Integration Hub/API/Webhook | Migration + Runtime/Backend + API | Ready-to-copy prompt added | See Section 22 |
 | Phase 32 | Import/Export | Runtime/Backend + UI | Ready-to-copy prompt added | See Section 22 |
 | Phase 33 | Reporting/KPI | Runtime/Backend + Reporting UI | Ready-to-copy prompt added | See Section 22 |
-| Phase 34-39 | Future logistics canonical hardening/release phases | TBD per phase | Not ready-to-copy; pending Prompt 9C or equivalent | Reference canonical phase map |
-| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 23 |
-| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 23 |
-| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 23 |
-| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 23 |
-| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 23 |
-| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 23 |
+| Phase 34 | Regression Suite | Hardening + Test Expansion | Ready-to-copy prompt added | See Section 23 |
+| Phase 35 | Security Hardening | Security Hardening | Ready-to-copy prompt added | See Section 23 |
+| Phase 36 | Performance | Performance Hardening | Ready-to-copy prompt added | See Section 23 |
+| Phase 37 | Deployment | Deployment Readiness | Ready-to-copy prompt added | See Section 23 |
+| Phase 38 | Smoke Test | Validation + Smoke Test | Ready-to-copy prompt added | See Section 23 |
+| Phase 39 | Release Candidate | Release Candidate Lock | Ready-to-copy prompt added | See Section 23 |
+| Phase 40 | HRIS Core Master Data and Organization Structure | Migration + Runtime/Backend Foundation | Ready-to-copy prompt added; after Phase 39 | See Section 24 |
+| Phase 41 | Recruitment, Applicant Tracking, and Public Job Portal | Migration + Runtime + Public UI Foundation | Ready-to-copy prompt added; after Phase 40 | See Section 24 |
+| Phase 42 | Employee Lifecycle, Documents, Leave, Claims, and HR Operations | Migration + Runtime + UI | Ready-to-copy prompt added; after Phase 41 | See Section 24 |
+| Phase 43 | Payroll, Benefits, Compensation, Tax, and Statutory Configuration | Migration + Runtime + Calculation Engine | Ready-to-copy prompt added; after Phase 42 | See Section 24 |
+| Phase 44 | HRIS Performance, KPI, Disciplinary, Training, and HR Analytics | Migration + Runtime + Reporting | Ready-to-copy prompt added; after Phase 43 | See Section 24 |
+| Phase 45 | HRIS Portal, Self-Service, Approval Workflow, and Final Hardening | Integration + UI + Hardening | Ready-to-copy prompt added; after Phase 44 | See Section 24 |
 
 ## 20. Ready-to-Copy Recovery Prompts
 
@@ -767,9 +772,9 @@ Completion Report:
 ```
 
 
-## 22. Ready-to-Copy Logistics Future Prompts and Phase 34-39 Policy
+## 22. Ready-to-Copy Logistics Future Prompts
 
-Phase 17 through Phase 33 are ready-to-copy below. Execute only one prompt at a time and do not execute these prompts during prompt-pack maintenance. Phase 34 through Phase 39 remain not ready-to-copy until a later prompt-pack expansion PR (Prompt 9C or equivalent) adds compact executable prompts. Operators must use `docs/roadmap/canonical-phase-map.md` only for Phase 34 through Phase 39 placement, not as executable prompt text.
+Phase 17 through Phase 39 are now ready-to-copy in this canonical prompt pack. Execute only one prompt at a time and do not execute these prompts during prompt-pack maintenance.
 
 ### Phase 17 — Numbering / Resi / Tracking Number Engine
 
@@ -1420,7 +1425,219 @@ Completion Report:
 - Confirm no future prompt was executed, no unrelated feature or business migration was created, and no BCP implementation artifact was copied or reused.
 ```
 
-## 23. Ready-to-Copy HRIS Future Prompts
+
+## 23. Ready-to-Copy Hardening and Release Prompts
+
+Use one hardening/release prompt at a time. Do not execute the prompt text while maintaining this prompt pack.
+
+### Phase 34 — Regression Suite
+
+```text
+Work on Phase 34 — Regression Suite. Do not execute Phase 35 or later.
+
+Phase Type: Hardening + Test Expansion.
+Completion Mode: Add or improve executable regression coverage for completed CargoGrid modules. This hardening phase must not be contract-only or documentation-only.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Build a broad regression suite across completed modules only; do not create new product features or business migrations.
+- Cover commercial-to-job flow, shipment/job behavior, finance/billing if implemented, TMS/WMS if implemented, permission denial, tenant isolation, service-role leak checks, and migration catalog checks.
+Required Concrete Artifacts:
+- Module regression matrix encoded in tests/docs, new or improved regression tests, leak/migration checks, updated docs/build-log/phase-34-regression-suite.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Regression is only documented, no tests are added or improved, or critical flows are neither covered nor explicitly deferred with reason.
+Definition of Done:
+- Existing completed modules have meaningful regression coverage and documented gaps; tests enforce clean-room greenfield boundaries, no BCP implementation reuse, tenant isolation, module/feature/permission gates, audit expectations, and service-role safety where applicable.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm regression matrix and tests/checks added or improved.
+- Confirm critical covered/deferred flows, build-log and context updates.
+- Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 35 — Security Hardening
+
+```text
+Work on Phase 35 — Security Hardening. Do not execute Phase 36 or later.
+
+Phase Type: Security Hardening.
+Completion Mode: Encode, run, and apply security hardening for existing CargoGrid surfaces. This hardening phase must not be checklist-only.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Review and harden app, Supabase, RLS, server/client boundaries, permissions, audit logs, public routes, customer portal/public tracking if implemented, and API/webhook security if implemented.
+Required Concrete Artifacts:
+- RLS and tenant-isolation review artifacts, service-role leak scan, sensitive mutation audit check, permission gate review, public exposure review, fixes or documented findings, security tests/checks, docs/build-log/phase-35-security-hardening.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Only checklist text is added, no scans/tests/reviews are encoded, or findings are neither fixed nor documented with severity and follow-up.
+Definition of Done:
+- Security findings for implemented modules are fixed or tracked; tenant isolation, module/feature/permission gates, audit logging, clean-room/no-BCP boundaries, and server-only secret handling are verified by tests or reproducible checks.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm scans/tests/reviews performed and findings fixed or documented.
+- Confirm tenant/RLS, gates, audit, public/API exposure, and service-role leak status.
+- Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 36 — Performance
+
+```text
+Work on Phase 36 — Performance. Do not execute Phase 37 or later.
+
+Phase Type: Performance Hardening.
+Completion Mode: Improve or measurably verify performance for existing implemented modules; not notes-only.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Review query/index coverage, dashboard/report queries, pagination, expensive routes, public tracking/customer portal performance if implemented, build bundle review placeholder, and documented performance risks.
+Required Concrete Artifacts:
+- Tests/checks or measurable review scripts, safe indexes or query improvements where applicable, pagination/route findings, documented bundle-review placeholder, docs/build-log/phase-36-performance.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Only performance notes are added, or no tests, indexes, query improvements, or measurable checks are added where applicable.
+Definition of Done:
+- Implemented modules have measurable performance checks or justified deferrals, with tenant isolation/security/audit behavior preserved and no hardcoded tenant behavior or BCP implementation reuse.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks if indexes or migrations are changed.
+Completion Report:
+- List files changed.
+- Confirm checks/improvements, risks, and any index/migration validation.
+- Confirm no future prompt was executed, no unrelated feature/business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 37 — Deployment
+
+```text
+Work on Phase 37 — Deployment. Do not execute Phase 38 or later.
+
+Phase Type: Deployment Readiness.
+Completion Mode: Prepare and verify the production deployment path; documentation must include runnable checks.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Document environment variables, Vercel readiness, Supabase environment notes, migration deployment checklist, build/start validation, smoke-test commands, rollback notes, and release checklist.
+Required Concrete Artifacts:
+- Deployment readiness document/checklist, runnable validation commands or scripts where useful, migration deployment notes, rollback/release checklist, docs/build-log/phase-37-deployment.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Deployment is only described without runnable checks or checklist updates.
+Definition of Done:
+- A release operator can follow documented checks to deploy without exposing secrets, bypassing tenant isolation/RLS, skipping module/feature/permission gates, omitting audit concerns, or relying on BCP implementation artifacts.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm env/Vercel/Supabase/migration/build-start/smoke/rollback/release checklist updates.
+- Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 38 — Smoke Test
+
+```text
+Work on Phase 38 — Smoke Test. Do not execute Phase 39 or later.
+
+Phase Type: Validation + Smoke Test.
+Completion Mode: Execute and document smoke validation for release-candidate readiness; validation/audit phase may be documentation-centered but must include executed or explicitly blocked checks.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Run and document app boot, auth boundary if available, tenant context, core navigation, representative module smokes, public route smokes if available, API/webhook smokes if available, and pass/fail matrix.
+Required Concrete Artifacts:
+- Smoke test matrix with commands/results, fixes or documented blockers, docs/build-log/phase-38-smoke-test.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Smoke test is only a checklist with no executed or documented validation.
+Definition of Done:
+- Release-candidate smoke status is reproducible and transparent, including tenant/security/gate/audit-sensitive coverage where applicable and documented deferrals/blockers.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm smoke matrix, pass/fail status, blockers/deferrals, and context/build-log updates.
+- Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+### Phase 39 — Release Candidate
+
+```text
+Work on Phase 39 — Release Candidate.
+
+Phase Type: Release Candidate Lock.
+Completion Mode: Prepare the release-candidate status package. This validation/release phase may report status, but must not hide unresolved blockers.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/build-log/phase-34-regression-suite.md
+- docs/build-log/phase-35-security-hardening.md
+- docs/build-log/phase-36-performance.md
+- docs/build-log/phase-37-deployment.md
+- docs/build-log/phase-38-smoke-test.md
+- CARGOGRID_CONTEXT.md
+Scope:
+- Prepare RC status report, known blockers, known deferrals, migration validation status, security status, regression status, performance status, deployment status, smoke test status, release notes, and final clean-room confirmation.
+Required Concrete Artifacts:
+- Release-candidate report/release notes, status matrix, blocker/deferral list, final clean-room confirmation, docs/build-log/phase-39-release-candidate.md, and CARGOGRID_CONTEXT.md.
+Not Complete If:
+- Unresolved blockers are hidden, or RC is marked ready without quality/security/migration/deployment status.
+Definition of Done:
+- RC readiness is clearly marked ready or not ready with evidence from regression, security, performance, deployment, smoke, migration, tenant isolation, permission gates, audit logging, and clean-room/no-BCP checks.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm RC status, blockers/deferrals, migration/security/regression/performance/deployment/smoke statuses, release notes, and final clean-room confirmation.
+- Confirm no future prompt was executed, no feature or business migration was created, and no BCP implementation artifact was copied or reused.
+```
+
+## 24. Ready-to-Copy HRIS Future Prompts
 
 HRIS Phases 40 through 45 remain after Phase 39 and must not interrupt the logistics ERP core path unless the user explicitly prioritizes HRIS later. Use one prompt at a time; do not execute later HRIS prompts from an earlier phase.
 
