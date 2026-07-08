@@ -165,8 +165,8 @@ Do not write or execute full future prompts in this shell. Add executable prompt
 | Phase 16A.4 | Contract Recovery: Issue Report / Internal Ticket / Exception Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.5 | Contract Recovery: Menu / Module / UI Configuration Migration and Runtime Alignment | Migration + Runtime/Backend | Ready-to-copy prompt added | See Section 20 |
 | Phase 16A.6 | Contract Recovery Regression and Documentation Lock | Hardening + Documentation Lock | Ready-to-copy prompt added | See Section 20 |
-| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | Migration + Configuration | Prompt slot only; future ready-to-copy prompt required | TBD |
-| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | Runtime/Backend + Validation | Prompt slot only; future ready-to-copy prompt required | TBD |
+| Phase 16A.7 | Shipment Detail Expansion Schema and Configuration | Migration + Configuration Schema Implementation | Ready-to-copy prompt added | See Section 20 |
+| Phase 16A.8 | Shipment Detail Runtime and Validation Alignment | Runtime/Backend Alignment | Ready-to-copy prompt added | See Section 20 |
 | Phase 16B | Job Order Server Actions and Repository Runtime | Runtime/Backend Implementation | Ready-to-copy prompt added; blocked by recovery/shipment-detail gate | See Section 21 |
 | Phase 16C | Job Order Internal UI | UI Implementation | Ready-to-copy prompt added; depends on Phase 16B | See Section 21 |
 | Phase 16D | Job Order Workflow Integration | Integration Implementation | Ready-to-copy prompt added; depends on Phase 16B/16C | See Section 21 |
@@ -470,6 +470,103 @@ Completion Report:
 - Confirm no future prompt was executed.
 - Confirm no features or migrations were created.
 - Confirm full quality-gate results.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+
+### Phase 16A.7 — Shipment Detail Expansion Schema and Configuration
+
+```text
+Work on Phase 16A.7 — Shipment Detail Expansion Schema and Configuration. Do not execute Phase 16A.8, continue Phase 16B, build runtime features, or create unrelated business migrations.
+
+Phase Type: Migration + Configuration Schema Implementation.
+Completion Mode: Implement concrete schema/configuration; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+- supabase/migrations/20260707240000_job_order_core.sql
+Scope:
+- Extend the existing Job Order Core schema before Job Order runtime is built; do not duplicate logistics_jobs, shipments, or existing shipment child tables.
+- Structurally support multidrop, multi-pickup, multi-service, multi-leg, split, consolidated, parent-child, and grouped shipments.
+- Support multi-currency charges/costs, multi-koli/package details, multi-SKU/item details, package/item dimensions and weight, volumetric/chargeable weight, cargo classification, dangerous goods, temperature control, special handling, insurance value, declared value, and COD/value-collection placeholders.
+- Support stop sequence with stop-level contact/address/time window/instruction, service-level config, fleet requirements, own/vendor fleet, vehicle/body type, driver/crew placeholder, route constraints, SLA/milestone template placeholder, tenant-configurable required fields, tenant-configurable package/koli/SKU fields, and plan/package access to advanced shipment features.
+Required Concrete Artifacts:
+- Safe migration extending Job Order Core with normalized child tables where needed, e.g. shipment_stops, shipment_stop_contacts, shipment_services, shipment_service_requirements, shipment_items, shipment_skus, shipment_package_items, shipment_dimensions, shipment_currency_amounts, shipment_fleet_requirements, shipment_service_configs, shipment_required_field_configs, shipment_feature_entitlements, or justified equivalents.
+- tenant_id on tenant-scoped tables; FKs to logistics_jobs, shipments, shipment_legs, customers, addresses, service_types, package_types, units, currencies, vendors, branches, and related master data where available.
+- RLS policies, indexes, unique/check constraints, audit triggers, and configuration schema entries/tables for shipment behavior.
+- Module/feature/permission gates plus Supreme Admin and subscription/package entitlement representation for multidrop, multi-pickup, multi-service, multi-currency, SKU detail, own fleet, vendor fleet, advanced koli/package detail, and SLA/milestone templates.
+- Tests for schema, RLS, audit triggers, config gates, entitlement gates, and no duplicate logistics_jobs/shipments table creation.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-7-shipment-detail-expansion.md.
+Not Complete If:
+- Only proposed tables, repository constants, AppShell preview, interfaces, docs, or TODOs are added.
+- Existing shipment schema is ignored, duplicate logistics_jobs or shipments tables are created, or no RLS/audit/entitlement exists.
+Definition of Done:
+- Real migration safely extends existing Job Order Core; tenant_id/RLS/policies/audit/indexes exist.
+- Shipment detail structurally supports multidrop, multi-service, multi-currency, multi-koli, multi-SKU, and fleet requirements.
+- Supreme Admin configuration and package gating are represented; tests prove schema and guardrails; build log and CARGOGRID_CONTEXT.md are updated.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+- Applicable migration validation/checks for changed migrations.
+Completion Report:
+- List files changed.
+- Confirm Phase 16A.7 concrete migration/config artifacts and tests.
+- Confirm no duplicate logistics_jobs or shipments table was created.
+- Confirm tenant_id, RLS, audit logs, module/feature/permission gates, Supreme Admin configurability, and subscription/package entitlement checks.
+- Confirm Phase 16A.8 and Phase 16B were not executed.
+- Confirm no BCP implementation artifact was copied or reused.
+```
+
+### Phase 16A.8 — Shipment Detail Runtime and Validation Alignment
+
+```text
+Work on Phase 16A.8 — Shipment Detail Runtime and Validation Alignment. Do not continue Phase 16B or build unrelated product features.
+
+Phase Type: Runtime/Backend Alignment.
+Completion Mode: Implement concrete server-only runtime/validation for the Phase 16A.7 shipment detail model; No Contract-Only Completion Rule applies.
+Files to Read First:
+- docs/prompts/cargogrid_canonical_phase_prompt_pack.md
+- docs/roadmap/recovery-reconciliation-spec.md
+- docs/roadmap/canonical-phase-map.md
+- docs/roadmap/recovery-execution-queue.md
+- docs/build-log/phase-16a-job-order-core-schema.md
+- docs/build-log/phase-16a-7-shipment-detail-expansion.md
+- supabase/migrations/20260707240000_job_order_core.sql
+Scope:
+- Build server-only create/update/read runtime for shipment stops, items/SKU/package detail, multi-service requirements, and fleet requirements.
+- Validate multidrop and multi-pickup sequence, package/koli/SKU totals, multi-currency cost/charge inputs, service/fleet requirements against tenant entitlement, and required fields from Supreme Admin/tenant configuration.
+- Prevent duplicate upstream data entry by reusing existing customer/contact/address/service/cargo/rate/quotation/job/shipment records; do not duplicate logistics_jobs or shipments tables.
+- Enforce tenant_id isolation, RLS-aware access, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks, and audit records for sensitive changes.
+Required Concrete Artifacts:
+- Server-only repositories/actions with real read/write logic.
+- Validation helpers, entitlement checks, module/feature/permission gates, and audit logging.
+- Tests for success path, tenant isolation, permission denial, module denial, feature denial, package entitlement denial, multidrop validation, multi-service validation, multi-currency validation, multi-koli/SKU validation, fleet config validation, and no duplicate upstream data entry.
+- Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16a-8-shipment-detail-runtime.md.
+Not Complete If:
+- Only TypeScript interfaces, repository contracts, proposed methods, docs, or TODOs are added.
+- No real read/write logic, entitlement validation, audit logging, or runtime behavior tests exist.
+Definition of Done:
+- Runtime actions are server-only and executable; validation is real.
+- Entitlements and Supreme Admin configuration are enforced; no duplicate user input is introduced; tests pass; build log and CARGOGRID_CONTEXT.md are updated.
+Quality Gate:
+- npm ci
+- npm run lint
+- npm run typecheck
+- npm test
+- npm run build
+- git diff --check
+Completion Report:
+- List files changed.
+- Confirm Phase 16A.8 runtime, validation, entitlement, and audit behavior.
+- Confirm tenant isolation, module/feature/permission gates, Supreme Admin configurability, subscription/package entitlement checks, and no duplicate logistics_jobs/shipments tables.
+- Confirm Phase 16B was not executed and no unrelated product feature was built.
 - Confirm no BCP implementation artifact was copied or reused.
 ```
 
