@@ -1,5 +1,9 @@
 # Phase 13 — Communication & Notification Rebuild
 
+## Recovery Reclassification Note
+
+Historical contract/preview-only. Recovery prompt is Phase 16A.2.
+
 ## Summary
 
 Phase 13 implemented a PR-sized CargoGrid-native Communication & Notification foundation from scratch. This phase intentionally does not create Supabase migrations yet; it adds the server-only repository contract, proposed data model constants, connected-flow documentation, UI surface preview, tests, and build-log/context updates for the future migration/UI implementation phase.

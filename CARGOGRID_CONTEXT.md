@@ -69,9 +69,9 @@ CargoGrid also adds new clean-room modules beyond BCP parity, including TMS, WMS
 
 ## Phase 03.9 BCP-Parity Build Prompt Status
 
-Phase 03.9 — BCP-Parity Clean-Room Build Prompts is complete as a documentation-only phase. `docs/prompts/bcp-parity-feature-build-prompts.md` now provides standalone future build prompts for BCP-equivalent features rebuilt as CargoGrid-native modules from scratch. The prompts cover Commercial Core, RFQ/inquiry/ticketing, rate request/procurement, pricing/rate management, quotation, target/KPI/sales performance, Finance Lite/DSO/AR, communication/notification, attendance/workforce/location, issue/internal ticket/exception management, menu/module/UI configuration, analytics/audit/reporting, import/export, and marketing/campaign support.
+Phase 03.9 — BCP-Parity Clean-Room Build Prompts is complete as a documentation-only historical phase. `docs/prompts/bcp-parity-feature-build-prompts.md` is now deprecated for future phase execution and preserved only as a historical index/redirect file. Future executable prompts must use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`.
 
-The prompt library requires every future BCP-parity feature to enforce clean-room implementation, connected module flow, single source of truth, Supreme Admin configuration, tenant isolation, Supabase RLS, server-only mutations, permission/module/feature gates, audit logging, tests, build checks, and documentation updates. No application code was changed and no migrations were created in Phase 03.9.
+The historical prompt library remains evidence that BCP-parity planning required clean-room implementation, connected module flow, single source of truth, Supreme Admin configuration, tenant isolation, Supabase RLS, server-only mutations, permission/module/feature gates, audit logging, tests, build checks, and documentation updates. No application code was changed and no migrations were created in Phase 03.9.
 
 ## Correct Phase Sequence After Phase 03.9
 
@@ -370,8 +370,8 @@ Phase 05 — Core Master Data, after applying and validating the Phase 04 RBAC m
 - `scripts/verify-governance.mjs` — temporary governance build verification.
 - `test/governance.test.mjs` — governance smoke tests.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
-- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
-- `docs/prompts/bcp-parity-feature-build-prompts.md` — standalone future build prompts for clean-room BCP-equivalent CargoGrid-native modules.
+- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — deprecated historical prompt index/redirect; not an active prompt source.
+- `docs/prompts/bcp-parity-feature-build-prompts.md` — deprecated historical prompt index/redirect; not an active prompt source.
 - `docs/build-log/phase-03-9.md` — Phase 03.9 documentation-only build log.
 - `docs/build-log/phase-03-10.md` — Phase 03.10 full prompt-pack reconciliation build log.
 - `docs/build-log/phase-04.md` — Phase 04 RBAC schema and permission catalog build log.
@@ -410,7 +410,7 @@ Phase 05 — Core Master Data, after applying and validating the Phase 04 RBAC m
 - `docs/build-log/phase-11.md` — Phase 11 Target, KPI & Sales Performance Rebuild build log.
 - `docs/reference/bcp_feature_parity_cleanroom_requirements_v1.md` — clean-room business capability checklist for BCP-inspired feature parity requirements.
 - `docs/blueprint/cargogrid_complete_blueprint_and_build_manual_v1.md` — master blueprint reference.
-- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — phased prompt pack reference.
+- `docs/prompts/cargogrid_codex_prompt_pack_v1.md` — deprecated historical prompt index/redirect; not an active prompt source.
 CargoGrid is a web-based, multi-tenant, white-label logistics ERP.
 
 Core principles:
@@ -514,3 +514,18 @@ Phase 16B — Job Order Server Actions and Repository Runtime remains not starte
 The canonical prompt pack shell is established at `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` as the only authoritative future executable prompt source. Historical prompt files remain historical/redirect-only references and must not be used as active executable prompt sources.
 
 The shell defines global rules, phase type Definitions of Done, roadmap/recovery references, prompt length and context safety limits, and future prompt index placeholders only. No future prompt was executed, no full future prompt was written, no product feature was built, no business migration was created, and Phase 16B was not continued during this documentation task.
+
+## Recovery Documentation Update — Deprecated Old Prompts and Reclassified Logs
+
+The legacy prompt files `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md` are deprecated for future phase execution and preserved only as historical index/redirect files. Future executable phase prompts must use `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`.
+
+Historical build logs have been reclassified at the top of each affected file:
+
+- Historical Phase 12 is contract/preview-only; recovery prompt is Phase 16A.1.
+- Historical Phase 13 is contract/preview-only; recovery prompt is Phase 16A.2.
+- Historical Phase 14 is contract/preview-only; recovery prompt is Phase 16A.3.
+- Historical Phase 15 is contract/preview-only; recovery prompt is Phase 16A.4.
+- Historical Phase 16 is out-of-sequence Menu/UI contract/preview-only; recovery prompt is Phase 16A.5.
+- Historical Phase 24 Job Order Core is reclassified as canonical Phase 16A; canonical Phase 24 is WMS Inbound/Outbound.
+
+This recovery documentation update did not build product features, did not create business migrations, and did not execute Phase 16B.

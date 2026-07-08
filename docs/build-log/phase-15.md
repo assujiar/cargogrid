@@ -1,5 +1,9 @@
 # Phase 15 — Issue Report / Internal Ticket / Exception Rebuild
 
+## Recovery Reclassification Note
+
+Historical contract/preview-only. Recovery prompt is Phase 16A.4.
+
 ## Summary
 
 Phase 15 implemented a PR-sized CargoGrid-native Issue Report / Internal Ticket / Exception foundation from scratch. This phase intentionally does not create Supabase migrations yet; it adds the server-only repository contract, proposed data model constants, connected-flow documentation, UI surface preview, tests, and build-log/context updates for the future migration/UI implementation phase.
