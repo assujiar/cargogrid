@@ -499,6 +499,7 @@ Required Concrete Artifacts:
 Not Complete If:
 - Only repository interfaces, proposed methods, TODOs, docs, or string-presence tests are added.
 - Duplicate job order schema, duplicate job order tables, or business migrations are created.
+- Duplicate job order schema or business migrations are created.
 Definition of Done:
 - Job Order backend behavior is executable, audited, tenant-isolated, permission-aware, and uses existing Phase 16A tables.
 Quality Gate:
@@ -541,6 +542,7 @@ Required Concrete Artifacts:
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16c-job-order-internal-ui.md.
 Not Complete If:
 - Only AppShell preview, preview cards, static mock screens, docs, or TODO-only tests are added.
+- Only AppShell preview cards, static mock screens, docs, or TODO-only tests are added.
 Definition of Done:
 - Internal users can access real Job Order UI paths and perform permitted operations through Phase 16B runtime without duplicate upstream data entry.
 Quality Gate:
@@ -628,6 +630,7 @@ Required Concrete Artifacts:
 - Updated CARGOGRID_CONTEXT.md and docs/build-log/phase-16e-job-order-regression-hardening.md.
 Not Complete If:
 - Only documentation changes, documentation checklists, or build-log-only edits are made without regression/security/hardening tests or concrete fixes.
+- Only documentation/checklists are changed and no regression/security/hardening tests or concrete fixes are added.
 Definition of Done:
 - Job Order implementation has strengthened test coverage, security posture, RLS confidence, service-role leak protection, migration validation status, index/performance review, and locked documentation context.
 Quality Gate:
