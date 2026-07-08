@@ -49,7 +49,7 @@ Any previous reference that labels Job Order Core as canonical Phase 24 must be 
 
 ## Phase 16B Gate
 
-Phase 16B must not start until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Phase 16B must not start until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user; if later pre-16B recovery or shipment-detail gates are added to `docs/roadmap/canonical-phase-map.md`, those gates must also complete or be explicitly deferred before Phase 16B starts. Current canonical gating includes Phase 16A.1 through Phase 16A.8.
 
 Until that gate is satisfied, do not continue Phase 16B, do not build new product features, do not create new business migrations, and do not modify business application logic except where strictly required for tooling/build health.
 

@@ -547,3 +547,11 @@ The `fix/deprecate-old-prompts-reclassify-logs` recovery task converted `docs/pr
 The affected historical build logs now carry top recovery notes: Phase 12 maps to recovery prompt Phase 16A.1; Phase 13 maps to Phase 16A.2; Phase 14 maps to Phase 16A.3; Phase 15 maps to Phase 16A.4; out-of-sequence historical Phase 16 Menu/UI maps to Phase 16A.5; and historical Phase 24 Job Order Core is reclassified as canonical Phase 16A while canonical Phase 24 remains WMS Inbound/Outbound.
 
 This task created `docs/build-log/deprecate-old-prompts-reclassify-logs.md` as the documentation-only build log. No product features were built, no business migrations were created, and Phase 16B was not executed.
+
+## Global Docs Final Recovery Check
+
+The `verify/global-docs-final-recovery-check` task completed a documentation-only recovery verification across global guidance, roadmap documents, and prompt-pack authority. `docs/prompts/cargogrid_canonical_phase_prompt_pack.md` remains the only authoritative future executable prompt source. `docs/prompts/cargogrid_codex_prompt_pack_v1.md` and `docs/prompts/bcp-parity-feature-build-prompts.md` remain historical/redirect-only and must not be used to copy future executable prompts.
+
+Historical Phase 12 through Historical Phase 15 remain contract/preview-only. Historical Phase 16 Menu/UI remains out-of-sequence contract/preview-only. Historical Phase 24 Job Order Core remains reclassified as canonical Phase 16A, and canonical Phase 24 remains WMS Inbound/Outbound. Phase 16A.1 through Phase 16A.6 appear before Phase 16B, and the current canonical roadmap additionally places Phase 16A.7 and Phase 16A.8 before Phase 16B. Phase 16B was not started.
+
+The final recovery check updated `AGENTS.md`, `CODEX_TASK_TEMPLATE.md`, `docs/roadmap/recovery-reconciliation-spec.md`, `docs/prompts/cargogrid_canonical_phase_prompt_pack.md`, and `docs/build-log/global-docs-final-recovery-check.md`. No product feature was built, no business application logic was modified, and no business migration was created.

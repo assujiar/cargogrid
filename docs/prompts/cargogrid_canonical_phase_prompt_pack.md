@@ -579,7 +579,7 @@ Completion Report:
 Work on Phase 16B — Job Order Server Actions and Repository Runtime. Do not execute Phase 16C, 16D, or 16E.
 
 Phase Type: Runtime/Backend Implementation.
-Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not run until Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred by the user.
+Completion Mode: Build server-only Job Order runtime/repository/server actions against the existing Phase 16A schema. Do not run until Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred by the user.
 Files to Read First:
 - docs/prompts/cargogrid_canonical_phase_prompt_pack.md
 - docs/roadmap/canonical-phase-map.md
@@ -587,7 +587,7 @@ Files to Read First:
 - docs/build-log/phase-16a-job-order-core-schema.md
 Required Verification:
 - Verify supabase/migrations/20260707240000_job_order_core.sql exists.
-- Verify Phase 16A.1 through Phase 16A.6 are complete or explicitly deferred.
+- Verify Phase 16A.1 through Phase 16A.8 are complete or explicitly deferred.
 Files Not to Modify unless required:
 - Do not create or rename Supabase business migrations.
 - Do not create duplicate job order tables or rewrite the Phase 16A migration.
@@ -616,7 +616,7 @@ Quality Gate:
 - git diff --check
 Completion Report:
 - List files changed.
-- Confirm Phase 16A.1 through Phase 16A.6 were complete or explicitly deferred before starting.
+- Confirm Phase 16A.1 through Phase 16A.8 were complete or explicitly deferred before starting.
 - Confirm prompts 16C through 16E were not executed.
 - Confirm existing Phase 16A schema was consumed and no duplicate job order tables were created.
 - Confirm no BCP implementation artifact was copied or reused.
